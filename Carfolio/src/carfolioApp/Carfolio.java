@@ -5,17 +5,29 @@
  */
 package carfolioApp;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+
 /**
  *
  * @author Dstet
  */
-public class Carfolio {
+public class Carfolio extends Application
+{
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) 
+    {
+        launch(args);
+    }
+    
+    @Override
+    public void start(Stage primaryStage) throws Exception 
+    {                                
+        //JavaFX stuff        
     }
     
 }

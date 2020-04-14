@@ -12,7 +12,7 @@
             </test-roots>
         </data>
         <libraries xmlns="http://www.netbeans.org/ns/ant-project-libraries/1">
-            <definitions>C:\Users\Dstet\Documents\Learn\Spring 2020\IST 311\Car Project\Carfolio\libraries\nblibraries.properties</definitions>
+            <definitions>../libraries/nblibraries.properties</definitions>
         </libraries>
     </configuration>
 </project>
