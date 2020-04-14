@@ -21,7 +21,6 @@ public class Carfolio extends Application
      */
     public static void main(String[] args) 
     {
-        System.out.println("me");
         launch(args);
     }
     
