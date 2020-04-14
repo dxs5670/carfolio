@@ -39,6 +39,10 @@
                         <TextField layoutX="341.0" layoutY="116.0" prefHeight="26.0" prefWidth="142.0" />
                         <Button layoutX="174.0" layoutY="203.0" mnemonicParsing="false" text="Save" textFill="#09a107" />
                         <Button layoutX="300.0" layoutY="203.0" mnemonicParsing="false" text="Delete" textFill="#c30d0d" />
+                        <Label layoutX="15.0" layoutY="165.0" text="Price" />
+                        <TextField layoutX="63.0" layoutY="160.0" prefHeight="26.0" prefWidth="74.0" text="\$" />
+                        <Button layoutX="361.0" layoutY="160.0" mnemonicParsing="false" text="Add Description" />
+                        <Button layoutX="239.0" layoutY="160.0" mnemonicParsing="false" text="Add History" />
                      </children>
                   </AnchorPane>
             </content>
@@ -61,8 +65,12 @@
                               <Label layoutX="238.0" layoutY="121.0" text="Safety Rating" />
                               <TextField layoutX="63.0" layoutY="116.0" prefHeight="26.0" prefWidth="142.0" />
                               <TextField layoutX="341.0" layoutY="116.0" prefHeight="26.0" prefWidth="142.0" />
-                              <Button layoutX="174.0" layoutY="203.0" mnemonicParsing="false" text="Save" />
-                              <Button layoutX="300.0" layoutY="203.0" mnemonicParsing="false" text="Delete" />
+                              <Button layoutX="174.0" layoutY="203.0" mnemonicParsing="false" text="Save" textFill="#09a107" />
+                              <Button layoutX="300.0" layoutY="203.0" mnemonicParsing="false" text="Delete" textFill="#c30d0d" />
+                              <Label layoutX="15.0" layoutY="165.0" text="Price" />
+                              <TextField layoutX="63.0" layoutY="160.0" prefHeight="26.0" prefWidth="74.0" text="\$" />
+                              <Button layoutX="361.0" layoutY="160.0" mnemonicParsing="false" text="Add Description" />
+                              <Button layoutX="239.0" layoutY="160.0" mnemonicParsing="false" text="Add History" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -87,8 +95,12 @@
                               <Label layoutX="238.0" layoutY="121.0" text="Safety Rating" />
                               <TextField layoutX="63.0" layoutY="116.0" prefHeight="26.0" prefWidth="142.0" />
                               <TextField layoutX="341.0" layoutY="116.0" prefHeight="26.0" prefWidth="142.0" />
-                              <Button layoutX="174.0" layoutY="203.0" mnemonicParsing="false" text="Save" />
-                              <Button layoutX="300.0" layoutY="203.0" mnemonicParsing="false" text="Delete" />
+                              <Button layoutX="174.0" layoutY="203.0" mnemonicParsing="false" text="Save" textFill="#09a107" />
+                              <Button layoutX="300.0" layoutY="203.0" mnemonicParsing="false" text="Delete" textFill="#c30d0d" />
+                              <Label layoutX="15.0" layoutY="165.0" text="Price" />
+                              <TextField layoutX="63.0" layoutY="160.0" prefHeight="26.0" prefWidth="74.0" text="\$" />
+                              <Button layoutX="361.0" layoutY="160.0" mnemonicParsing="false" text="Add Description" />
+                              <Button layoutX="239.0" layoutY="160.0" mnemonicParsing="false" text="Add History" />
                            </children>
                         </AnchorPane>
                      </children>
