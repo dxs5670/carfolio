@@ -8,10 +8,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.messageController">
    <children>
-      <Button layoutX="26.0" layoutY="338.0" mnemonicParsing="false" text="Close" />
-      <Button layoutX="516.0" layoutY="338.0" mnemonicParsing="false" text="Send" textFill="#08bf30" />
-      <TextArea layoutX="107.0" layoutY="99.0" prefHeight="239.0" prefWidth="387.0" text="Type message here.&#10;" />
-      <TextField layoutX="107.0" layoutY="54.0" text="Recipient" />
+      <Button fx:id="backButton" layoutX="26.0" layoutY="338.0" mnemonicParsing="false" onAction="#backClicked" text="Close" />
+      <Button fx:id="sendButton" layoutX="516.0" layoutY="338.0" mnemonicParsing="false" onAction="#sendClicked" text="Send" textFill="#08bf30" />
+      <TextArea fx:id="messageField" layoutX="107.0" layoutY="99.0" prefHeight="239.0" prefWidth="387.0" text="Type message here.&#10;" />
+      <TextField fx:id="recipientField" layoutX="107.0" layoutY="54.0" text="Recipient" />
       <Label layoutX="249.0" layoutY="14.0" text="User Messaging" />
    </children>
 </AnchorPane>

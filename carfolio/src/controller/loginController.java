@@ -1,5 +1,5 @@
 /**
- * Sample Skeleton for 'loginView.fxml' Controller Class
+ * Sample Skeleton for 'createAccountView.fxml' Controller Class
  */
 
 package controller;
@@ -108,17 +108,17 @@ public class loginController {
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
-        assert forgotPasswordLink != null : "fx:id=\"forgotPasswordLink\" was not injected: check your FXML file 'loginView.fxml'.";
-        assert existingUsername != null : "fx:id=\"existingUsername\" was not injected: check your FXML file 'loginView.fxml'.";
-        assert existingPassword != null : "fx:id=\"existingPassword\" was not injected: check your FXML file 'loginView.fxml'.";
-        assert loginButton != null : "fx:id=\"loginButton\" was not injected: check your FXML file 'loginView.fxml'.";
-        assert createAccountButton != null : "fx:id=\"createAccountButton\" was not injected: check your FXML file 'loginView.fxml'.";
-        assert strengthBar != null : "fx:id=\"strengthBar\" was not injected: check your FXML file 'loginView.fxml'.";
-        assert accountSelector != null : "fx:id=\"accountSelector\" was not injected: check your FXML file 'loginView.fxml'.";
-        assert usernameField != null : "fx:id=\"usernameField\" was not injected: check your FXML file 'loginView.fxml'.";
-        assert passwordField != null : "fx:id=\"passwordField\" was not injected: check your FXML file 'loginView.fxml'.";
-        assert firstNameField != null : "fx:id=\"firstNameField\" was not injected: check your FXML file 'loginView.fxml'.";
-        assert lastNameField != null : "fx:id=\"lastNameField\" was not injected: check your FXML file 'loginView.fxml'.";
+        assert forgotPasswordLink != null : "fx:id=\"forgotPasswordLink\" was not injected: check your FXML file 'createAccountView.fxml'.";
+        assert existingUsername != null : "fx:id=\"existingUsername\" was not injected: check your FXML file 'createAccountView.fxml'.";
+        assert existingPassword != null : "fx:id=\"existingPassword\" was not injected: check your FXML file 'createAccountView.fxml'.";
+        assert loginButton != null : "fx:id=\"loginButton\" was not injected: check your FXML file 'createAccountView.fxml'.";
+        assert createAccountButton != null : "fx:id=\"createAccountButton\" was not injected: check your FXML file 'createAccountView.fxml'.";
+        assert strengthBar != null : "fx:id=\"strengthBar\" was not injected: check your FXML file 'createAccountView.fxml'.";
+        assert accountSelector != null : "fx:id=\"accountSelector\" was not injected: check your FXML file 'createAccountView.fxml'.";
+        assert usernameField != null : "fx:id=\"usernameField\" was not injected: check your FXML file 'createAccountView.fxml'.";
+        assert passwordField != null : "fx:id=\"passwordField\" was not injected: check your FXML file 'createAccountView.fxml'.";
+        assert firstNameField != null : "fx:id=\"firstNameField\" was not injected: check your FXML file 'createAccountView.fxml'.";
+        assert lastNameField != null : "fx:id=\"lastNameField\" was not injected: check your FXML file 'createAccountView.fxml'.";
 
     }
 }
