@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+
+<AnchorPane fx:id="portfolioPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.portfolioController">
+   <children>
+      <Rectangle fx:id="portfolioPicture" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="134.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="134.0" />
+      <Label fx:id="askingPrice" layoutX="441.0" layoutY="26.0" text="Price" />
+      <Label fx:id="make" layoutX="158.0" layoutY="17.0" text="Make" />
+      <Label fx:id="model" layoutX="159.0" layoutY="56.0" text="Model" />
+      <Label fx:id="style" layoutX="159.0" layoutY="91.0" text="Style" />
+      <Label fx:id="miles" layoutX="159.0" layoutY="129.0" text="Miles" />
+      <Label fx:id="ownerName" layoutX="509.0" layoutY="312.0" text="ownerName" />
+      <Button fx:id="contactOwnerButton" layoutX="492.0" layoutY="267.0" mnemonicParsing="false" onAction="#contactOwner" text="Contact Owner" />
+      <TableView fx:id="offerHistory" layoutX="483.0" layoutY="4.0" prefHeight="200.0" prefWidth="113.0">
+        <columns>
+          <TableColumn prefWidth="112.80004272460937" text="Offer History" />
+        </columns>
+      </TableView>
+      <Label fx:id="carLocation" layoutX="510.0" layoutY="342.0" text="carLocation" />
+      <TextArea fx:id="portfolioDescription" layoutX="149.0" layoutY="171.0" prefHeight="201.0" prefWidth="328.0" text="Description&#10;" />
+      <TableView fx:id="maintnenceHistory" layoutX="13.0" layoutY="169.0" prefHeight="200.0" prefWidth="113.0">
+         <columns>
+            <TableColumn prefWidth="116.79998302459717" text="Mainenence" />
+         </columns>
+      </TableView>
+      <Label fx:id="recommendedPrice" layoutX="358.0" layoutY="84.0" text="Recommended Price" />
+      <Button fx:id="makeOfferButton" layoutX="501.0" layoutY="232.0" mnemonicParsing="false" onAction="#makeOffer" text="Make Offer" />
+   </children>
+</AnchorPane>
