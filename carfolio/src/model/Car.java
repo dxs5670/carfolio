@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package model;
 
 import java.io.Serializable;
@@ -16,10 +12,10 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Dstet
+ * @author Caden
  */
 @Entity
-@Table(name = "Car")
+@Table(name = "car")
 @NamedQueries({
     @NamedQuery(name = "Car.findAll", query = "SELECT c FROM Car c"),
     @NamedQuery(name = "Car.findByVin", query = "SELECT c FROM Car c WHERE c.vin = :vin"),
@@ -27,8 +23,9 @@ import javax.persistence.Table;
     @NamedQuery(name = "Car.findByModel", query = "SELECT c FROM Car c WHERE c.model = :model"),
     @NamedQuery(name = "Car.findByStyle", query = "SELECT c FROM Car c WHERE c.style = :style"),
     @NamedQuery(name = "Car.findBySafteyRating", query = "SELECT c FROM Car c WHERE c.safteyRating = :safteyRating"),
-    @NamedQuery(name = "Car.findByYear", query = "SELECT c FROM Car c WHERE c.year = :year")})
-public abstract class Car implements Serializable {
+    @NamedQuery(name = "Car.findByYear", query = "SELECT c FROM Car c WHERE c.year = :year"),
+    @NamedQuery(name = "Car.findByMiles", query = "SELECT c FROM Car c WHERE c.miles = :miles")})
+public class Car implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,6 +42,9 @@ public abstract class Car implements Serializable {
     private Short safteyRating;
     @Column(name = "year")
     private Short year;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "miles")
+    private Float miles;
 
     public Car() {
     }
@@ -99,6 +99,14 @@ public abstract class Car implements Serializable {
 
     public void setYear(Short year) {
         this.year = year;
+    }
+
+    public Float getMiles() {
+        return miles;
+    }
+
+    public void setMiles(Float miles) {
+        this.miles = miles;
     }
 
     @Override

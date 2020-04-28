@@ -4,10 +4,17 @@
 
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -17,6 +24,12 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import model.Car;
+
 
 public class searchController {
 
@@ -280,6 +293,8 @@ public class searchController {
 
     @FXML // fx:id="milesCar4"
     private Label milesCar4; // Value injected by FXMLLoader
+    
+    EntityManager manager;
 
     @FXML
     void contactCar1Owner(ActionEvent event) {
@@ -327,8 +342,20 @@ public class searchController {
     }
 
     @FXML
-    void openCar1Portfolio(ActionEvent event) {
-
+    void openCar1Portfolio(ActionEvent event) throws IOException {
+        
+        //Need to pass car data or id
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/portfolioView.fxml"));
+        
+        Parent portfolioView = loader.load();
+        
+        Scene portfolioViewScene = new Scene(portfolioView);
+        
+        portfolioController controller = loader.getController();
+        
+        Stage stage = new Stage();
+        stage.setScene(portfolioViewScene);
+        stage.show();
     }
 
     @FXML
@@ -470,9 +497,31 @@ public class searchController {
     void togglePriceSort(ActionEvent event) {
 
     }
+    
+    private void loadDefault() {
+        Query query = manager.createNamedQuery("Car.findAll");
+        
+        List<Car> data = query.getResultList();
+        
+        // JavaFX docs: observablelist lets listeners track changes to the list
+        ObservableList<Car> odata = FXCollections.observableArrayList();
+
+        for (Car d : data) {
+               
+            System.out.println(d.getVin());
+            odata.add(d);
+        }
+        
+        //set first row car
+        makeCar1.setText(odata.get(0).getMake());
+        modelCar1.setText(odata.get(0).getModel());
+        yearCar1.setText(odata.get(0).getYear().toString());
+        milesCar1.setText(odata.get(0).getMiles().toString());
+    }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
+
         assert advancedSearchPane != null : "fx:id=\"advancedSearchPane\" was not injected: check your FXML file 'searchView.fxml'.";
         assert searchPane != null : "fx:id=\"searchPane\" was not injected: check your FXML file 'searchView.fxml'.";
         assert searchButton != null : "fx:id=\"searchButton\" was not injected: check your FXML file 'searchView.fxml'.";
@@ -558,6 +607,14 @@ public class searchController {
         assert contactButtonCar4 != null : "fx:id=\"contactButtonCar4\" was not injected: check your FXML file 'searchView.fxml'.";
         assert makeOfferButton4 != null : "fx:id=\"makeOfferButton4\" was not injected: check your FXML file 'searchView.fxml'.";
         assert milesCar4 != null : "fx:id=\"milesCar4\" was not injected: check your FXML file 'searchView.fxml'.";
+        
+        //Database connection, named in persistence.xml
+        manager = (EntityManager) Persistence.createEntityManagerFactory("CarfolioPU").createEntityManager();
+        
+        //Display first few cars in the DB for now
+        loadDefault();
 
     }
+
+    
 }
