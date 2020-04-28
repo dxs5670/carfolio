@@ -8,11 +8,12 @@
     <class>model.Buyer</class>
     <class>model.NewEntity</class>
     <class>model.User</class>
+    <class>model.Message_1</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://remotemysql.com:3306/CWRIex4iHs?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
-      <property name="javax.persistence.jdbc.user" value="CWRIex4iHs"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://ist311db.cahpdmpysbav.us-east-2.rds.amazonaws.com:3306/db11?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="javax.persistence.jdbc.user" value="db11_user"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="6pdd0Q942O"/>
+      <property name="javax.persistence.jdbc.password" value="db11_user_ist311_qkd"/>
     </properties>
   </persistence-unit>
 </persistence>

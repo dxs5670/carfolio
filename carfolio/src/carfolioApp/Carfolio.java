@@ -29,7 +29,7 @@ public class Carfolio extends Application
     public void start(Stage primaryStage) throws Exception 
     {                                
         //JavaFX stuff   
-      Parent root = FXMLLoader.load(getClass().getResource("/view/searchView.fxml")); //change back > "/view/loginView.fxml"
+      Parent root = FXMLLoader.load(getClass().getResource("/view/loginView.fxml"));
       Scene scene = new Scene(root);
       primaryStage.setScene(scene);
       primaryStage.show();

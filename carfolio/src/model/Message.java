@@ -19,10 +19,10 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Dstet
+ * @author Caden
  */
 @Entity
-@Table(name = "Message")
+@Table(name = "message")
 @NamedQueries({
     @NamedQuery(name = "Message.findAll", query = "SELECT m FROM Message m"),
     @NamedQuery(name = "Message.findByMessageBody", query = "SELECT m FROM Message m WHERE m.messageBody = :messageBody"),
@@ -33,7 +33,6 @@ import javax.persistence.TemporalType;
 public class Message implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Basic(optional = false)
     @Column(name = "messageBody")
     private String messageBody;
     @Column(name = "recipient")
@@ -53,11 +52,6 @@ public class Message implements Serializable {
 
     public Message(String messageID) {
         this.messageID = messageID;
-    }
-
-    public Message(String messageID, String messageBody) {
-        this.messageID = messageID;
-        this.messageBody = messageBody;
     }
 
     public String getMessageBody() {
