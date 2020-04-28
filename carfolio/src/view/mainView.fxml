@@ -5,7 +5,6 @@
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -20,13 +19,10 @@
             <Image url="@../assets/Carfolio.png" />
          </image>
       </ImageView>
-      <PasswordField fx:id="passwordField" layoutX="29.0" layoutY="74.0" onAction="#setPassword" promptText="Password" />
-      <Button fx:id="loginButton" layoutX="30.0" layoutY="115.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="70.0" text="Login" textFill="#053361" />
-      <TextField fx:id="usernameField" layoutX="30.0" layoutY="35.0" onAction="#setUsername" promptText="Username" />
-      <Button fx:id="registerButton" layoutX="107.0" layoutY="115.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="26.0" prefWidth="70.0" text="Register" textFill="#053361" />
-      <Button fx:id="accountButton" layoutX="550.0" layoutY="74.0" mnemonicParsing="false" onAction="#openAccount" prefHeight="26.0" prefWidth="67.0" text="Account" textFill="#053361" />
-      <Button fx:id="portfolioButton" layoutX="550.0" layoutY="129.0" mnemonicParsing="false" onAction="#viewUserPortfolios" prefHeight="26.0" prefWidth="68.0" text="Portfolios" textFill="#053361" />
-      <Button fx:id="messagesButton" layoutX="550.0" layoutY="102.0" mnemonicParsing="false" onAction="#openMessages" text="Messages" textFill="#053361" />
+      <Button fx:id="loginButton" layoutX="501.0" layoutY="45.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="117.0" text="Login or Register" textFill="#053361" />
+      <Button fx:id="accountButton" layoutX="526.0" layoutY="74.0" mnemonicParsing="false" onAction="#openAccount" prefHeight="26.0" prefWidth="67.0" text="Account" textFill="#053361" />
+      <Button fx:id="portfolioButton" layoutX="526.0" layoutY="131.0" mnemonicParsing="false" onAction="#viewUserPortfolios" prefHeight="26.0" prefWidth="68.0" text="Portfolios" textFill="#053361" />
+      <Button fx:id="messagesButton" layoutX="526.0" layoutY="103.0" mnemonicParsing="false" onAction="#openMessages" text="Messages" textFill="#053361" />
       <Separator fx:id="horizontalSeparator" layoutX="3.0" layoutY="182.0" prefHeight="0.0" prefWidth="650.0" />
       <Label fx:id="searchCarLabel" layoutX="53.0" layoutY="206.0" text="Search for Cars" textFill="#053361">
          <font>
@@ -69,10 +65,5 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <ImageView fx:id="accountPhoto" blendMode="SRC_ATOP" cache="true" cacheHint="SPEED" fitHeight="62.0" fitWidth="67.0" layoutX="549.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/profilePic.jpg" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

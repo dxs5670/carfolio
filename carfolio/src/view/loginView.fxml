@@ -45,17 +45,17 @@
                         <Label layoutX="37.0" layoutY="168.0" text="Password Strength" />
                         <Label layoutX="37.0" layoutY="96.0" text="Username:" />
                         <Label layoutX="38.0" layoutY="214.0" text="Account Type:" />
-                        <MenuButton fx:id="accountSelector" layoutX="165.0" layoutY="209.0" mnemonicParsing="false">
+                        <MenuButton fx:id="accountSelector" layoutX="165.0" layoutY="209.0" mnemonicParsing="false" text="Select">
                           <items>
-                            <MenuItem fx:id="buyerSelected" mnemonicParsing="false" onAction="#setBuyerAccount" text="Buyer" />
-                            <MenuItem fx:id="sellerSelected" mnemonicParsing="false" onAction="#setSellerAccount" text="Seller" />
+                            <MenuItem fx:id="buyerSelect" mnemonicParsing="false" onAction="#setBuyerAccount" text="Buyer" />
+                            <MenuItem fx:id="sellerSelect" mnemonicParsing="false" onAction="#setSellerAccount" text="Seller" />
                           </items>
                         </MenuButton>
-                        <TextField fx:id="usernameField" layoutX="159.0" layoutY="91.0" onAction="#setUserName" prefHeight="26.0" prefWidth="110.0" promptText="Username" />
+                        <TextField fx:id="usernameField" layoutX="159.0" layoutY="91.0" onKeyTyped="#setUserName" prefHeight="26.0" prefWidth="110.0" promptText="Username" />
                         <Label layoutX="38.0" layoutY="131.0" text="Password:" />
-                        <PasswordField fx:id="passwordField" layoutX="159.0" layoutY="128.0" onAction="#setPassword" prefHeight="26.0" prefWidth="110.0" promptText="Password" />
-                        <TextField fx:id="firstNameField" layoutX="159.0" layoutY="23.0" onAction="#setFirstName" prefHeight="26.0" prefWidth="109.0" promptText="First Name" />
-                        <TextField fx:id="lastNameField" layoutX="159.0" layoutY="57.0" onAction="#setLastName" prefHeight="26.0" prefWidth="110.0" promptText="Last Name" />
+                        <PasswordField fx:id="passwordField" layoutX="159.0" layoutY="128.0" onKeyTyped="#setPassword" prefHeight="26.0" prefWidth="110.0" promptText="Password" />
+                        <TextField fx:id="firstNameField" layoutX="159.0" layoutY="23.0" onKeyTyped="#setFirstName" prefHeight="26.0" prefWidth="109.0" promptText="First Name" />
+                        <TextField fx:id="lastNameField" layoutX="159.0" layoutY="57.0" onKeyTyped="#setLastName" prefHeight="26.0" prefWidth="110.0" promptText="Last Name" />
                         <Label layoutX="37.0" layoutY="27.0" text="First Name:" />
                         <Label layoutX="37.0" layoutY="61.0" text="Last Name:" />
                      </children>

@@ -7,6 +7,7 @@
     <class>model.Car</class>
     <class>model.Buyer</class>
     <class>model.NewEntity</class>
+    <class>model.User</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://remotemysql.com:3306/CWRIex4iHs?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="CWRIex4iHs"/>
