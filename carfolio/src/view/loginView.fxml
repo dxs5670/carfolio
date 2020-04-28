@@ -45,10 +45,10 @@
                         <Label layoutX="37.0" layoutY="168.0" text="Password Strength" />
                         <Label layoutX="37.0" layoutY="96.0" text="Username:" />
                         <Label layoutX="38.0" layoutY="214.0" text="Account Type:" />
-                        <MenuButton fx:id="accountSelector" layoutX="165.0" layoutY="209.0" mnemonicParsing="false" onAction="#setAccountType" text="Select">
+                        <MenuButton fx:id="accountSelector" layoutX="165.0" layoutY="209.0" mnemonicParsing="false">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="Buyer" />
-                            <MenuItem mnemonicParsing="false" text="Seller" />
+                            <MenuItem fx:id="buyerSelected" mnemonicParsing="false" onAction="#setBuyerAccount" text="Buyer" />
+                            <MenuItem fx:id="sellerSelected" mnemonicParsing="false" onAction="#setSellerAccount" text="Seller" />
                           </items>
                         </MenuButton>
                         <TextField fx:id="usernameField" layoutX="159.0" layoutY="91.0" onAction="#setUserName" prefHeight="26.0" prefWidth="110.0" promptText="Username" />
