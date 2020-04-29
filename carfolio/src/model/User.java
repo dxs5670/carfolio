@@ -9,9 +9,11 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+
 import javax.persistence.Table;
 
 /**
@@ -29,7 +31,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "User.findByUserType", query = "SELECT u FROM User u WHERE u.userType = :userType"),
     @NamedQuery(name = "User.findByUserRating", query = "SELECT u FROM User u WHERE u.userRating = :userRating")})
 public class User implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -46,6 +48,8 @@ public class User implements Serializable {
     @Column(name = "userRating")
     private Short userRating;
 
+ 
+    
     public User(String username, String password, String firstName, String lastName, Short userType, Short userRating) {
         this.username = username;
         this.password = password;
@@ -77,7 +81,7 @@ public class User implements Serializable {
     }
 
    
-    
+
     
     // Get and set
     
@@ -130,9 +134,9 @@ public class User implements Serializable {
                 break;
             
         }
-        
     }
-
+    
+    
     public Short getUserRating() {
         return userRating;
     }
@@ -141,8 +145,7 @@ public class User implements Serializable {
         this.userRating = userRating;
     }
 
-    
-    
+
     
     @Override
     public int hashCode() {
@@ -168,6 +171,8 @@ public class User implements Serializable {
     public String toString() {
         return "{ " + this.firstName + " " + this.lastName + " has Username " + this.username + " with password " + this.password + " with account type of " + this.userType + " }";
     }
+
+
 
     
     
