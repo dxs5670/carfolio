@@ -516,7 +516,7 @@ public class searchController {
         makeCar1.setText(odata.get(0).getMake());
         modelCar1.setText(odata.get(0).getModel());
         yearCar1.setText(odata.get(0).getYear().toString());
-        milesCar1.setText(odata.get(0).getMiles().toString());
+        milesCar1.setText(odata.get(0).getMiles() + "");
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

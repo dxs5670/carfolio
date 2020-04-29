@@ -226,6 +226,7 @@ public class loginController {
                     Scene sellerUI = new Scene(seller);
                     sellerController sController = sellerLoader.getController();
                     sController.setActiveUser(userLogin);
+                    sController.setGreeting();
                     Stage sellerWindow = (Stage) ((Node) e.getSource()).getScene().getWindow();
                     sellerWindow.setScene(sellerUI);
                     sellerWindow.show();

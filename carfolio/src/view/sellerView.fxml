@@ -10,37 +10,41 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.sellerController">
    <children>
-      <ImageView fx:id="carPicture" fitHeight="114.0" fitWidth="218.0" layoutX="196.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="carPicture" fitHeight="114.0" fitWidth="218.0" layoutX="196.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/Carfolio.png" />
          </image>
       </ImageView>
-      <Label fx:id="carfolioTitle" layoutX="237.0" layoutY="34.0" text="Carfolio" textFill="#053361">
+      <Label fx:id="carfolioTitle" layoutX="238.0" layoutY="20.0" text="Carfolio" textFill="#053361">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Label fx:id="sellCarLabel" layoutX="200.0" layoutY="213.0" text="Sell a Car" textFill="#053361">
+      <Label fx:id="sellCarLabel" layoutX="197.0" layoutY="180.0" text="Sell a Car" textFill="#053361">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
       <Button fx:id="initializePortfolioButton" layoutX="340.0" layoutY="355.0" mnemonicParsing="false" onAction="#initializePortfolio" text="Build Portfolio" textFill="#053361" />
-      <TextField fx:id="makeField" layoutX="151.0" layoutY="258.0" onAction="#setMake" promptText="Enter Make" />
-      <TextField fx:id="modelField" layoutX="151.0" layoutY="291.0" onAction="#setModel" promptText="Enter Model" />
-      <TextField fx:id="vinField" layoutX="151.0" layoutY="323.0" onAction="#setVin" promptText="Enter VIN" />
-      <TextField fx:id="milageField" layoutX="151.0" layoutY="355.0" onAction="#setMileage" promptText="Enter Mileage" />
-      <Label fx:id="makeLabel" layoutX="84.0" layoutY="262.0" text="Make" textFill="#053361" />
-      <Label fx:id="modelLabel" layoutX="81.0" layoutY="295.0" text="Model" textFill="#053361" />
-      <Label fx:id="vinLabel" layoutX="48.0" layoutY="327.0" text="VIN Number" textFill="#053361" />
-      <Label fx:id="mileageLabel" layoutX="31.0" layoutY="359.0" text="Current Mileage" textFill="#053361" />
+      <TextField fx:id="makeField" layoutX="155.0" layoutY="205.0" onAction="#setMake" promptText="Enter Make" />
+      <TextField fx:id="modelField" layoutX="156.0" layoutY="238.0" onAction="#setModel" promptText="Enter Model" />
+      <TextField fx:id="vinField" layoutX="156.0" layoutY="339.0" onAction="#setVin" promptText="Enter VIN" />
+      <TextField fx:id="milageField" layoutX="156.0" layoutY="371.0" onAction="#setMileage" promptText="Enter Mileage" />
+      <Label fx:id="makeLabel" layoutX="91.0" layoutY="209.0" text="Make" textFill="#053361" />
+      <Label fx:id="modelLabel" layoutX="88.0" layoutY="242.0" text="Model" textFill="#053361" />
+      <Label fx:id="vinLabel" layoutX="48.0" layoutY="343.0" text="VIN Number" textFill="#053361" />
+      <Label fx:id="mileageLabel" layoutX="31.0" layoutY="375.0" text="Current Mileage" textFill="#053361" />
       <Button fx:id="accountButton" layoutX="489.0" layoutY="46.0" mnemonicParsing="false" onAction="#openAccount" prefHeight="26.0" prefWidth="67.0" text="Account" textFill="#053361" />
       <Button fx:id="portfolioButton" layoutX="489.0" layoutY="103.0" mnemonicParsing="false" onAction="#viewUserPortfolios" prefHeight="26.0" prefWidth="68.0" text="Portfolios" textFill="#053361" />
       <Button fx:id="messagesButton" layoutX="489.0" layoutY="75.0" mnemonicParsing="false" onAction="#openMessages" text="Messages" textFill="#053361" />
-      <Label layoutX="449.0" layoutY="24.0" text="Hello, ">
+      <Label fx:id="greetingName" layoutX="449.0" layoutY="24.0" text="Hello, ">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
+      <TextField fx:id="styleField" layoutX="155.0" layoutY="270.0" onAction="#setStyle" promptText="Enter Style" />
+      <Label layoutX="93.0" layoutY="274.0" text="Style" textFill="#053361" />
+      <TextField fx:id="yearField" layoutX="156.0" layoutY="305.0" onAction="#setYear" promptText="Enter Year" />
+      <Label layoutX="92.0" layoutY="309.0" text="Year" textFill="#053361" />
    </children>
 </AnchorPane>

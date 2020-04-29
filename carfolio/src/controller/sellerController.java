@@ -67,8 +67,17 @@ public class sellerController {
     @FXML // fx:id="messagesButton"
     private Button messagesButton; // Value injected by FXMLLoader
 
-    private User activeUser;
+    @FXML // fx:id="greetingName"
+    private Label greetingName; // Value injected by FXMLLoader
+
+    @FXML // fx:id="styleField"
+    private TextField styleField; // Value injected by FXMLLoader
+
+    @FXML // fx:id="yearField"
+    private TextField yearField; // Value injected by FXMLLoader
     
+    private User activeUser;
+
     @FXML
     void initializePortfolio(ActionEvent event) {
 
@@ -100,7 +109,17 @@ public class sellerController {
     }
 
     @FXML
+    void setStyle(ActionEvent event) {
+
+    }
+
+    @FXML
     void setVin(ActionEvent event) {
+
+    }
+
+    @FXML
+    void setYear(ActionEvent event) {
 
     }
 
@@ -108,11 +127,15 @@ public class sellerController {
     void viewUserPortfolios(ActionEvent event) {
 
     }
-
+    
     public void setActiveUser(User activeUser) {
         this.activeUser = activeUser;
     }
     
+    public void setGreeting() {
+        this.greetingName.setText("Hello, " + activeUser.getUsername());
+    }
+
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert carPicture != null : "fx:id=\"carPicture\" was not injected: check your FXML file 'sellerView.fxml'.";
@@ -130,6 +153,10 @@ public class sellerController {
         assert accountButton != null : "fx:id=\"accountButton\" was not injected: check your FXML file 'sellerView.fxml'.";
         assert portfolioButton != null : "fx:id=\"portfolioButton\" was not injected: check your FXML file 'sellerView.fxml'.";
         assert messagesButton != null : "fx:id=\"messagesButton\" was not injected: check your FXML file 'sellerView.fxml'.";
+        assert greetingName != null : "fx:id=\"greetingName\" was not injected: check your FXML file 'sellerView.fxml'.";
+        assert styleField != null : "fx:id=\"styleField\" was not injected: check your FXML file 'sellerView.fxml'.";
+        assert yearField != null : "fx:id=\"yearField\" was not injected: check your FXML file 'sellerView.fxml'.";
+
 
     }
 }
