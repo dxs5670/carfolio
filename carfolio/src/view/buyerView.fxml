@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -23,19 +22,6 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <ComboBox fx:id="searchByMenu" layoutX="358.0" layoutY="255.0" onAction="#openSearchContextMenu" prefHeight="26.0" prefWidth="99.0" promptText="Search By:">
-         <contextMenu>
-            <ContextMenu>
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Make" />
-                  <MenuItem mnemonicParsing="false" text="Model" />
-                  <MenuItem mnemonicParsing="false" text="Year" />
-                  <MenuItem mnemonicParsing="false" text="Mileage" />
-                  <MenuItem mnemonicParsing="false" text="Style" />
-               </items>
-            </ContextMenu>
-         </contextMenu>
-      </ComboBox>
       <TextField fx:id="searchTermField" layoutX="163.0" layoutY="255.0" onAction="#setSearch" prefHeight="26.0" prefWidth="175.0" promptText="Enter Search Term" />
       <Button fx:id="advancedSearchButton" layoutX="354.0" layoutY="300.0" mnemonicParsing="false" onAction="#openAdvancedSearch" text="Advanced Search" textFill="#053361" />
       <Button fx:id="searchButton" layoutX="222.0" layoutY="300.0" mnemonicParsing="false" onAction="#beginSearchBy" text="Search" textFill="#053361" />
@@ -52,5 +38,14 @@
             <Font size="16.0" />
          </font>
       </Label>
+      <MenuButton fx:id="searchByMenu" layoutX="362.0" layoutY="256.0" mnemonicParsing="false" text="Search by..." textFill="#053361">
+         <items>
+            <MenuItem fx:id="searchMake" mnemonicParsing="false" onAction="#setMakeSearch" text="Make" />
+            <MenuItem fx:id="searchModel" mnemonicParsing="false" onAction="#setModelSearch" text="Model" />
+            <MenuItem fx:id="searchMileage" mnemonicParsing="false" onAction="#setMileageSearch" text="Mileage" />
+            <MenuItem fx:id="searchStyle" mnemonicParsing="false" onAction="#setStyleSearch" text="Style" />
+            <MenuItem fx:id="searchYear" mnemonicParsing="false" onAction="#setYearSearch" text="Year" />
+         </items>
+      </MenuButton>
    </children>
 </AnchorPane>
