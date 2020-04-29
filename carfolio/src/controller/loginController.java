@@ -4,22 +4,37 @@
 
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
+import javax.persistence.NoResultException;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import model.User;
+
 
 public class loginController {
 
+    
+    
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
@@ -38,6 +53,9 @@ public class loginController {
     @FXML // fx:id="loginButton"
     private Button loginButton; // Value injected by FXMLLoader
 
+    @FXML
+    private Label accountNotFound;
+    
     @FXML // fx:id="createAccountButton"
     private Button createAccountButton; // Value injected by FXMLLoader
 
@@ -65,6 +83,12 @@ public class loginController {
     @FXML // fx:id="lastNameField"
     private TextField lastNameField; // Value injected by FXMLLoader
     
+    @FXML
+    private Label usernameExists;
+    
+    @FXML
+    private Label failureToRegister;
+        
     private User newUser = new User();
     private User toLogin = new User();
     
@@ -72,8 +96,15 @@ public class loginController {
  
     @FXML
     void createAccount(ActionEvent event) {
-        System.out.println(newUser.toString()); 
+        if(verifyRegisterFields() == false) {
+            failureToRegister.setVisible(true);
+        } else if (verifyUsername(usernameField.getText()) == true) {
+            usernameExists.setVisible(true);
+        } else {
+            createUser(newUser);
+        }
     }
+    
 
     @FXML
     void launchForgotPassword(ActionEvent event) {
@@ -81,8 +112,12 @@ public class loginController {
     }
 
     @FXML
-    void login(ActionEvent event) {
-
+    void login(ActionEvent event) throws IOException {
+         if(verifyLoginFields() == false) {
+            failureToRegister.setVisible(true);
+        } else if(verifyUsername(existingUsername.getText()) == true) {
+             signIn(existingUsername.getText(), existingPassword.getText(), event);
+        }       
     }
 
     @FXML
@@ -128,12 +163,95 @@ public class loginController {
     }
 
     public boolean verifyRegisterFields(){
-        String fName;
-        String lName;
-        String uName;
-        int typeSelected;
-        return true;
+        String fName = firstNameField.getText();
+        String lName = lastNameField.getText();
+        String uName = usernameField.getText();
+        String pw = passwordField.getText();
+        String typeSelected = accountSelector.getText();
+        return !(fName.trim().equals("") || lName.trim().equals("") || uName.trim().equals("") || pw.trim().equals("") || null == typeSelected);
     }
+    
+    public boolean verifyLoginFields() {
+        String uName = existingUsername.getText();
+        String pw = existingPassword.getText();
+        return !(uName.trim().equals("") || pw.trim().equals(""));
+    }
+    
+    EntityManager em;
+    
+    public void createUser(User user) {
+        try {
+            em.getTransaction().begin();
+            if (user.getUsername() != null) {
+                em.persist(user);
+                em.getTransaction().commit();    
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void signIn(String username, String password, ActionEvent e) throws IOException {
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE  u.username = :username AND u.password = :password", User.class);
+        query.setParameter("username", username);
+        query.setParameter("password", password);
+        try {
+            switch(query.getSingleResult().getUserType()) {
+                case 0:
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/mainView.fxml"));
+                    Parent main = loader.load();
+                    Scene adminUI = new Scene(main);
+                    mainController controller = loader.getController();
+                    //controller.initData();
+                    Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                    window.setScene(adminUI);
+                    window.show();
+                    break;
+                case 1:
+                    FXMLLoader sellerLoader = new FXMLLoader(getClass().getResource("/view/sellerView.fxml"));
+                    Parent seller = sellerLoader.load();
+                    Scene sellerUI = new Scene(seller);
+                    sellerController sConroller = sellerLoader.getController();
+                    Stage sellerWindow = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                    sellerWindow.setScene(sellerUI);
+                    sellerWindow.show();
+                    break;
+                case 2:
+                    FXMLLoader buyerLoader = new FXMLLoader(getClass().getResource("/view/buyerView.fxml"));
+                    Parent buyer = buyerLoader.load();
+                    Scene buyerUI = new Scene(buyer);
+                    buyerController bConroller = buyerLoader.getController();
+                    Stage buyerWindow = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                    buyerWindow.setScene(buyerUI);
+                    buyerWindow.show();
+                    break;
+                default:
+                    System.out.println("Error switching scenes");
+                    break;
+            }   
+        } catch (Exception ex) {
+            System.out.println(e);
+            accountNotFound.setVisible(true);
+        }
+    }
+    
+    
+    
+        
+    public boolean verifyUsername(String username) {
+        Query query = em.createNamedQuery("User.findByUsername");
+        query.setParameter("username", username);
+        try {
+            Object result = query.getSingleResult();
+            return true;
+        } catch(NoResultException e) {
+            e.getMessage();
+            return false;
+        } 
+    }
+    
+
+    
     
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
@@ -141,6 +259,7 @@ public class loginController {
         assert existingUsername != null : "fx:id=\"existingUsername\" was not injected: check your FXML file 'loginView.fxml'.";
         assert existingPassword != null : "fx:id=\"existingPassword\" was not injected: check your FXML file 'loginView.fxml'.";
         assert loginButton != null : "fx:id=\"loginButton\" was not injected: check your FXML file 'loginView.fxml'.";
+        assert accountNotFound != null : "fx:id=\"accountNotFound\" was not injected: check your FXML file 'loginView.fxml'.";
         assert createAccountButton != null : "fx:id=\"createAccountButton\" was not injected: check your FXML file 'loginView.fxml'.";
         assert strengthBar != null : "fx:id=\"strengthBar\" was not injected: check your FXML file 'loginView.fxml'.";
         assert accountSelector != null : "fx:id=\"accountSelector\" was not injected: check your FXML file 'loginView.fxml'.";
@@ -150,9 +269,11 @@ public class loginController {
         assert passwordField != null : "fx:id=\"passwordField\" was not injected: check your FXML file 'loginView.fxml'.";
         assert firstNameField != null : "fx:id=\"firstNameField\" was not injected: check your FXML file 'loginView.fxml'.";
         assert lastNameField != null : "fx:id=\"lastNameField\" was not injected: check your FXML file 'loginView.fxml'.";
+        assert usernameExists != null : "fx:id=\"usernameExists\" was not injected: check your FXML file 'loginView.fxml'.";
+        assert failureToRegister != null : "fx:id=\"failureToRegister\" was not injected: check your FXML file 'loginView.fxml'.";
 
-        
-        
+        em = (EntityManager) Persistence.createEntityManagerFactory("CarfolioPU").createEntityManager();
+        System.out.println(em);
     }
     
     
