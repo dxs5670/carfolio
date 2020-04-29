@@ -88,9 +88,12 @@ public class loginController {
     
     @FXML
     private Label failureToRegister;
+    
+    @FXML
+    private Label accountCreated;
         
     private User newUser = new User();
-    private User toLogin = new User();
+    private User userLogin = new User();
     
     
  
@@ -107,8 +110,14 @@ public class loginController {
     
 
     @FXML
-    void launchForgotPassword(ActionEvent event) {
-
+    void launchForgotPassword(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/resetPasswordView.fxml"));
+        Parent reset = loader.load();
+        Scene resetPwScene = new Scene(reset);
+        resetPasswordController controller = loader.getController();
+        Stage stage = new Stage();
+        stage.setScene(resetPwScene);
+        stage.show();
     }
 
     @FXML
@@ -138,12 +147,12 @@ public class loginController {
 
     @FXML
     void setLoginPassword(KeyEvent event) {
-        toLogin.setPassword(existingPassword.getText());
+        userLogin.setPassword(existingPassword.getText());
     }
 
     @FXML
     void setLoginUsername(KeyEvent event) {
-        toLogin.setUsername(existingUsername.getText());
+        userLogin.setUsername(existingUsername.getText());
     }
 
     @FXML
@@ -184,7 +193,10 @@ public class loginController {
             em.getTransaction().begin();
             if (user.getUsername() != null) {
                 em.persist(user);
-                em.getTransaction().commit();    
+                em.getTransaction().commit();
+                usernameExists.setVisible(false);
+                failureToRegister.setVisible(false);
+                accountCreated.setVisible(true);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -202,7 +214,8 @@ public class loginController {
                     Parent main = loader.load();
                     Scene adminUI = new Scene(main);
                     mainController controller = loader.getController();
-                    //controller.initData();
+                    controller.setLoggedUser(userLogin);
+                    controller.setGreeting("Hello, " + username +"!");
                     Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
                     window.setScene(adminUI);
                     window.show();
@@ -211,7 +224,8 @@ public class loginController {
                     FXMLLoader sellerLoader = new FXMLLoader(getClass().getResource("/view/sellerView.fxml"));
                     Parent seller = sellerLoader.load();
                     Scene sellerUI = new Scene(seller);
-                    sellerController sConroller = sellerLoader.getController();
+                    sellerController sController = sellerLoader.getController();
+                    sController.setLoggedUser(userLogin);
                     Stage sellerWindow = (Stage) ((Node) e.getSource()).getScene().getWindow();
                     sellerWindow.setScene(sellerUI);
                     sellerWindow.show();
@@ -220,7 +234,8 @@ public class loginController {
                     FXMLLoader buyerLoader = new FXMLLoader(getClass().getResource("/view/buyerView.fxml"));
                     Parent buyer = buyerLoader.load();
                     Scene buyerUI = new Scene(buyer);
-                    buyerController bConroller = buyerLoader.getController();
+                    buyerController bController = buyerLoader.getController();
+                    bController.setLoggedUser(userLogin);
                     Stage buyerWindow = (Stage) ((Node) e.getSource()).getScene().getWindow();
                     buyerWindow.setScene(buyerUI);
                     buyerWindow.show();
@@ -230,7 +245,7 @@ public class loginController {
                     break;
             }   
         } catch (Exception ex) {
-            System.out.println(e);
+            System.out.println(ex);
             accountNotFound.setVisible(true);
         }
     }
@@ -271,9 +286,10 @@ public class loginController {
         assert lastNameField != null : "fx:id=\"lastNameField\" was not injected: check your FXML file 'loginView.fxml'.";
         assert usernameExists != null : "fx:id=\"usernameExists\" was not injected: check your FXML file 'loginView.fxml'.";
         assert failureToRegister != null : "fx:id=\"failureToRegister\" was not injected: check your FXML file 'loginView.fxml'.";
+        assert accountCreated != null : "fx:id=\"accountCreated\" was not injected: check your FXML file 'loginView.fxml'.";
 
         em = (EntityManager) Persistence.createEntityManagerFactory("CarfolioPU").createEntityManager();
-        System.out.println(em);
+        
     }
     
     

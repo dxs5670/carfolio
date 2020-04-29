@@ -13,13 +13,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import model.Car;
+import model.User;
 
 public class mainController {
 
@@ -31,18 +34,6 @@ public class mainController {
 
     @FXML // fx:id="carPicture"
     private ImageView carPicture; // Value injected by FXMLLoader
-
-    @FXML // fx:id="passwordField"
-    private PasswordField passwordField; // Value injected by FXMLLoader
-
-    @FXML // fx:id="loginButton"
-    private Button loginButton; // Value injected by FXMLLoader
-
-    @FXML // fx:id="usernameField"
-    private TextField usernameField; // Value injected by FXMLLoader
-
-    @FXML // fx:id="registerButton"
-    private Button registerButton; // Value injected by FXMLLoader
 
     @FXML // fx:id="accountButton"
     private Button accountButton; // Value injected by FXMLLoader
@@ -61,9 +52,6 @@ public class mainController {
 
     @FXML // fx:id="sellCarLabel"
     private Label sellCarLabel; // Value injected by FXMLLoader
-
-    @FXML // fx:id="searchByMenu"
-    private ComboBox<?> searchByMenu; // Value injected by FXMLLoader
 
     @FXML // fx:id="vSeparator"
     private Separator vSeparator; // Value injected by FXMLLoader
@@ -93,7 +81,7 @@ public class mainController {
     private TextField vinField; // Value injected by FXMLLoader
 
     @FXML // fx:id="milageField"
-    private TextField milageField; // Value injected by FXMLLoader
+    private TextField mileageField; // Value injected by FXMLLoader
 
     @FXML // fx:id="makeLabel"
     private Label makeLabel; // Value injected by FXMLLoader
@@ -110,51 +98,47 @@ public class mainController {
     @FXML // fx:id="carfolioTitle"
     private Label carfolioTitle; // Value injected by FXMLLoader
 
-    @FXML // fx:id="accountPhoto"
-    private ImageView accountPhoto; // Value injected by FXMLLoader
+    @FXML // fx:id="greeting"
+    private Label greeting; // Value injected by FXMLLoader
+
+    @FXML // fx:id="searchByMenu"
+    private MenuButton searchByMenu; // Value injected by FXMLLoader
+
+    @FXML // fx:id="searchMake"
+    private MenuItem searchMake; // Value injected by FXMLLoader
+
+    @FXML // fx:id="searchModel"
+    private MenuItem searchModel; // Value injected by FXMLLoader
+
+    @FXML // fx:id="searchMileage"
+    private MenuItem searchMileage; // Value injected by FXMLLoader
+
+    @FXML // fx:id="searchStyle"
+    private MenuItem searchStyle; // Value injected by FXMLLoader
+
+    @FXML // fx:id="searchYear"
+    private MenuItem searchYear; // Value injected by FXMLLoader
+
+    private User loggedUser;
+    private Car sellCar;
+    
 
     @FXML
-    void beginSearchBy(ActionEvent event) {
-        
+    void beginSearch(ActionEvent event) {
 
-    }
-
-    @FXML
-    void createAccount(ActionEvent event) throws IOException {
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/loginView.fxml"));
-        
-        Parent loginView = loader.load();
-        
-        Scene loginViewScene = new Scene(loginView);
-        
-        loginController controller = loader.getController();
-        
-        Stage stage = new Stage();
-        stage.setScene(loginViewScene);
-        stage.show();
     }
 
     @FXML
     void initializePortfolio(ActionEvent event) {
-
-    }
-
-    @FXML
-    void login(ActionEvent event) {
-
+        
     }
 
     @FXML
     void openAccount(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/accountView.fxml"));
-        
         Parent accountView = loader.load();
-        
         Scene accountViewScene = new Scene(accountView);
-        
         accountController controller = loader.getController();
-        
         Stage stage = new Stage();
         stage.setScene(accountViewScene);
         stage.show();
@@ -162,15 +146,10 @@ public class mainController {
 
     @FXML
     void openAdvancedSearch(ActionEvent event) throws IOException {
-        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/searchView.fxml"));
-        
         Parent searchView = loader.load();
-        
         Scene searchViewScene = new Scene(searchView);
-        
         searchController controller = loader.getController();
-        
         Stage stage = new Stage();
         stage.setScene(searchViewScene);
         stage.show();
@@ -179,13 +158,9 @@ public class mainController {
 
     @FXML
     void openMessages(ActionEvent event) throws IOException {
-       
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messageView.fxml"));
-        
         Parent messageView = loader.load();
-        
         Scene messageViewScene = new Scene(messageView);
-        
         messageController controller = loader.getController();
         
         Stage stage = new Stage();
@@ -194,14 +169,22 @@ public class mainController {
     }
 
     @FXML
+    void openPortfolios(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/userPortfolioView.fxml"));
+        Parent userPortfolioView = loader.load();
+        Scene userPortfolioViewScene = new Scene(userPortfolioView);
+        portfolioController controller = loader.getController();
+        
+        Stage stage = new Stage();
+        stage.setScene(userPortfolioViewScene);
+        stage.show();
+    }
+
+    @FXML
     void openScraper(ActionEvent event) throws IOException {
-        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/scraperView.fxml"));
-        
         Parent scraperView = loader.load();
-        
         Scene scraperViewScene = new Scene(scraperView);
-        
         scraperController controller = loader.getController();
         
         Stage stage = new Stage();
@@ -210,64 +193,78 @@ public class mainController {
     }
 
     @FXML
-    void openSearchContextMenu(ActionEvent event) {
+    void setMake(KeyEvent event) {
+        sellCar.setMake(makeField.getText());
+    }
+
+    @FXML
+    void setMakeSearch(ActionEvent event) {
+        searchByMenu.setText("Make");
+    }
+
+    @FXML
+    void setMileage(KeyEvent event) {
+        sellCar.setMiles(Integer.valueOf(mileageField.getText()));
+    }
+
+    @FXML
+    void setMileageSearch(ActionEvent event) {
+        searchByMenu.setText("Mileage");
+    }
+
+    @FXML
+    void setModel(KeyEvent event) {
+        sellCar.setMake(makeField.getText());
+    }
+
+    @FXML
+    void setModelSearch(ActionEvent event) {
+        searchByMenu.setText("Model");
+    }
+
+    @FXML
+    void setSearch(KeyEvent event) {
 
     }
 
     @FXML
-    void setMake(ActionEvent event) {
-
+    void setStyleSearch(ActionEvent event) {
+        searchByMenu.setText("Style");
     }
 
     @FXML
-    void setMileage(ActionEvent event) {
-
+    void setVin(KeyEvent event) {
+        sellCar.setVin(vinField.getText());
     }
 
     @FXML
-    void setModel(ActionEvent event) {
-
+    void setYearSearch(ActionEvent event) {
+        searchByMenu.setText("Year");
     }
 
-    @FXML
-    void setPassword(ActionEvent event) {
-
+    public User getLoggedUser() {
+        return loggedUser;
     }
 
-    @FXML
-    void setSearch(ActionEvent event) {
-
+    public void setLoggedUser(User loggedUser) {
+        this.loggedUser = loggedUser;
     }
-
-    @FXML
-    void setUsername(ActionEvent event) {
-
+    
+    public void setGreeting(String greet) {
+        this.greeting.setText(greet);
     }
+    
 
-    @FXML
-    void setVin(ActionEvent event) {
-
-    }
-
-    @FXML
-    void viewUserPortfolios(ActionEvent event) {
-        
-    }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert carPicture != null : "fx:id=\"carPicture\" was not injected: check your FXML file 'mainView.fxml'.";
-        assert passwordField != null : "fx:id=\"passwordField\" was not injected: check your FXML file 'mainView.fxml'.";
-        assert loginButton != null : "fx:id=\"loginButton\" was not injected: check your FXML file 'mainView.fxml'.";
-        assert usernameField != null : "fx:id=\"usernameField\" was not injected: check your FXML file 'mainView.fxml'.";
-        assert registerButton != null : "fx:id=\"registerButton\" was not injected: check your FXML file 'mainView.fxml'.";
         assert accountButton != null : "fx:id=\"accountButton\" was not injected: check your FXML file 'mainView.fxml'.";
         assert portfolioButton != null : "fx:id=\"portfolioButton\" was not injected: check your FXML file 'mainView.fxml'.";
         assert messagesButton != null : "fx:id=\"messagesButton\" was not injected: check your FXML file 'mainView.fxml'.";
         assert horizontalSeparator != null : "fx:id=\"horizontalSeparator\" was not injected: check your FXML file 'mainView.fxml'.";
         assert searchCarLabel != null : "fx:id=\"searchCarLabel\" was not injected: check your FXML file 'mainView.fxml'.";
         assert sellCarLabel != null : "fx:id=\"sellCarLabel\" was not injected: check your FXML file 'mainView.fxml'.";
-        assert searchByMenu != null : "fx:id=\"searchByMenu\" was not injected: check your FXML file 'mainView.fxml'.";
         assert vSeparator != null : "fx:id=\"vSeparator\" was not injected: check your FXML file 'mainView.fxml'.";
         assert searchTermField != null : "fx:id=\"searchTermField\" was not injected: check your FXML file 'mainView.fxml'.";
         assert initializePortfolioButton != null : "fx:id=\"initializePortfolioButton\" was not injected: check your FXML file 'mainView.fxml'.";
@@ -277,14 +274,24 @@ public class mainController {
         assert makeField != null : "fx:id=\"makeField\" was not injected: check your FXML file 'mainView.fxml'.";
         assert modelField != null : "fx:id=\"modelField\" was not injected: check your FXML file 'mainView.fxml'.";
         assert vinField != null : "fx:id=\"vinField\" was not injected: check your FXML file 'mainView.fxml'.";
-        assert milageField != null : "fx:id=\"milageField\" was not injected: check your FXML file 'mainView.fxml'.";
+        assert mileageField != null : "fx:id=\"milageField\" was not injected: check your FXML file 'mainView.fxml'.";
         assert makeLabel != null : "fx:id=\"makeLabel\" was not injected: check your FXML file 'mainView.fxml'.";
         assert modelLabel != null : "fx:id=\"modelLabel\" was not injected: check your FXML file 'mainView.fxml'.";
         assert vinLabel != null : "fx:id=\"vinLabel\" was not injected: check your FXML file 'mainView.fxml'.";
         assert mileageLabel != null : "fx:id=\"mileageLabel\" was not injected: check your FXML file 'mainView.fxml'.";
         assert carfolioTitle != null : "fx:id=\"carfolioTitle\" was not injected: check your FXML file 'mainView.fxml'.";
-        assert accountPhoto != null : "fx:id=\"accountPhoto\" was not injected: check your FXML file 'mainView.fxml'.";
-
+        assert greeting != null : "fx:id=\"greeting\" was not injected: check your FXML file 'mainView.fxml'.";
+        assert searchByMenu != null : "fx:id=\"searchByMenu\" was not injected: check your FXML file 'mainView.fxml'.";
+        assert searchMake != null : "fx:id=\"searchMake\" was not injected: check your FXML file 'mainView.fxml'.";
+        assert searchModel != null : "fx:id=\"searchModel\" was not injected: check your FXML file 'mainView.fxml'.";
+        assert searchMileage != null : "fx:id=\"searchMileage\" was not injected: check your FXML file 'mainView.fxml'.";
+        assert searchStyle != null : "fx:id=\"searchStyle\" was not injected: check your FXML file 'mainView.fxml'.";
+        assert searchYear != null : "fx:id=\"searchYear\" was not injected: check your FXML file 'mainView.fxml'.";
+        
+        
+        
     }
+
+
 }
 

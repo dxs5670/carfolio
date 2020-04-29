@@ -13,6 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import model.User;
 
 public class buyerController {
 
@@ -52,6 +53,10 @@ public class buyerController {
     @FXML // fx:id="sellCarLabel"
     private Label sellCarLabel; // Value injected by FXMLLoader
 
+    private User loggedUser;
+
+
+    
     @FXML
     void beginSearchBy(ActionEvent event) {
 
@@ -85,6 +90,14 @@ public class buyerController {
     @FXML
     void viewUserPortfolios(ActionEvent event) {
 
+    }
+    
+    public User getLoggedUser() {
+        return loggedUser;
+    }
+
+    public void setLoggedUser(User loggedUser) {
+        this.loggedUser = loggedUser;
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

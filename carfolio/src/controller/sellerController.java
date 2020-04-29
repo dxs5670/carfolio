@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import model.User;
 
 public class sellerController {
 
@@ -66,6 +67,8 @@ public class sellerController {
     @FXML // fx:id="messagesButton"
     private Button messagesButton; // Value injected by FXMLLoader
 
+    private User loggedUser;
+    
     @FXML
     void initializePortfolio(ActionEvent event) {
 
@@ -105,7 +108,15 @@ public class sellerController {
     void viewUserPortfolios(ActionEvent event) {
 
     }
+    
+    public User getLoggedUser() {
+        return loggedUser;
+    }
 
+    public void setLoggedUser(User loggedUser) {
+        this.loggedUser = loggedUser;
+    }
+    
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert carPicture != null : "fx:id=\"carPicture\" was not injected: check your FXML file 'sellerView.fxml'.";
