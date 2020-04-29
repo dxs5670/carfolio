@@ -4,16 +4,22 @@
 
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import model.User;
 
 public class buyerController {
@@ -80,18 +86,39 @@ public class buyerController {
     }
 
     @FXML
-    void openAccount(ActionEvent event) {
+    void openAccount(ActionEvent event) throws IOException {
+        //opens in same window
+        FXMLLoader accountLoader = new FXMLLoader(getClass().getResource("/view/accountView.fxml"));
+        Parent account = accountLoader.load();
+        Scene searchUI = new Scene(account);
+        accountController aController = accountLoader.getController();
+        Stage accountWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        accountWindow.setScene(searchUI);
+        accountWindow.show();
+    }
 
+    @FXML 
+    void openAdvancedSearch(ActionEvent event) throws IOException {
+        //opens in same window
+        FXMLLoader searchLoader = new FXMLLoader(getClass().getResource("/view/searchView.fxml"));
+        Parent search = searchLoader.load();
+        Scene searchUI = new Scene(search);
+        searchController sController = searchLoader.getController();
+        Stage searchWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        searchWindow.setScene(searchUI);
+        searchWindow.show();
     }
 
     @FXML
-    void openAdvancedSearch(ActionEvent event) {
-
-    }
-
-    @FXML
-    void openMessages(ActionEvent event) {
-
+    void openMessages(ActionEvent event) throws IOException {
+        //opens in same window
+        FXMLLoader messageLoader = new FXMLLoader(getClass().getResource("/view/messageView.fxml"));
+        Parent message = messageLoader.load();
+        Scene messageUI = new Scene(message);
+        messageController mController = messageLoader.getController();
+        Stage messageWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        messageWindow.setScene(messageUI);
+        messageWindow.show();
     }
 
     @FXML

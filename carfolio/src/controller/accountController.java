@@ -1,10 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Sample Skeleton for 'accountView.fxml' Controller Class
  */
-package controller;
 
+package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,8 +16,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.SVGPath;
 import model.User;
 
+public class accountController {
 
-class accountController {
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
@@ -67,9 +65,9 @@ class accountController {
 
     @FXML // fx:id="accountType"
     private Label accountType; // Value injected by FXMLLoader
-
+    
     private User activeUser;
-        
+
     @FXML
     void deleteAccount(ActionEvent event) {
 
@@ -109,11 +107,10 @@ class accountController {
     void updateUser(ActionEvent event) {
 
     }
-
+    
     public void setActiveUser(User activeUser) {
         this.activeUser = activeUser;
     }
-    
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
