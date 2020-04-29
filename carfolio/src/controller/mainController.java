@@ -119,7 +119,7 @@ public class mainController {
     @FXML // fx:id="searchYear"
     private MenuItem searchYear; // Value injected by FXMLLoader
 
-    private User loggedUser;
+    private User activeUser;
     private Car sellCar;
     
 
@@ -242,12 +242,8 @@ public class mainController {
         searchByMenu.setText("Year");
     }
 
-    public User getLoggedUser() {
-        return loggedUser;
-    }
-
-    public void setLoggedUser(User loggedUser) {
-        this.loggedUser = loggedUser;
+    public void setActiveUser(User activeUser) {
+        this.activeUser = activeUser;
     }
     
     public void setGreeting(String greet) {

@@ -53,7 +53,7 @@ public class buyerController {
     @FXML // fx:id="sellCarLabel"
     private Label sellCarLabel; // Value injected by FXMLLoader
 
-    private User loggedUser;
+    private User activeUser;
 
 
     
@@ -92,12 +92,8 @@ public class buyerController {
 
     }
     
-    public User getLoggedUser() {
-        return loggedUser;
-    }
-
-    public void setLoggedUser(User loggedUser) {
-        this.loggedUser = loggedUser;
+    public void setActiveUser(User activeUser) {
+        this.activeUser = activeUser;
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

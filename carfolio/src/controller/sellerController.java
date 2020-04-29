@@ -67,7 +67,7 @@ public class sellerController {
     @FXML // fx:id="messagesButton"
     private Button messagesButton; // Value injected by FXMLLoader
 
-    private User loggedUser;
+    private User activeUser;
     
     @FXML
     void initializePortfolio(ActionEvent event) {
@@ -108,13 +108,9 @@ public class sellerController {
     void viewUserPortfolios(ActionEvent event) {
 
     }
-    
-    public User getLoggedUser() {
-        return loggedUser;
-    }
 
-    public void setLoggedUser(User loggedUser) {
-        this.loggedUser = loggedUser;
+    public void setActiveUser(User activeUser) {
+        this.activeUser = activeUser;
     }
     
     @FXML // This method is called by the FXMLLoader when initialization is complete

@@ -214,7 +214,7 @@ public class loginController {
                     Parent main = loader.load();
                     Scene adminUI = new Scene(main);
                     mainController controller = loader.getController();
-                    controller.setLoggedUser(userLogin);
+                    controller.setActiveUser(userLogin);
                     controller.setGreeting("Hello, " + username +"!");
                     Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
                     window.setScene(adminUI);
@@ -225,7 +225,7 @@ public class loginController {
                     Parent seller = sellerLoader.load();
                     Scene sellerUI = new Scene(seller);
                     sellerController sController = sellerLoader.getController();
-                    sController.setLoggedUser(userLogin);
+                    sController.setActiveUser(userLogin);
                     Stage sellerWindow = (Stage) ((Node) e.getSource()).getScene().getWindow();
                     sellerWindow.setScene(sellerUI);
                     sellerWindow.show();
@@ -235,7 +235,7 @@ public class loginController {
                     Parent buyer = buyerLoader.load();
                     Scene buyerUI = new Scene(buyer);
                     buyerController bController = buyerLoader.getController();
-                    bController.setLoggedUser(userLogin);
+                    bController.setActiveUser(userLogin);
                     Stage buyerWindow = (Stage) ((Node) e.getSource()).getScene().getWindow();
                     buyerWindow.setScene(buyerUI);
                     buyerWindow.show();
