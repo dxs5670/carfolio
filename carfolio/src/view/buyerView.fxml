@@ -28,7 +28,7 @@
       <Button fx:id="accountButton" layoutX="499.0" layoutY="39.0" mnemonicParsing="false" onAction="#openAccount" prefHeight="26.0" prefWidth="67.0" text="Account" textFill="#053361" />
       <Button fx:id="portfolioButton" layoutX="499.0" layoutY="96.0" mnemonicParsing="false" onAction="#viewUserPortfolios" prefHeight="26.0" prefWidth="68.0" text="Portfolios" textFill="#053361" />
       <Button fx:id="messagesButton" layoutX="499.0" layoutY="68.0" mnemonicParsing="false" onAction="#openMessages" text="Messages" textFill="#053361" />
-      <Label layoutX="459.0" layoutY="17.0" text="Hello, ">
+      <Label fx:id="greetingName" layoutX="459.0" layoutY="17.0" text="Hello, ">
          <font>
             <Font size="14.0" />
          </font>

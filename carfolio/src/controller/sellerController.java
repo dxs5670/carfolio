@@ -86,8 +86,8 @@ public class sellerController {
     
     EntityManager manager;
 
-    // Should this be "Create listing" instead of portfolio?
-    @FXML
+    
+    @FXML // Add a new Car entity to the DB
     void initializePortfolio(ActionEvent event) {
         this.createdCar = new Car();
         // TODO: add error checking
@@ -106,7 +106,7 @@ public class sellerController {
         alert.setTitle("Message");
         alert.setContentText("Your Car has been created!");
         alert.showAndWait();
-        
+        // Clear fields
         modelField.setText("");
         makeField.setText("");
         styleField.setText("");
@@ -164,6 +164,7 @@ public class sellerController {
         this.activeUser = activeUser;
     }
     
+    //Username appears in top right
     public void setGreeting() {
         this.greetingName.setText("Hello, " + activeUser.getUsername());
     }

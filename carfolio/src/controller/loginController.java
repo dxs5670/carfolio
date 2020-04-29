@@ -209,7 +209,7 @@ public class loginController {
         query.setParameter("password", password);
         try {
             switch(query.getSingleResult().getUserType()) {
-                case 0:
+                case 0: // Admin
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/mainView.fxml"));
                     Parent main = loader.load();
                     Scene adminUI = new Scene(main);
@@ -220,7 +220,7 @@ public class loginController {
                     window.setScene(adminUI);
                     window.show();
                     break;
-                case 1:
+                case 1: // Seller
                     FXMLLoader sellerLoader = new FXMLLoader(getClass().getResource("/view/sellerView.fxml"));
                     Parent seller = sellerLoader.load();
                     Scene sellerUI = new Scene(seller);
@@ -237,6 +237,7 @@ public class loginController {
                     Scene buyerUI = new Scene(buyer);
                     buyerController bController = buyerLoader.getController();
                     bController.setActiveUser(userLogin);
+                    bController.setGreeting();
                     Stage buyerWindow = (Stage) ((Node) e.getSource()).getScene().getWindow();
                     buyerWindow.setScene(buyerUI);
                     buyerWindow.show();
