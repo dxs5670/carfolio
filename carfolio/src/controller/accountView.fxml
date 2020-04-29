@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.accountController">
+  <tabs>
+    <Tab text="Account Settings">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="firstName" layoutX="85.0" layoutY="39.0" onKeyTyped="#setFirst" promptText="First Name" />
+                  <TextField fx:id="lastName" layoutX="85.0" layoutY="80.0" onKeyTyped="#setLast" promptText="Last Name" />
+                  <TextField fx:id="username" layoutX="85.0" layoutY="121.0" onKeyTyped="#setUsername" promptText="Username" />
+                  <PasswordField fx:id="password" layoutX="85.0" layoutY="162.0" onKeyTyped="#setPassword" promptText="Password" />
+                  <PasswordField fx:id="confirmPassword" layoutX="85.0" layoutY="203.0" onKeyTyped="#setConfirmPassword" promptText="Confirm Password" />
+                  <Button fx:id="updateAccount" layoutX="108.0" layoutY="248.0" mnemonicParsing="false" onAction="#updateUser" text="Update Account" />
+                  <Button fx:id="signOutButton" layoutX="128.0" layoutY="308.0" mnemonicParsing="false" onAction="#signOut" text="Sign Out" />
+                  <Button fx:id="deleteAccountButton" layoutX="468.0" layoutY="308.0" mnemonicParsing="false" onAction="#deleteAccount" text="Delete Account" />
+                  <SVGPath fx:id="star1" content="M 192.000 204.000L 206.107 211.416L 203.413 195.708L 214.825 184.584L 199.053 182.292L 192.000 168.000L 184.947 182.292L 169.175 184.584L 180.587 195.708L 177.893 211.416L 192.000 204.000" layoutX="152.0" layoutY="-115.0" />
+                  <SVGPath fx:id="star2" content="M 192.000 204.000L 206.107 211.416L 203.413 195.708L 214.825 184.584L 199.053 182.292L 192.000 168.000L 184.947 182.292L 169.175 184.584L 180.587 195.708L 177.893 211.416L 192.000 204.000" layoutX="201.0" layoutY="-115.0" />
+                  <SVGPath fx:id="star3" content="M 192.000 204.000L 206.107 211.416L 203.413 195.708L 214.825 184.584L 199.053 182.292L 192.000 168.000L 184.947 182.292L 169.175 184.584L 180.587 195.708L 177.893 211.416L 192.000 204.000" layoutX="250.0" layoutY="-115.0" />
+                  <SVGPath fx:id="star4" content="M 192.000 204.000L 206.107 211.416L 203.413 195.708L 214.825 184.584L 199.053 182.292L 192.000 168.000L 184.947 182.292L 169.175 184.584L 180.587 195.708L 177.893 211.416L 192.000 204.000" layoutX="301.0" layoutY="-115.0" />
+                  <SVGPath fx:id="star5" content="M 192.000 204.000L 206.107 211.416L 203.413 195.708L 214.825 184.584L 199.053 182.292L 192.000 168.000L 184.947 182.292L 169.175 184.584L 180.587 195.708L 177.893 211.416L 192.000 204.000" layoutX="350.0" layoutY="-115.0" />
+                  <Label fx:id="accountType" layoutX="377.0" layoutY="120.0" text="{ Account Type }">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="416.0" layoutY="157.0" text="Rating">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="noMatch" layoutX="248.0" layoutY="251.0" style="visibility: false;" text="Error: Passwords do not match!" textFill="RED">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>
