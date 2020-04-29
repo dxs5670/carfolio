@@ -14,6 +14,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import model.Car;
+import model.User;
 
 public class portfolioController {
 
@@ -68,15 +70,52 @@ public class portfolioController {
     @FXML // fx:id="makeOfferButton"
     private Button makeOfferButton; // Value injected by FXMLLoader
 
+    private Car selectedCar = new Car();
+    private User activeUser;
+     
+    
+    
+    
     @FXML
-    void contactOwner(ActionEvent event) {
+    public void contactOwner(ActionEvent event) {
 
     }
 
     @FXML
-    void makeOffer(ActionEvent event) {
-
+    public void makeOffer(ActionEvent event) {
+        
     }
+    
+    public void setMake(Car car) {
+        make.setText(selectedCar.getMake());
+    }
+    
+    public void setModel(Car car) {
+        model.setText(selectedCar.getModel());
+    }
+    
+    public void setMiles(Car car) {
+        miles.setText(Integer.toString(selectedCar.getMiles()));
+    }
+    
+    public void setPrice(Car car) {
+        //askingPrice.setText(selectedCar.getPrice());
+    }
+
+    public void setCar(Car selectedCar) {
+        this.selectedCar = selectedCar;
+    }
+    
+    // Set all portfolio data of the selected car
+    public void setAttributes() {
+        
+        make.setText(selectedCar.getMake());
+        miles.setText(Integer.toString(selectedCar.getMiles()));
+        model.setText(selectedCar.getModel());
+        
+    }
+    
+    
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
@@ -96,6 +135,8 @@ public class portfolioController {
         assert recommendedPrice != null : "fx:id=\"recommendedPrice\" was not injected: check your FXML file 'portfolioView.fxml'.";
         assert makeOfferButton != null : "fx:id=\"makeOfferButton\" was not injected: check your FXML file 'portfolioView.fxml'.";
 
+        setAttributes();
+        
     }
 }
 
