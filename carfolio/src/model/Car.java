@@ -46,9 +46,8 @@ public class Car implements Serializable {
     private Short safteyRating;
     @Column(name = "year")
     private Short year;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "miles")
-    private Float miles;
+    private int miles;
 
     public Car() {
     }
@@ -105,11 +104,11 @@ public class Car implements Serializable {
         this.year = year;
     }
 
-    public Float getMiles() {
+    public int getMiles() {
         return miles;
     }
 
-    public void setMiles(Float miles) {
+    public void setMiles(int miles) {
         this.miles = miles;
     }
 

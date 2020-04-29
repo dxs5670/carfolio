@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Caden
+ * @author Dstet
  */
 @Entity
 @Table(name = "message")
