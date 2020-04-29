@@ -1,23 +1,32 @@
-/**
- * Sample Skeleton for 'accountView.fxml' Controller Class
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-
 package controller;
 
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.SVGPath;
+import javafx.stage.Stage;
+import javax.persistence.EntityManager;
 import model.User;
 
-public class accountController {
 
+public class accountController {
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
@@ -65,52 +74,113 @@ public class accountController {
 
     @FXML // fx:id="accountType"
     private Label accountType; // Value injected by FXMLLoader
-    
-    private User activeUser;
+   
+    @FXML
+    private Label noMatch;
 
+    private EntityManager em;
+    
+    private User activeUser = new User();
+        
+    private String fn;
+    private String ln;
+    private String un;
+    private String pw;
+    private String cp;
+    
+    
+    
     @FXML
     void deleteAccount(ActionEvent event) {
-
+        try {
+            User toRemove = em.find(User.class, activeUser.getUsername());
+            if (toRemove != null) {
+                em.getTransaction().begin();
+                em.remove(toRemove);
+                em.getTransaction().commit();
+            }    
+        } catch (Exception e) {
+                System.out.println(e.getMessage());
+        }
+            
     }
+    
 
     @FXML
     void setConfirmPassword(KeyEvent event) {
-
+        cp = confirmPassword.getText();
     }
 
     @FXML
     void setFirst(KeyEvent event) {
-
+        fn = firstName.getText();
     }
 
     @FXML
     void setLast(KeyEvent event) {
-
+        ln = lastName.getText();
     }
 
     @FXML
     void setPassword(KeyEvent event) {
-
+        pw = password.getText();
     }
 
     @FXML
     void setUsername(KeyEvent event) {
-
+        un = username.getText();
     }
 
     @FXML
-    void signOut(ActionEvent event) {
-
+    void signOut(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/loginView.fxml"));
+        Parent login = loader.load();
+        Scene loginUI = new Scene(login);
+        loginController controller = loader.getController();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(loginUI);
+        window.show();
     }
 
     @FXML
-    void updateUser(ActionEvent event) {
+    void updateUser(ActionEvent event) throws IOException {
+         try {
 
+         User toUpdate = em.find(User.class, activeUser.getUsername());
+
+            if (toUpdate != null && (pw == null ? cp == null : pw.equals(cp))) {
+                em.getTransaction().begin();
+                // update
+                activeUser.setFirstName(fn);
+                activeUser.setLastName(ln);
+                activeUser.setUsername(un);
+                activeUser.setPassword(pw);
+                em.getTransaction().commit();
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/loginView.fxml"));
+            Parent login = loader.load();
+            Scene loginUI = new Scene(login);
+            loginController controller = loader.getController();
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(loginUI);
+            window.show();
+         }
     }
-    
+
     public void setActiveUser(User activeUser) {
         this.activeUser = activeUser;
     }
+    
+    public void updateActiveUser() {
+        username.setText(activeUser.getUsername());
+        firstName.setText(activeUser.getFirstName());
+        lastName.setText(activeUser.getLastName());
+        
+    }
+    
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
@@ -128,6 +198,8 @@ public class accountController {
         assert star4 != null : "fx:id=\"star4\" was not injected: check your FXML file 'accountView.fxml'.";
         assert star5 != null : "fx:id=\"star5\" was not injected: check your FXML file 'accountView.fxml'.";
         assert accountType != null : "fx:id=\"accountType\" was not injected: check your FXML file 'accountView.fxml'.";
+        assert noMatch != null : "fx:id=\"noMatch\" was not injected: check your FXML file 'accountView.fxml'.";
 
+        updateActiveUser();
     }
 }

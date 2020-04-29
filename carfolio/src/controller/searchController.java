@@ -639,9 +639,9 @@ public class searchController {
         Query query = manager.createNamedQuery("Car.findAll");
         List<Car> data = query.getResultList();
         ObservableList<Car> odata = FXCollections.observableArrayList();
-        for (Car d : data) {
-                odata.add(d);
-        }
+        data.forEach((d) -> {
+            odata.add(d);
+        });
         return odata;
     } 
     
