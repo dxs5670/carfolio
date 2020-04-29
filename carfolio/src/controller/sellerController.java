@@ -8,10 +8,15 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+import model.Car;
 import model.User;
 
 public class sellerController {
@@ -77,10 +82,37 @@ public class sellerController {
     private TextField yearField; // Value injected by FXMLLoader
     
     private User activeUser;
+    private Car createdCar;
+    
+    EntityManager manager;
 
+    // Should this be "Create listing" instead of portfolio?
     @FXML
     void initializePortfolio(ActionEvent event) {
-
+        this.createdCar = new Car();
+        // TODO: add error checking
+        createdCar.setMake(makeField.getText());
+        createdCar.setModel(modelField.getText());
+        createdCar.setStyle(styleField.getText());
+        createdCar.setYear(Short.parseShort(yearField.getText()));
+        createdCar.setVin(vinField.getText());
+        createdCar.setMiles(Integer.parseInt(milageField.getText()));
+        
+        manager.getTransaction().begin();
+        manager.persist(createdCar);
+        manager.getTransaction().commit();
+        
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Message");
+        alert.setContentText("Your Car has been created!");
+        alert.showAndWait();
+        
+        modelField.setText("");
+        makeField.setText("");
+        styleField.setText("");
+        yearField.setText("");
+        vinField.setText("");
+        milageField.setText("");
     }
 
     @FXML
@@ -157,6 +189,6 @@ public class sellerController {
         assert styleField != null : "fx:id=\"styleField\" was not injected: check your FXML file 'sellerView.fxml'.";
         assert yearField != null : "fx:id=\"yearField\" was not injected: check your FXML file 'sellerView.fxml'.";
 
-
+        manager = (EntityManager) Persistence.createEntityManagerFactory("CarfolioPU").createEntityManager();
     }
 }
