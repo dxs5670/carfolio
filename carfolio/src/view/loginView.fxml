@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="578.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.loginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="578.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.loginController">
    <children>
       <Label layoutX="216.0" layoutY="21.0" text="Welcome to Carfolio!">
          <font>
@@ -32,13 +32,14 @@
                         <TextField fx:id="existingUsername" layoutX="156.0" layoutY="61.0" onAction="#setLoginUsername" prefHeight="26.0" prefWidth="152.0" />
                         <PasswordField fx:id="existingPassword" layoutX="156.0" layoutY="109.0" onAction="#setLoginPassword" prefHeight="26.0" prefWidth="152.0" />
                         <Button fx:id="loginButton" layoutX="159.0" layoutY="228.0" mnemonicParsing="false" onAction="#login" text="Login" />
+                        <Label fx:id="accountNotFound" layoutX="49.0" layoutY="194.0" style="visibility: false;" text="Invalid Credentials. Create an account or try again." textFill="RED" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
           <Tab text="Create Account">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="379.0">
                      <children>
                         <Button fx:id="createAccountButton" layoutX="141.0" layoutY="258.0" mnemonicParsing="false" onAction="#createAccount" text="Create Account" />
                         <ProgressBar fx:id="strengthBar" layoutX="173.0" layoutY="167.0" prefHeight="20.0" prefWidth="95.0" progress="0.0" />
@@ -64,5 +65,7 @@
           </Tab>
         </tabs>
       </TabPane>
+      <Label fx:id="usernameExists" layoutX="95.0" layoutY="413.0" style="visibility: false;" text="An account already exists with that username. Please try a different username." textFill="RED" />
+      <Label fx:id="failureToRegister" layoutX="148.0" layoutY="386.0" prefWidth="305.0" style="visibility: false;" text="One or more of the required fields were empty. Try again." textFill="RED" />
    </children>
 </AnchorPane>

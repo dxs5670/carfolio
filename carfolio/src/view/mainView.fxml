@@ -65,5 +65,10 @@
             <Font size="36.0" />
          </font>
       </Label>
+      <Label layoutX="35.0" layoutY="21.0" text="Hello, administrator!">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
