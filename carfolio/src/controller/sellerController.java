@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -87,6 +88,9 @@ public class sellerController {
     @FXML // fx:id="yearField"
     private TextField yearField; // Value injected by FXMLLoader
     
+    @FXML
+    private TextField priceField;
+    
     private User activeUser;
     private Car createdCar;
     
@@ -103,6 +107,8 @@ public class sellerController {
         createdCar.setYear(Short.parseShort(yearField.getText()));
         createdCar.setVin(vinField.getText());
         createdCar.setMiles(Integer.parseInt(milageField.getText()));
+        createdCar.setPrice(Integer.parseInt(priceField.getText()));
+        createdCar.setSellerUsername(activeUser.getUsername());
         
         manager.getTransaction().begin();
         manager.persist(createdCar);
@@ -119,11 +125,20 @@ public class sellerController {
         yearField.setText("");
         vinField.setText("");
         milageField.setText("");
+        priceField.setText("");
     }
 
     @FXML
-    void openAccount(ActionEvent event) {
-        
+    void openAccount(ActionEvent event) throws IOException {
+        //opens in new window
+        FXMLLoader accountLoader = new FXMLLoader(getClass().getResource("/view/accountView.fxml"));
+        Parent account = accountLoader.load();
+        Scene accountUI = new Scene(account);
+        accountController aController = accountLoader.getController();
+        aController.setActiveUser(activeUser);
+        Stage stage = new Stage();
+        stage.setScene(accountUI);
+        stage.show();
     }
 
     @FXML
@@ -142,32 +157,32 @@ public class sellerController {
     }
 
     @FXML
-    void setMake(ActionEvent event) {
+    void setMileage(KeyEvent event) {
 
     }
 
     @FXML
-    void setMileage(ActionEvent event) {
+    void setModel(KeyEvent event) {
 
     }
 
     @FXML
-    void setModel(ActionEvent event) {
+    void setStyle(KeyEvent event) {
 
     }
 
     @FXML
-    void setStyle(ActionEvent event) {
+    void setVin(KeyEvent event) {
 
     }
 
     @FXML
-    void setVin(ActionEvent event) {
+    void setYear(KeyEvent event) {
 
     }
-
+    
     @FXML
-    void setYear(ActionEvent event) {
+    void setPrice(KeyEvent event) {
 
     }
 
@@ -206,6 +221,8 @@ public class sellerController {
         assert greetingName != null : "fx:id=\"greetingName\" was not injected: check your FXML file 'sellerView.fxml'.";
         assert styleField != null : "fx:id=\"styleField\" was not injected: check your FXML file 'sellerView.fxml'.";
         assert yearField != null : "fx:id=\"yearField\" was not injected: check your FXML file 'sellerView.fxml'.";
+        assert priceField != null : "fx:id=\"priceField\" was not injected: check your FXML file 'sellerView.fxml'.";
+
 
         manager = (EntityManager) Persistence.createEntityManagerFactory("CarfolioPU").createEntityManager();
     }
