@@ -20,6 +20,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import model.User;
 
 public class buyerController {
@@ -77,6 +79,8 @@ public class buyerController {
     
     @FXML // fx:id="greetingName"
     private Label greetingName; // Value injected by FXMLLoader
+    
+    private EntityManager em;
     
     private User activeUser;
 
@@ -168,8 +172,9 @@ public class buyerController {
 
     }
     
-    public void setActiveUser(User activeUser) {
-        this.activeUser = activeUser;
+    public void setActiveUser(User fromLogin) {
+        String queryUsername = fromLogin.getUsername();
+        activeUser = em.find(User.class, queryUsername);
     }
     
     //Username appears in top right
@@ -195,5 +200,6 @@ public class buyerController {
         assert searchStyle != null : "fx:id=\"searchStyle\" was not injected: check your FXML file 'buyerView.fxml'.";
         assert searchYear != null : "fx:id=\"searchYear\" was not injected: check your FXML file 'buyerView.fxml'.";
 
+        em = (EntityManager) Persistence.createEntityManagerFactory("CarfolioPU").createEntityManager();
     }
 }
