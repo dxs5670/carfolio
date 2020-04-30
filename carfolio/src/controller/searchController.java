@@ -35,260 +35,254 @@ import model.Car;
 
 public class searchController {
 
-    @FXML
-    private SplitPane advancedSearchPane;
+    @FXML // ResourceBundle that was given to the FXMLLoader
+    private ResourceBundle resources;
 
-    @FXML
-    private AnchorPane searchPane;
+    @FXML // URL location of the FXML file that was given to the FXMLLoader
+    private URL location;
 
-    @FXML
-    private Button searchButton;
+    @FXML // fx:id="advancedSearchPane"
+    private SplitPane advancedSearchPane; // Value injected by FXMLLoader
 
-    @FXML
-    private MenuButton sortByMenu;
+    @FXML // fx:id="searchPane"
+    private AnchorPane searchPane; // Value injected by FXMLLoader
 
-    @FXML
-    private MenuItem priceSortMenuItem;
+    @FXML // fx:id="searchButton"
+    private Button searchButton; // Value injected by FXMLLoader
 
-    @FXML
-    private MenuItem mileageSortMenuItem;
+    @FXML // fx:id="sortByMenu"
+    private MenuButton sortByMenu; // Value injected by FXMLLoader
 
-    @FXML
-    private MenuItem distanceSortMenuItem;
+    @FXML // fx:id="priceSortMenuItem"
+    private MenuItem priceSortMenuItem; // Value injected by FXMLLoader
 
-    @FXML
-    private MenuItem bestValueSortMenuItem;
+    @FXML // fx:id="mileageSortMenuItem"
+    private MenuItem mileageSortMenuItem; // Value injected by FXMLLoader
 
-    @FXML
-    private TextField searchField;
+    @FXML // fx:id="distanceSortMenuItem"
+    private MenuItem distanceSortMenuItem; // Value injected by FXMLLoader
 
-    @FXML
-    private Label searchTermLabel;
+    @FXML // fx:id="bestValueSortMenuItem"
+    private MenuItem bestValueSortMenuItem; // Value injected by FXMLLoader
 
-    @FXML
-    private Label filterTitleLabel;
+    @FXML // fx:id="searchField"
+    private TextField searchField; // Value injected by FXMLLoader
 
-    @FXML
-    private TextField maxPriceField;
+    @FXML // fx:id="searchTermLabel"
+    private Label searchTermLabel; // Value injected by FXMLLoader
 
-    @FXML
-    private TextField minPriceField;
+    @FXML // fx:id="filterTitleLabel"
+    private Label filterTitleLabel; // Value injected by FXMLLoader
 
-    @FXML
-    private TextField minMilesField;
+    @FXML // fx:id="maxPriceField"
+    private TextField maxPriceField; // Value injected by FXMLLoader
 
-    @FXML
-    private TextField maxMilesField;
+    @FXML // fx:id="minPriceField"
+    private TextField minPriceField; // Value injected by FXMLLoader
 
-    @FXML
-    private MenuButton manufacturerMenu;
+    @FXML // fx:id="minMilesField"
+    private TextField minMilesField; // Value injected by FXMLLoader
 
-    @FXML
-    private RadioMenuItem make1;
+    @FXML // fx:id="maxMilesField"
+    private TextField maxMilesField; // Value injected by FXMLLoader
 
-    @FXML
-    private RadioMenuItem make2;
+    @FXML // fx:id="manufacturerMenu"
+    private MenuButton manufacturerMenu; // Value injected by FXMLLoader
 
-    @FXML
-    private RadioMenuItem make3;
+    @FXML // fx:id="make1"
+    private RadioMenuItem make1; // Value injected by FXMLLoader
 
-    @FXML
-    private RadioMenuItem make4;
+    @FXML // fx:id="make2"
+    private RadioMenuItem make2; // Value injected by FXMLLoader
 
-    @FXML
-    private RadioMenuItem make5;
+    @FXML // fx:id="make3"
+    private RadioMenuItem make3; // Value injected by FXMLLoader
 
-    @FXML
-    private MenuButton modelMenu;
+    @FXML // fx:id="make4"
+    private RadioMenuItem make4; // Value injected by FXMLLoader
 
-    @FXML
-    private RadioMenuItem model1;
+    @FXML // fx:id="make5"
+    private RadioMenuItem make5; // Value injected by FXMLLoader
 
-    @FXML
-    private RadioMenuItem model2;
+    @FXML // fx:id="modelMenu"
+    private MenuButton modelMenu; // Value injected by FXMLLoader
 
-    @FXML
-    private RadioMenuItem model3;
+    @FXML // fx:id="model1"
+    private RadioMenuItem model1; // Value injected by FXMLLoader
 
-    @FXML
-    private RadioMenuItem model4;
+    @FXML // fx:id="model2"
+    private RadioMenuItem model2; // Value injected by FXMLLoader
 
-    @FXML
-    private RadioMenuItem model5;
+    @FXML // fx:id="model3"
+    private RadioMenuItem model3; // Value injected by FXMLLoader
 
-    @FXML
-    private Label filterPriceLabel;
+    @FXML // fx:id="model4"
+    private RadioMenuItem model4; // Value injected by FXMLLoader
 
-    @FXML
-    private Label filterMilesLabel;
+    @FXML // fx:id="model5"
+    private RadioMenuItem model5; // Value injected by FXMLLoader
 
-    @FXML
-    private Label greaterThanPrice;
+    @FXML // fx:id="filterPriceLabel"
+    private Label filterPriceLabel; // Value injected by FXMLLoader
 
-    @FXML
-    private Label greaterThanMiles;
+    @FXML // fx:id="filterMilesLabel"
+    private Label filterMilesLabel; // Value injected by FXMLLoader
 
-    @FXML
-    private Label lessThanPrice;
+    @FXML // fx:id="greaterThanPrice"
+    private Label greaterThanPrice; // Value injected by FXMLLoader
 
-    @FXML
-    private Label lessThanMiles;
+    @FXML // fx:id="greaterThanMiles"
+    private Label greaterThanMiles; // Value injected by FXMLLoader
 
-    @FXML
-    private Label andPrice;
+    @FXML // fx:id="lessThanPrice"
+    private Label lessThanPrice; // Value injected by FXMLLoader
 
-    @FXML
-    private Label andMiles;
+    @FXML // fx:id="lessThanMiles"
+    private Label lessThanMiles; // Value injected by FXMLLoader
 
-    @FXML
-    private Button nextPageButton;
+    @FXML // fx:id="andPrice"
+    private Label andPrice; // Value injected by FXMLLoader
 
-    @FXML
-    private Button lastButton;
+    @FXML // fx:id="andMiles"
+    private Label andMiles; // Value injected by FXMLLoader
 
-    @FXML
-    private Label lastButtonLabel;
+    @FXML // fx:id="nextPageButton"
+    private Button nextPageButton; // Value injected by FXMLLoader
 
-    @FXML
-    private Label nextButtonLabel;
+    @FXML // fx:id="lastButton"
+    private Button lastButton; // Value injected by FXMLLoader
 
-    @FXML
-    private TextField currentPageLabel;
+    @FXML // fx:id="lastButtonLabel"
+    private Label lastButtonLabel; // Value injected by FXMLLoader
 
-    @FXML
-    private SplitPane carListPane;
+    @FXML // fx:id="nextButtonLabel"
+    private Label nextButtonLabel; // Value injected by FXMLLoader
 
-    @FXML
-    private AnchorPane car1Pane;
+    @FXML // fx:id="pageNumber"
+    private Label pageNumber; // Value injected by FXMLLoader
 
-    @FXML
-    private Button moreDetailsButton1;
+    @FXML // fx:id="carListPane"
+    private SplitPane carListPane; // Value injected by FXMLLoader
 
-    @FXML
-    private Label moreDetailsLabel1;
+    @FXML // fx:id="car1Pane"
+    private AnchorPane car1Pane; // Value injected by FXMLLoader
 
-    @FXML
-    private Rectangle pictureCar1;
+    @FXML // fx:id="moreDetailsButton1"
+    private Button moreDetailsButton1; // Value injected by FXMLLoader
 
-    @FXML
-    private Label priceCar1;
+    @FXML // fx:id="moreDetailsLabel1"
+    private Label moreDetailsLabel1; // Value injected by FXMLLoader
 
-    @FXML
-    private Button contactButton1;
+    @FXML // fx:id="priceCar1"
+    private Label priceCar1; // Value injected by FXMLLoader
 
-    @FXML
-    private Button makeOfferButton1;
+    @FXML // fx:id="contactButton1"
+    private Button contactButton1; // Value injected by FXMLLoader
 
-    @FXML
-    private Label makeCar1;
+    @FXML // fx:id="makeOfferButton1"
+    private Button makeOfferButton1; // Value injected by FXMLLoader
 
-    @FXML
-    private Label modelCar1;
+    @FXML // fx:id="makeCar1"
+    private Label makeCar1; // Value injected by FXMLLoader
 
-    @FXML
-    private Label yearCar1;
+    @FXML // fx:id="modelCar1"
+    private Label modelCar1; // Value injected by FXMLLoader
 
-    @FXML
-    private Label milesCar1;
+    @FXML // fx:id="yearCar1"
+    private Label yearCar1; // Value injected by FXMLLoader
 
-    @FXML
-    private AnchorPane car2Pane;
+    @FXML // fx:id="milesCar1"
+    private Label milesCar1; // Value injected by FXMLLoader
 
-    @FXML
-    private Button moreDetailsButton2;
+    @FXML // fx:id="car2Pane"
+    private AnchorPane car2Pane; // Value injected by FXMLLoader
 
-    @FXML
-    private Label moreDetailsLabe2;
+    @FXML // fx:id="moreDetailsButton2"
+    private Button moreDetailsButton2; // Value injected by FXMLLoader
 
-    @FXML
-    private Rectangle pictureCar2;
+    @FXML // fx:id="moreDetailsLabe2"
+    private Label moreDetailsLabe2; // Value injected by FXMLLoader
 
-    @FXML
-    private Label priceCar2;
+    @FXML // fx:id="priceCar2"
+    private Label priceCar2; // Value injected by FXMLLoader
 
-    @FXML
-    private Button contactButtonCar2;
+    @FXML // fx:id="contactButtonCar2"
+    private Button contactButtonCar2; // Value injected by FXMLLoader
 
-    @FXML
-    private Button makeOfferButton2;
+    @FXML // fx:id="makeOfferButton2"
+    private Button makeOfferButton2; // Value injected by FXMLLoader
 
-    @FXML
-    private Label makeCar2;
+    @FXML // fx:id="makeCar2"
+    private Label makeCar2; // Value injected by FXMLLoader
 
-    @FXML
-    private Label modelCar2;
+    @FXML // fx:id="modelCar2"
+    private Label modelCar2; // Value injected by FXMLLoader
 
-    @FXML
-    private Label yearCar2;
+    @FXML // fx:id="yearCar2"
+    private Label yearCar2; // Value injected by FXMLLoader
 
-    @FXML
-    private Label milesCar2;
+    @FXML // fx:id="milesCar2"
+    private Label milesCar2; // Value injected by FXMLLoader
 
-    @FXML
-    private AnchorPane car3Pane;
+    @FXML // fx:id="car3Pane"
+    private AnchorPane car3Pane; // Value injected by FXMLLoader
 
-    @FXML
-    private Button moreDetailsButton3;
+    @FXML // fx:id="moreDetailsButton3"
+    private Button moreDetailsButton3; // Value injected by FXMLLoader
 
-    @FXML
-    private Label moreDetailsLabel3;
+    @FXML // fx:id="moreDetailsLabel3"
+    private Label moreDetailsLabel3; // Value injected by FXMLLoader
 
-    @FXML
-    private Rectangle pictureCar3;
+    @FXML // fx:id="priceCar3"
+    private Label priceCar3; // Value injected by FXMLLoader
 
-    @FXML
-    private Label priceCar3;
+    @FXML // fx:id="contactButtonCar3"
+    private Button contactButtonCar3; // Value injected by FXMLLoader
 
-    @FXML
-    private Button contactButtonCar3;
+    @FXML // fx:id="makeOfferButton3"
+    private Button makeOfferButton3; // Value injected by FXMLLoader
 
-    @FXML
-    private Button makeOfferButton3;
+    @FXML // fx:id="makeCar3"
+    private Label makeCar3; // Value injected by FXMLLoader
 
-    @FXML
-    private Label makeCar3;
+    @FXML // fx:id="modelCar3"
+    private Label modelCar3; // Value injected by FXMLLoader
 
-    @FXML
-    private Label modelCar3;
+    @FXML // fx:id="yearCar3"
+    private Label yearCar3; // Value injected by FXMLLoader
 
-    @FXML
-    private Label yearCar3;
+    @FXML // fx:id="milesCar3"
+    private Label milesCar3; // Value injected by FXMLLoader
 
-    @FXML
-    private Label milesCar3;
+    @FXML // fx:id="car4Pane"
+    private AnchorPane car4Pane; // Value injected by FXMLLoader
 
-    @FXML
-    private AnchorPane car4Pane;
+    @FXML // fx:id="moreDetailsButton4"
+    private Button moreDetailsButton4; // Value injected by FXMLLoader
 
-    @FXML
-    private Button moreDetailsButton4;
+    @FXML // fx:id="moreDetailsLabel4"
+    private Label moreDetailsLabel4; // Value injected by FXMLLoader
 
-    @FXML
-    private Label moreDetailsLabel4;
+    @FXML // fx:id="makeCar4"
+    private Label makeCar4; // Value injected by FXMLLoader
 
-    @FXML
-    private Label makeCar4;
+    @FXML // fx:id="modelCar4"
+    private Label modelCar4; // Value injected by FXMLLoader
 
-    @FXML
-    private Label modelCar4;
+    @FXML // fx:id="yearCar4"
+    private Label yearCar4; // Value injected by FXMLLoader
 
-    @FXML
-    private Label yearCar4;
+    @FXML // fx:id="priceCar4"
+    private Label priceCar4; // Value injected by FXMLLoader
 
-    @FXML
-    private Rectangle pictureCar4;
+    @FXML // fx:id="contactButtonCar4"
+    private Button contactButtonCar4; // Value injected by FXMLLoader
 
-    @FXML
-    private Label priceCar4;
+    @FXML // fx:id="makeOfferButton4"
+    private Button makeOfferButton4; // Value injected by FXMLLoader
 
-    @FXML
-    private Button contactButtonCar4;
-
-    @FXML
-    private Button makeOfferButton4;
-
-    @FXML
-    private Label milesCar4;
+    @FXML // fx:id="milesCar4"
+    private Label milesCar4; // Value injected by FXMLLoader
     
     private EntityManager manager;
     
@@ -433,8 +427,8 @@ public class searchController {
         if (getPage() > 1) {
             firstCar -= 4;
             lastCar -= 4;
-            int newPage = Integer.getInteger(currentPageLabel.getText()) - 1;
-            currentPageLabel.setText(Integer.toString(newPage));
+            int newPage = getPage() - 1;
+            pageNumber.setText(Integer.toString(newPage));
         } else {
             firstCar = 0;
             lastCar = 3;
@@ -450,34 +444,18 @@ public class searchController {
     void renderNextCars(ActionEvent event) {
         if (getPage() < totalPages()) {
             firstCar += 4;
-            lastCar += 4; 
-            int newPage = Integer.getInteger(currentPageLabel.getText()) + 1;
-            currentPageLabel.setText(Integer.toString(newPage));
+            lastCar += 4;
+            int newPage = getPage() + 1;
+            pageNumber.setText(Integer.toString(newPage));
+            
         } else {
             lastCar = getCarList().size();
             firstCar = lastCar - 4;
             
         }
+        
 
-        SetCars();
-        setPageCarData();
-    }
 
-    /* When the user types a page number, set Car objects corresponding with 
-    the data entry and render the page with updated data */
-    
-    @FXML
-    void setCurrentPage(ActionEvent event) {
-        
-        
-        if( getPage() > totalPages() ) {
-            lastCar = getCarList().size();
-            firstCar = lastCar - 4;        
-        } else {
-            firstCar = 4 * getPage() - 1;
-            lastCar = firstCar + 4;
-        }
-        
         SetCars();
         setPageCarData();
     }
@@ -627,7 +605,6 @@ public class searchController {
     // Method used to initialize the page with essential data
     private void loadPage() {
         
-        currentPageLabel.setText("1");
         SetCars();
         setPageCarData();
         
@@ -656,7 +633,8 @@ public class searchController {
     
     // this will fetch the current page
     public int getPage() {
-        int nowSelected = Integer.getInteger(currentPageLabel.getText());
+        int nowSelected = Integer.parseInt(pageNumber.getText());
+        System.out.println(nowSelected);
         return nowSelected;
     }
     
@@ -666,6 +644,7 @@ public class searchController {
         modelCar1.setText(one.getModel());
         yearCar1.setText(Integer.toString(one.getYear()));
         milesCar1.setText(Integer.toString(one.getMiles()));
+        priceCar1.setText(Integer.toString(one.getPrice()));
             
     }
     
@@ -675,6 +654,7 @@ public class searchController {
         modelCar2.setText(two.getModel());
         yearCar2.setText(Integer.toString(two.getYear()));
         milesCar2.setText(Integer.toString(two.getMiles()));
+        priceCar2.setText(Integer.toString(two.getPrice()));
             
     }    
     
@@ -684,7 +664,7 @@ public class searchController {
         modelCar3.setText(three.getModel());
         yearCar3.setText(Integer.toString(three.getYear()));
         milesCar3.setText(Integer.toString(three.getMiles()));
-            
+        priceCar3.setText(Integer.toString(three.getPrice()));
     }    
     
     // set the data for the fourth car on the page
@@ -693,6 +673,7 @@ public class searchController {
         modelCar4.setText(four.getModel());
         yearCar4.setText(Integer.toString(four.getYear()));
         milesCar4.setText(Integer.toString(four.getMiles()));
+        priceCar4.setText(Integer.toString(four.getPrice()));
             
     }    
     
@@ -707,7 +688,7 @@ public class searchController {
     // the total number of pages 
     public int totalPages() {
         
-        int pages = (getCarList().size() + 1) / 4;
+        int pages = (getCarList().size()) / 4;
         return pages;
     }
     
@@ -755,12 +736,11 @@ public class searchController {
         assert lastButton != null : "fx:id=\"lastButton\" was not injected: check your FXML file 'searchView.fxml'.";
         assert lastButtonLabel != null : "fx:id=\"lastButtonLabel\" was not injected: check your FXML file 'searchView.fxml'.";
         assert nextButtonLabel != null : "fx:id=\"nextButtonLabel\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert currentPageLabel != null : "fx:id=\"currentPageLabel\" was not injected: check your FXML file 'searchView.fxml'.";
+        assert pageNumber != null : "fx:id=\"pageNumber\" was not injected: check your FXML file 'searchView.fxml'.";
         assert carListPane != null : "fx:id=\"carListPane\" was not injected: check your FXML file 'searchView.fxml'.";
         assert car1Pane != null : "fx:id=\"car1Pane\" was not injected: check your FXML file 'searchView.fxml'.";
         assert moreDetailsButton1 != null : "fx:id=\"moreDetailsButton1\" was not injected: check your FXML file 'searchView.fxml'.";
         assert moreDetailsLabel1 != null : "fx:id=\"moreDetailsLabel1\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert pictureCar1 != null : "fx:id=\"pictureCar1\" was not injected: check your FXML file 'searchView.fxml'.";
         assert priceCar1 != null : "fx:id=\"priceCar1\" was not injected: check your FXML file 'searchView.fxml'.";
         assert contactButton1 != null : "fx:id=\"contactButton1\" was not injected: check your FXML file 'searchView.fxml'.";
         assert makeOfferButton1 != null : "fx:id=\"makeOfferButton1\" was not injected: check your FXML file 'searchView.fxml'.";
@@ -771,7 +751,6 @@ public class searchController {
         assert car2Pane != null : "fx:id=\"car2Pane\" was not injected: check your FXML file 'searchView.fxml'.";
         assert moreDetailsButton2 != null : "fx:id=\"moreDetailsButton2\" was not injected: check your FXML file 'searchView.fxml'.";
         assert moreDetailsLabe2 != null : "fx:id=\"moreDetailsLabe2\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert pictureCar2 != null : "fx:id=\"pictureCar2\" was not injected: check your FXML file 'searchView.fxml'.";
         assert priceCar2 != null : "fx:id=\"priceCar2\" was not injected: check your FXML file 'searchView.fxml'.";
         assert contactButtonCar2 != null : "fx:id=\"contactButtonCar2\" was not injected: check your FXML file 'searchView.fxml'.";
         assert makeOfferButton2 != null : "fx:id=\"makeOfferButton2\" was not injected: check your FXML file 'searchView.fxml'.";
@@ -782,7 +761,6 @@ public class searchController {
         assert car3Pane != null : "fx:id=\"car3Pane\" was not injected: check your FXML file 'searchView.fxml'.";
         assert moreDetailsButton3 != null : "fx:id=\"moreDetailsButton3\" was not injected: check your FXML file 'searchView.fxml'.";
         assert moreDetailsLabel3 != null : "fx:id=\"moreDetailsLabel3\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert pictureCar3 != null : "fx:id=\"pictureCar3\" was not injected: check your FXML file 'searchView.fxml'.";
         assert priceCar3 != null : "fx:id=\"priceCar3\" was not injected: check your FXML file 'searchView.fxml'.";
         assert contactButtonCar3 != null : "fx:id=\"contactButtonCar3\" was not injected: check your FXML file 'searchView.fxml'.";
         assert makeOfferButton3 != null : "fx:id=\"makeOfferButton3\" was not injected: check your FXML file 'searchView.fxml'.";
@@ -796,15 +774,14 @@ public class searchController {
         assert makeCar4 != null : "fx:id=\"makeCar4\" was not injected: check your FXML file 'searchView.fxml'.";
         assert modelCar4 != null : "fx:id=\"modelCar4\" was not injected: check your FXML file 'searchView.fxml'.";
         assert yearCar4 != null : "fx:id=\"yearCar4\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert pictureCar4 != null : "fx:id=\"pictureCar4\" was not injected: check your FXML file 'searchView.fxml'.";
         assert priceCar4 != null : "fx:id=\"priceCar4\" was not injected: check your FXML file 'searchView.fxml'.";
         assert contactButtonCar4 != null : "fx:id=\"contactButtonCar4\" was not injected: check your FXML file 'searchView.fxml'.";
         assert makeOfferButton4 != null : "fx:id=\"makeOfferButton4\" was not injected: check your FXML file 'searchView.fxml'.";
         assert milesCar4 != null : "fx:id=\"milesCar4\" was not injected: check your FXML file 'searchView.fxml'.";
+
         
         //Database connection, named in persistence.xml
         manager = (EntityManager) Persistence.createEntityManagerFactory("CarfolioPU").createEntityManager();
-        
         // Render the first page of cars
         loadPage();
         

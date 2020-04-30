@@ -102,8 +102,9 @@ public class portfolioController {
         //askingPrice.setText(selectedCar.getPrice());
     }
 
-    public void setCar(Car selectedCar) {
-        this.selectedCar = selectedCar;
+    public void setCar(Car setCar) {
+        selectedCar = setCar;
+        setAttributes();
     }
     
     // Set all portfolio data of the selected car
@@ -112,6 +113,9 @@ public class portfolioController {
         make.setText(selectedCar.getMake());
         miles.setText(Integer.toString(selectedCar.getMiles()));
         model.setText(selectedCar.getModel());
+        style.setText(selectedCar.getStyle());
+        askingPrice.setText(Integer.toString(selectedCar.getPrice()));
+        
         
     }
     
@@ -135,7 +139,6 @@ public class portfolioController {
         assert recommendedPrice != null : "fx:id=\"recommendedPrice\" was not injected: check your FXML file 'portfolioView.fxml'.";
         assert makeOfferButton != null : "fx:id=\"makeOfferButton\" was not injected: check your FXML file 'portfolioView.fxml'.";
 
-        setAttributes();
         
     }
 }
