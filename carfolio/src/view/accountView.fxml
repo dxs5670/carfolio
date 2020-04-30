@@ -29,12 +29,7 @@
                   <SVGPath fx:id="star3" content="M 192.000 204.000L 206.107 211.416L 203.413 195.708L 214.825 184.584L 199.053 182.292L 192.000 168.000L 184.947 182.292L 169.175 184.584L 180.587 195.708L 177.893 211.416L 192.000 204.000" layoutX="250.0" layoutY="-115.0" />
                   <SVGPath fx:id="star4" content="M 192.000 204.000L 206.107 211.416L 203.413 195.708L 214.825 184.584L 199.053 182.292L 192.000 168.000L 184.947 182.292L 169.175 184.584L 180.587 195.708L 177.893 211.416L 192.000 204.000" layoutX="301.0" layoutY="-115.0" />
                   <SVGPath fx:id="star5" content="M 192.000 204.000L 206.107 211.416L 203.413 195.708L 214.825 184.584L 199.053 182.292L 192.000 168.000L 184.947 182.292L 169.175 184.584L 180.587 195.708L 177.893 211.416L 192.000 204.000" layoutX="350.0" layoutY="-115.0" />
-                  <Label fx:id="accountType" layoutX="377.0" layoutY="120.0" text="{ Account Type }">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="416.0" layoutY="157.0" text="Rating">
+                  <Label fx:id="accountType" layoutX="377.0" layoutY="120.0" text="{ Account Type }" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
