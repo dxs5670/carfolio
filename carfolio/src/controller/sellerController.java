@@ -4,16 +4,22 @@
 
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import model.Car;
@@ -121,8 +127,17 @@ public class sellerController {
     }
 
     @FXML
-    void openMessages(ActionEvent event) {
-
+    void openMessages(ActionEvent event) throws IOException {
+        //opens in same window
+        FXMLLoader messageLoader = new FXMLLoader(getClass().getResource("/view/messageView.fxml"));
+        Parent message = messageLoader.load();
+        Scene messageUI = new Scene(message);
+        messageController mController = messageLoader.getController();
+        Stage messageWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        messageWindow.setScene(messageUI);
+        mController.setActiveUser(activeUser);
+        mController.setPreviousScene(((Node) event.getSource()).getScene());
+        messageWindow.show();
     }
 
     @FXML

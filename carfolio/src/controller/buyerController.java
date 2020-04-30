@@ -81,25 +81,8 @@ public class buyerController {
     private User activeUser;
 
     @FXML
-    void beginSearchBy(ActionEvent event) {
-
-    }
-
-    @FXML
-    void openAccount(ActionEvent event) throws IOException {
-        //opens in same window
-        FXMLLoader accountLoader = new FXMLLoader(getClass().getResource("/view/accountView.fxml"));
-        Parent account = accountLoader.load();
-        Scene searchUI = new Scene(account);
-        accountController aController = accountLoader.getController();
-        Stage accountWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        accountWindow.setScene(searchUI);
-        accountWindow.show();
-    }
-
-    @FXML 
-    void openAdvancedSearch(ActionEvent event) throws IOException {
-        //opens in same window
+    void beginSearchBy(ActionEvent event) throws IOException {
+        // Load advanced search and pass in search term
         FXMLLoader searchLoader = new FXMLLoader(getClass().getResource("/view/searchView.fxml"));
         Parent search = searchLoader.load();
         Scene searchUI = new Scene(search);
@@ -107,6 +90,31 @@ public class buyerController {
         Stage searchWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
         searchWindow.setScene(searchUI);
         searchWindow.show();
+        
+    }
+
+    @FXML
+    void openAccount(ActionEvent event) throws IOException {
+        //opens in new window
+        FXMLLoader accountLoader = new FXMLLoader(getClass().getResource("/view/accountView.fxml"));
+        Parent account = accountLoader.load();
+        Scene accountUI = new Scene(account);
+        accountController aController = accountLoader.getController();
+        Stage stage = new Stage();
+        stage.setScene(accountUI);
+        stage.show();
+    }
+
+    @FXML 
+    void openAdvancedSearch(ActionEvent event) throws IOException {
+        //opens in new window
+        FXMLLoader searchLoader = new FXMLLoader(getClass().getResource("/view/searchView.fxml"));
+        Parent search = searchLoader.load();
+        Scene searchUI = new Scene(search);
+        searchController sController = searchLoader.getController();
+        Stage stage = new Stage();
+        stage.setScene(searchUI);
+        stage.show();
     }
 
     @FXML
@@ -118,6 +126,8 @@ public class buyerController {
         messageController mController = messageLoader.getController();
         Stage messageWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
         messageWindow.setScene(messageUI);
+        mController.setActiveUser(activeUser);
+        mController.setPreviousScene(((Node) event.getSource()).getScene());
         messageWindow.show();
     }
 

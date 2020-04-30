@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -162,7 +163,8 @@ public class mainController {
         Parent messageView = loader.load();
         Scene messageViewScene = new Scene(messageView);
         messageController controller = loader.getController();
-        
+        controller.setActiveUser(activeUser);
+        controller.setPreviousScene(((Node) event.getSource()).getScene());
         Stage stage = new Stage();
         stage.setScene(messageViewScene);
         stage.show();
