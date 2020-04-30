@@ -13,13 +13,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import model.Message;
 import model.User;
 import org.controlsfx.control.textfield.TextFields;
@@ -46,6 +50,12 @@ public class messageController {
 
     @FXML // fx:id="back"
     private Button back; // Value injected by FXMLLoader
+    
+    @FXML
+    private SplitPane messagePane;
+    
+    @FXML
+    private Tab messageTab;
 
     private User activeUser;
     private Scene previousScene;
@@ -75,9 +85,39 @@ public class messageController {
         manager.getTransaction().begin();
         manager.persist(createdMessage);
         manager.getTransaction().commit();
+        
+        // Give confirmation and reset the text fields
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Message");
+        alert.setContentText("Your message has been sent!");
+        alert.showAndWait();
+        
+        recipientUser.setText("");
+        messageBody.setText("");
 
     }
 
+    @FXML // View messages addressed to current user
+    void loadMessages(ActionEvent event) {
+        // Not working
+//        List<Message> data = manager.createNamedQuery("Message.findAll").getResultList();
+//        ArrayList<Message> matching = new ArrayList<Message>();
+//        for (Message msg: data)
+//        {
+//            if (msg.getRecipient() == activeUser.getUsername())
+//            {
+//                matching.add(msg);
+//            }
+//        }
+//        
+//        for (Message msg: matching)
+//        {
+//            System.out.println(msg.getMessageBody());
+//        }
+        
+        
+    }
+    
     @FXML
     void setRecipient(KeyEvent event) {
         
@@ -115,6 +155,8 @@ public class messageController {
         assert delete != null : "fx:id=\"delete\" was not injected: check your FXML file 'messageView.fxml'.";
         assert sendButton != null : "fx:id=\"sendButton\" was not injected: check your FXML file 'messageView.fxml'.";
         assert back != null : "fx:id=\"back\" was not injected: check your FXML file 'messageView.fxml'.";
+        assert messagePane != null : "fx:id=\"messagePane\" was not injected: check your FXML file 'messageView.fxml'.";
+        assert messageTab != null : "fx:id=\"messageTab\" was not injected: check your FXML file 'messageView.fxml'.";
 
         manager = (EntityManager) Persistence.createEntityManagerFactory("CarfolioPU").createEntityManager();
         

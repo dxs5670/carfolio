@@ -7,6 +7,7 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +16,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -22,6 +25,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -29,6 +33,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import model.Car;
+import model.User;
 
 
 
@@ -294,6 +299,13 @@ public class searchController {
     private int firstCar = 0;
     private int lastCar = 3;
     
+    private User activeUser;
+    
+    
+    //Needed to determine who is sending offer/message
+    public void setActiveUser(User activeUser) {
+        this.activeUser = activeUser;
+    }
     
     //For messaging car owners 
     
@@ -319,25 +331,104 @@ public class searchController {
     
     
     //For making an offer on a vehicle
-    
     @FXML
     void makeOfferCar1(ActionEvent event) {
-
+        //Prompt user for offer amount
+        TextInputDialog dialog = new TextInputDialog("$0.00");
+        dialog.setTitle("Make Offer");
+        dialog.setHeaderText("Make Offer");
+        dialog.setContentText("Please enter an amount:");
+        
+        Optional<String> result = dialog.showAndWait();
+        String amount = "";
+        if (result.isPresent()){
+            try {
+                Double.parseDouble(result.get());
+                amount = result.get();
+            }
+            catch(NumberFormatException x){
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error");
+                alert.setContentText("Please enter a valid numeric dollar amount.");
+                alert.showAndWait();
+             }
+        }
+        //Auto-send message with the offer
+        
+        
     }
 
     @FXML
     void makeOfferCar2(ActionEvent event) {
-
+        TextInputDialog dialog = new TextInputDialog("$0.00");
+        dialog.setTitle("Make Offer");
+        dialog.setHeaderText("Make Offer");
+        dialog.setContentText("Please enter an amount:");
+        
+        Optional<String> result = dialog.showAndWait();
+        String amount = "";
+        if (result.isPresent()){
+            try {
+                Double.parseDouble(result.get());
+                amount = result.get();
+            }
+            catch(NumberFormatException x){
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error");
+                alert.setContentText("Please enter a valid numeric dollar amount.");
+                alert.showAndWait();
+             }
+        }
     }
 
     @FXML
     void makeOfferCar3(ActionEvent event) {
-
+        TextInputDialog dialog = new TextInputDialog("$0.00");
+        dialog.setTitle("Make Offer");
+        dialog.setHeaderText("Make Offer");
+        dialog.setContentText("Please enter an amount:");
+        
+        Optional<String> result = dialog.showAndWait();
+        String amount = "";
+        if (result.isPresent()){
+            try {
+                Double.parseDouble(result.get());
+                amount = result.get();
+            }
+            catch(NumberFormatException x){
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error");
+                alert.setContentText("Please enter a valid numeric dollar amount.");
+                alert.showAndWait();
+             }
+        }
     }
 
     @FXML
     void makeOfferCar4(ActionEvent event) {
-
+        TextInputDialog dialog = new TextInputDialog("$0.00");
+        dialog.setTitle("Make Offer");
+        dialog.setHeaderText("Make Offer");
+        dialog.setContentText("Please enter an amount:");
+        
+        Optional<String> result = dialog.showAndWait();
+        String amount = "";
+        if (result.isPresent()){
+            try {
+                Double.parseDouble(result.get());
+                amount = result.get();
+            }
+            catch(NumberFormatException x){
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error");
+                alert.setContentText("Please enter a valid numeric dollar amount.");
+                alert.showAndWait();
+             }
+        }
     }   
     
     

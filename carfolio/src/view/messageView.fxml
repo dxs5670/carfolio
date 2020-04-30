@@ -11,14 +11,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.messageController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.messageController">
   <tabs>
     <Tab text="Compose Message">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <TextField fx:id="recipientUser" layoutX="226.0" layoutY="22.0" onKeyTyped="#setRecipient" promptText="Recipient Username" />
-                  <TextArea fx:id="messageBody" layoutX="52.0" layoutY="64.0" onKeyTyped="#updateBody" prefHeight="226.0" prefWidth="496.0" promptText="Type message here..." />
+                  <TextArea fx:id="messageBody" layoutX="52.0" layoutY="64.0" onKeyTyped="#updateBody" prefHeight="226.0" prefWidth="496.0" promptText="Type message here..." wrapText="true" />
                   <Button fx:id="delete" layoutX="443.0" layoutY="313.0" mnemonicParsing="false" onAction="#discardMessage" style="-fx-background-color: red;" text="Delete Message">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -33,11 +33,11 @@
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab text="Message History">
+    <Tab fx:id="messageTab" onSelectionChanged="#loadMessages" text="Message History">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <SplitPane layoutX="175.0" layoutY="41.0" prefHeight="371.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane fx:id="messagePane" layoutX="175.0" layoutY="41.0" prefHeight="371.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <items>
                         <Separator orientation="VERTICAL" prefHeight="200.0">
                            <padding>

@@ -87,6 +87,7 @@ public class buyerController {
         Parent search = searchLoader.load();
         Scene searchUI = new Scene(search);
         searchController sController = searchLoader.getController();
+        sController.setActiveUser(activeUser);
         Stage searchWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
         searchWindow.setScene(searchUI);
         searchWindow.show();
@@ -112,6 +113,7 @@ public class buyerController {
         Parent search = searchLoader.load();
         Scene searchUI = new Scene(search);
         searchController sController = searchLoader.getController();
+        sController.setActiveUser(activeUser);
         Stage stage = new Stage();
         stage.setScene(searchUI);
         stage.show();

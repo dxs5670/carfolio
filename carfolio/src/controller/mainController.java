@@ -151,6 +151,7 @@ public class mainController {
         Parent searchView = loader.load();
         Scene searchViewScene = new Scene(searchView);
         searchController controller = loader.getController();
+        controller.setActiveUser(activeUser);
         Stage stage = new Stage();
         stage.setScene(searchViewScene);
         stage.show();
