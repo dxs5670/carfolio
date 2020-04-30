@@ -337,7 +337,7 @@ public class searchController {
     @FXML
     void makeOfferCar1(ActionEvent event) {
         //Prompt user for offer amount
-        TextInputDialog dialog = new TextInputDialog("$0.00");
+        TextInputDialog dialog = new TextInputDialog("0.00");
         dialog.setTitle("Make Offer");
         dialog.setHeaderText("Make Offer");
         dialog.setContentText("Please enter an amount:");
@@ -384,7 +384,8 @@ public class searchController {
 
     @FXML
     void makeOfferCar2(ActionEvent event) {
-        TextInputDialog dialog = new TextInputDialog("$0.00");
+        //Prompt user for offer amount
+        TextInputDialog dialog = new TextInputDialog("0.00");
         dialog.setTitle("Make Offer");
         dialog.setHeaderText("Make Offer");
         dialog.setContentText("Please enter an amount:");
@@ -395,6 +396,29 @@ public class searchController {
             try {
                 Double.parseDouble(result.get());
                 amount = result.get();
+                
+                //Auto-send message with the offer
+                this.createdMessage = new Message();
+                createdMessage.setRecipient(two.getSellerUsername());
+                createdMessage.setSender(activeUser.getUsername());
+                createdMessage.setMessageBody(activeUser.getUsername() + " has submitted an offer to buy your " + two.getMake() + ", VIN " + two.getVin() + ", for: " + "$" + amount);
+                Date dt = new Date(System.currentTimeMillis());
+                createdMessage.setTimeSent(dt);
+
+                List<Message> data  = manager.createNamedQuery("Message.findAll").getResultList();
+                int last_id = data.size();
+                createdMessage.setMessageID((last_id + 1) + "");
+
+                manager.getTransaction().begin();
+                manager.persist(createdMessage);
+                manager.getTransaction().commit();
+
+                //Success msg
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Offer submitted successfully!");
+                alert.showAndWait();
             }
             catch(NumberFormatException x){
                 Alert alert = new Alert(AlertType.ERROR);
@@ -403,12 +427,13 @@ public class searchController {
                 alert.setContentText("Please enter a valid numeric dollar amount.");
                 alert.showAndWait();
              }
-        }
+        }   
     }
 
     @FXML
     void makeOfferCar3(ActionEvent event) {
-        TextInputDialog dialog = new TextInputDialog("$0.00");
+        //Prompt user for offer amount
+        TextInputDialog dialog = new TextInputDialog("0.00");
         dialog.setTitle("Make Offer");
         dialog.setHeaderText("Make Offer");
         dialog.setContentText("Please enter an amount:");
@@ -419,6 +444,29 @@ public class searchController {
             try {
                 Double.parseDouble(result.get());
                 amount = result.get();
+                
+                //Auto-send message with the offer
+                this.createdMessage = new Message();
+                createdMessage.setRecipient(three.getSellerUsername());
+                createdMessage.setSender(activeUser.getUsername());
+                createdMessage.setMessageBody(activeUser.getUsername() + " has submitted an offer to buy your " + three.getMake() + ", VIN " + three.getVin() + ", for: " + "$" + amount);
+                Date dt = new Date(System.currentTimeMillis());
+                createdMessage.setTimeSent(dt);
+
+                List<Message> data  = manager.createNamedQuery("Message.findAll").getResultList();
+                int last_id = data.size();
+                createdMessage.setMessageID((last_id + 1) + "");
+
+                manager.getTransaction().begin();
+                manager.persist(createdMessage);
+                manager.getTransaction().commit();
+
+                //Success msg
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Offer submitted successfully!");
+                alert.showAndWait();
             }
             catch(NumberFormatException x){
                 Alert alert = new Alert(AlertType.ERROR);
@@ -427,12 +475,13 @@ public class searchController {
                 alert.setContentText("Please enter a valid numeric dollar amount.");
                 alert.showAndWait();
              }
-        }
+        }   
     }
 
     @FXML
     void makeOfferCar4(ActionEvent event) {
-        TextInputDialog dialog = new TextInputDialog("$0.00");
+        //Prompt user for offer amount
+        TextInputDialog dialog = new TextInputDialog("0.00");
         dialog.setTitle("Make Offer");
         dialog.setHeaderText("Make Offer");
         dialog.setContentText("Please enter an amount:");
@@ -443,6 +492,29 @@ public class searchController {
             try {
                 Double.parseDouble(result.get());
                 amount = result.get();
+                
+                //Auto-send message with the offer
+                this.createdMessage = new Message();
+                createdMessage.setRecipient(four.getSellerUsername());
+                createdMessage.setSender(activeUser.getUsername());
+                createdMessage.setMessageBody(activeUser.getUsername() + " has submitted an offer to buy your " + four.getMake() + ", VIN " + four.getVin() + ", for: " + "$" + amount);
+                Date dt = new Date(System.currentTimeMillis());
+                createdMessage.setTimeSent(dt);
+
+                List<Message> data  = manager.createNamedQuery("Message.findAll").getResultList();
+                int last_id = data.size();
+                createdMessage.setMessageID((last_id + 1) + "");
+
+                manager.getTransaction().begin();
+                manager.persist(createdMessage);
+                manager.getTransaction().commit();
+
+                //Success msg
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Offer submitted successfully!");
+                alert.showAndWait();
             }
             catch(NumberFormatException x){
                 Alert alert = new Alert(AlertType.ERROR);
@@ -451,21 +523,14 @@ public class searchController {
                 alert.setContentText("Please enter a valid numeric dollar amount.");
                 alert.showAndWait();
              }
-        }
+        }   
     }   
-    
-    
-
     
     
     @FXML
     void initializeSearch(ActionEvent event) {
 
     }
-    
-    
-    
-    
     
     //For launching the portfolio matching each car
 
@@ -478,6 +543,7 @@ public class searchController {
         Scene portfolioViewScene = new Scene(portfolioView);
         portfolioController controller = loader.getController();
         controller.setCar(one);
+        controller.setActiveUser(activeUser);
         Stage stage = new Stage();
         stage.setScene(portfolioViewScene);
         stage.show();
@@ -492,6 +558,7 @@ public class searchController {
         Scene portfolioViewScene = new Scene(portfolioView);
         portfolioController controller = loader.getController();
         controller.setCar(two);
+        controller.setActiveUser(activeUser);
         Stage stage = new Stage();
         stage.setScene(portfolioViewScene);
         stage.show();
@@ -506,6 +573,7 @@ public class searchController {
         Scene portfolioViewScene = new Scene(portfolioView);
         portfolioController controller = loader.getController();
         controller.setCar(three);
+        controller.setActiveUser(activeUser);
         Stage stage = new Stage();
         stage.setScene(portfolioViewScene);
         stage.show();
@@ -520,14 +588,14 @@ public class searchController {
         Scene portfolioViewScene = new Scene(portfolioView);
         portfolioController controller = loader.getController();
         controller.setCar(four);
+        controller.setActiveUser(activeUser);
         Stage stage = new Stage();
         stage.setScene(portfolioViewScene);
         stage.show();
     }
 
     
-    
-    
+
     @FXML
     void openSortMenu(ActionEvent event) {
 

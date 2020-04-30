@@ -5,16 +5,24 @@
 package controller;
 
 import java.net.URL;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import model.Car;
+import model.Message;
 import model.User;
 
 public class portfolioController {
@@ -72,18 +80,58 @@ public class portfolioController {
 
     private Car selectedCar = new Car();
     private User activeUser;
-     
-    
-    
-    
+    private Message createdMessage;
+    private EntityManager manager;
+
     @FXML
     public void contactOwner(ActionEvent event) {
 
     }
 
+    // Works the same as in searchController
     @FXML
     public void makeOffer(ActionEvent event) {
+        TextInputDialog dialog = new TextInputDialog("0.00");
+        dialog.setTitle("Make Offer");
+        dialog.setHeaderText("Make Offer");
+        dialog.setContentText("Please enter an amount:");
         
+        Optional<String> result = dialog.showAndWait();
+        String amount = "";
+        if (result.isPresent()){
+            try {
+                Double.parseDouble(result.get());
+                amount = result.get();
+                
+                this.createdMessage = new Message();
+                createdMessage.setRecipient(selectedCar.getSellerUsername());
+                createdMessage.setSender(activeUser.getUsername());
+                createdMessage.setMessageBody(activeUser.getUsername() + " has submitted an offer to buy your " + selectedCar.getMake() + ", VIN " + selectedCar.getVin() + ", for: " + "$" + amount);
+                Date dt = new Date(System.currentTimeMillis());
+                createdMessage.setTimeSent(dt);
+
+                List<Message> data  = manager.createNamedQuery("Message.findAll").getResultList();
+                int last_id = data.size();
+                createdMessage.setMessageID((last_id + 1) + "");
+
+                manager.getTransaction().begin();
+                manager.persist(createdMessage);
+                manager.getTransaction().commit();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Offer submitted successfully!");
+                alert.showAndWait();
+            }
+            catch(NumberFormatException x){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error");
+                alert.setContentText("Please enter a valid numeric dollar amount.");
+                alert.showAndWait();
+             }
+        }   
     }
     
     public void setMake(Car car) {
@@ -119,7 +167,9 @@ public class portfolioController {
         
     }
     
-    
+    public void setActiveUser(User usr) {
+        this.activeUser = usr;
+    }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
@@ -139,7 +189,8 @@ public class portfolioController {
         assert recommendedPrice != null : "fx:id=\"recommendedPrice\" was not injected: check your FXML file 'portfolioView.fxml'.";
         assert makeOfferButton != null : "fx:id=\"makeOfferButton\" was not injected: check your FXML file 'portfolioView.fxml'.";
 
-        
+        //Database connection, named in persistence.xml
+        manager = (EntityManager) Persistence.createEntityManagerFactory("CarfolioPU").createEntityManager();
     }
 }
 
