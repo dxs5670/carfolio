@@ -175,8 +175,9 @@ public class sellerController {
 
     }
     
-    public void setActiveUser(User activeUser) {
-        this.activeUser = activeUser;
+    public void setActiveUser(User fromLogin) {
+        String queryUsername = fromLogin.getUsername();
+        activeUser = manager.find(User.class, queryUsername);
     }
     
     //Username appears in top right

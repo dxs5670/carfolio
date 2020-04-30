@@ -22,6 +22,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import model.Car;
 import model.User;
 
@@ -120,6 +122,8 @@ public class mainController {
     @FXML // fx:id="searchYear"
     private MenuItem searchYear; // Value injected by FXMLLoader
 
+    private EntityManager em;
+    
     private User activeUser;
     private Car sellCar;
     
@@ -245,8 +249,10 @@ public class mainController {
         searchByMenu.setText("Year");
     }
 
-    public void setActiveUser(User activeUser) {
-        this.activeUser = activeUser;
+    public void setActiveUser(User fromLogin) {
+        //activeUser = fromLogin;
+        String queryUsername = fromLogin.getUsername();
+        activeUser = em.find(User.class, queryUsername);
     }
     
     public void setGreeting(String greet) {
@@ -287,7 +293,7 @@ public class mainController {
         assert searchStyle != null : "fx:id=\"searchStyle\" was not injected: check your FXML file 'mainView.fxml'.";
         assert searchYear != null : "fx:id=\"searchYear\" was not injected: check your FXML file 'mainView.fxml'.";
         
-        
+        em = (EntityManager) Persistence.createEntityManagerFactory("CarfolioPU").createEntityManager();
         
     }
 
