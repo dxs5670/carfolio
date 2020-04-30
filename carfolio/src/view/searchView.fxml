@@ -8,7 +8,6 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
 
 <SplitPane fx:id="advancedSearchPane" dividerPositions="0.24749163879598662" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.searchController">
   <items>
@@ -60,7 +59,7 @@
             <Button fx:id="lastButton" layoutX="18.0" layoutY="352.0" mnemonicParsing="false" onAction="#renderLastCars" text="&lt;--" />
             <Label fx:id="lastButtonLabel" layoutX="11.0" layoutY="379.0" text="Last Page" />
             <Label fx:id="nextButtonLabel" layoutX="82.0" layoutY="380.0" text="Next Page" />
-            <TextField fx:id="currentPageLabel" layoutX="64.0" layoutY="353.0" onAction="#setCurrentPage" prefHeight="26.0" prefWidth="16.0" />
+            <Label fx:id="pageNumber" layoutX="67.0" layoutY="357.0" text="1" />
          </children></AnchorPane>
       <SplitPane fx:id="carListPane" dividerPositions="0.25, 0.5, 0.75" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
         <items>
@@ -68,56 +67,60 @@
                <children>
                   <Button fx:id="moreDetailsButton1" layoutX="400.0" layoutY="48.0" mnemonicParsing="false" onAction="#openCar1Portfolio" text="--&gt;" />
                   <Label fx:id="moreDetailsLabel1" layoutX="371.0" layoutY="77.0" prefHeight="18.0" prefWidth="68.0" text="More Details" />
-                  <Rectangle fx:id="pictureCar1" arcHeight="5.0" arcWidth="5.0" fill="#5e768c" height="76.0" layoutX="9.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" width="90.0" />
                   <Label fx:id="priceCar1" layoutX="375.0" layoutY="18.0" prefHeight="18.0" prefWidth="65.0" text="Price:" />
                   <Button fx:id="contactButton1" layoutX="261.0" layoutY="55.0" mnemonicParsing="false" onAction="#contactCar1Owner" prefHeight="26.0" prefWidth="76.0" text="Contact" />
                   <Button fx:id="makeOfferButton1" layoutX="260.0" layoutY="17.0" mnemonicParsing="false" onAction="#makeOfferCar1" text="Make Offer" />
-                  <Label fx:id="makeCar1" layoutX="123.0" layoutY="19.0" text="Make" />
-                  <Label fx:id="modelCar1" layoutX="191.0" layoutY="19.0" text="Model" />
-                  <Label fx:id="yearCar1" layoutX="124.0" layoutY="64.0" text="Year" />
-                  <Label fx:id="milesCar1" layoutX="193.0" layoutY="64.0" text="Miles" />
+                  <Label fx:id="makeCar1" layoutX="47.0" layoutY="16.0" text="Make" />
+                  <Label fx:id="modelCar1" layoutX="42.0" layoutY="41.0" text="Model" />
+                  <Label fx:id="yearCar1" layoutX="14.0" layoutY="16.0" text="Year" />
+                  <Label fx:id="milesCar1" layoutX="50.0" layoutY="68.0" text="Miles" />
+                  <Label layoutX="367.0" layoutY="19.0" text="\$" />
+                  <Label layoutX="17.0" layoutY="68.0" text="Miles:" />
                </children>
             </AnchorPane>
           <AnchorPane fx:id="car2Pane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <Button fx:id="moreDetailsButton2" layoutX="401.0" layoutY="44.0" mnemonicParsing="false" onAction="#openCar2Portfolio" text="--&gt;" />
                   <Label fx:id="moreDetailsLabe2" layoutX="372.0" layoutY="73.0" prefHeight="18.0" prefWidth="68.0" text="More Details" />
-                  <Rectangle fx:id="pictureCar2" arcHeight="5.0" arcWidth="5.0" fill="#5e768c" height="76.0" layoutX="10.0" layoutY="8.0" stroke="BLACK" strokeType="INSIDE" width="90.0" />
                   <Label fx:id="priceCar2" layoutX="372.0" layoutY="15.0" prefHeight="18.0" prefWidth="65.0" text="Price:" />
                   <Button fx:id="contactButtonCar2" layoutX="263.0" layoutY="55.0" mnemonicParsing="false" onAction="#contactCar2Owner" prefHeight="26.0" prefWidth="76.0" text="Contact" />
                   <Button fx:id="makeOfferButton2" layoutX="262.0" layoutY="17.0" mnemonicParsing="false" onAction="#makeOfferCar2" text="Make Offer" />
-                  <Label fx:id="makeCar2" layoutX="124.0" layoutY="19.0" text="Make" />
-                  <Label fx:id="modelCar2" layoutX="192.0" layoutY="19.0" text="Model" />
-                  <Label fx:id="yearCar2" layoutX="125.0" layoutY="64.0" text="Year" />
-                  <Label fx:id="milesCar2" layoutX="194.0" layoutY="64.0" text="Miles" />
+                  <Label fx:id="makeCar2" layoutX="43.0" layoutY="19.0" text="Make" />
+                  <Label fx:id="modelCar2" layoutX="40.0" layoutY="42.0" text="Model" />
+                  <Label layoutX="364.0" layoutY="16.0" text="\$" />
+                  <Label fx:id="yearCar2" layoutX="10.0" layoutY="19.0" text="Year" />
+                  <Label fx:id="milesCar2" layoutX="46.0" layoutY="65.0" text="Miles" />
+                  <Label layoutX="13.0" layoutY="65.0" text="Miles:" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="car3Pane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <Button fx:id="moreDetailsButton3" layoutX="403.0" layoutY="43.0" mnemonicParsing="false" onAction="#openCar3Portfolio" text="--&gt;" />
                   <Label fx:id="moreDetailsLabel3" layoutX="374.0" layoutY="72.0" prefHeight="18.0" prefWidth="68.0" text="More Details" />
-                  <Rectangle fx:id="pictureCar3" arcHeight="5.0" arcWidth="5.0" fill="#5e768c" height="76.0" layoutX="9.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="90.0" />
                   <Label fx:id="priceCar3" layoutX="374.0" layoutY="16.0" prefHeight="18.0" prefWidth="65.0" text="Price:" />
                   <Button fx:id="contactButtonCar3" layoutX="267.0" layoutY="58.0" mnemonicParsing="false" onAction="#contactCar3Owner" prefHeight="26.0" prefWidth="76.0" text="Contact" />
                   <Button fx:id="makeOfferButton3" layoutX="266.0" layoutY="20.0" mnemonicParsing="false" onAction="#makeOfferCar3" text="Make Offer" />
-                  <Label fx:id="makeCar3" layoutX="127.0" layoutY="22.0" text="Make" />
-                  <Label fx:id="modelCar3" layoutX="195.0" layoutY="22.0" text="Model" />
-                  <Label fx:id="yearCar3" layoutX="128.0" layoutY="67.0" text="Year" />
-                  <Label fx:id="milesCar3" layoutX="197.0" layoutY="67.0" text="Miles" />
+                  <Label fx:id="makeCar3" layoutX="46.0" layoutY="15.0" text="Make" />
+                  <Label fx:id="modelCar3" layoutX="43.0" layoutY="40.0" text="Model" />
+                  <Label fx:id="yearCar3" layoutX="12.0" layoutY="15.0" text="Year" />
+                  <Label fx:id="milesCar3" layoutX="48.0" layoutY="65.0" text="Miles" />
+                  <Label layoutX="366.0" layoutY="17.0" text="\$" />
+                  <Label layoutX="16.0" layoutY="65.0" text="Miles:" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="car4Pane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <Button fx:id="moreDetailsButton4" layoutX="401.0" layoutY="45.0" mnemonicParsing="false" onAction="#openCar4Portfolio" text="--&gt;" />
                   <Label fx:id="moreDetailsLabel4" layoutX="372.0" layoutY="74.0" prefHeight="18.0" prefWidth="68.0" text="More Details" />
-                  <Label fx:id="makeCar4" layoutX="122.0" layoutY="17.0" text="Make" />
-                  <Label fx:id="modelCar4" layoutX="190.0" layoutY="17.0" text="Model" />
-                  <Label fx:id="yearCar4" layoutX="123.0" layoutY="62.0" text="Year" />
-                  <Rectangle fx:id="pictureCar4" arcHeight="5.0" arcWidth="5.0" fill="#5e768c" height="76.0" layoutX="9.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" width="90.0" />
+                  <Label fx:id="makeCar4" layoutX="47.0" layoutY="16.0" text="Make" />
+                  <Label fx:id="modelCar4" layoutX="44.0" layoutY="42.0" text="Model" />
+                  <Label fx:id="yearCar4" layoutX="14.0" layoutY="16.0" text="Year" />
                   <Label fx:id="priceCar4" layoutX="373.0" layoutY="16.0" prefHeight="18.0" prefWidth="65.0" text="Price:" />
                   <Button fx:id="contactButtonCar4" layoutX="269.0" layoutY="60.0" mnemonicParsing="false" onAction="#contactCar4Owner" prefHeight="26.0" prefWidth="76.0" text="Contact" />
+                  <Label layoutX="365.0" layoutY="17.0" text="\$" />
                   <Button fx:id="makeOfferButton4" layoutX="268.0" layoutY="22.0" mnemonicParsing="false" onAction="#makeOfferCar4" text="Make Offer" />
-                  <Label fx:id="milesCar4" layoutX="192.0" layoutY="62.0" text="Miles" />
+                  <Label fx:id="milesCar4" layoutX="46.0" layoutY="67.0" text="Miles" />
+                  <Label layoutX="14.0" layoutY="67.0" text="Miles:" />
                </children>
             </AnchorPane>
         </items>
