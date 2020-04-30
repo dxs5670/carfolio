@@ -136,6 +136,10 @@ public class messageController {
         
     }
     
+   public void setMessageRecipient(String username) {
+       recipientUser.setText(username);
+   }
+    
     // Should be called from anywhere messageView is entered
     public void setPreviousScene(Scene scene) {
         previousScene = scene;

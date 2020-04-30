@@ -4,6 +4,7 @@
 
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,9 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,6 +23,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import model.Car;
@@ -84,8 +89,16 @@ public class portfolioController {
     private EntityManager manager;
 
     @FXML
-    public void contactOwner(ActionEvent event) {
-
+    public void contactOwner(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messageView.fxml"));
+        Parent messageView = loader.load();
+        Scene messageViewScene = new Scene(messageView);
+        messageController controller = loader.getController();
+        controller.setActiveUser(activeUser);
+        controller.setMessageRecipient(selectedCar.getSellerUsername());
+        Stage stage = new Stage();
+        stage.setScene(messageViewScene);
+        stage.show();
     }
 
     // Works the same as in searchController
@@ -163,6 +176,7 @@ public class portfolioController {
         model.setText(selectedCar.getModel());
         style.setText(selectedCar.getStyle());
         askingPrice.setText(Integer.toString(selectedCar.getPrice()));
+        ownerName.setText(selectedCar.getSellerUsername());
         
         
     }

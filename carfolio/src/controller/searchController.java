@@ -313,23 +313,55 @@ public class searchController {
     //For messaging car owners 
     
     @FXML
-    void contactCar1Owner(ActionEvent event) {
-        
+    void contactCar1Owner(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messageView.fxml"));
+        Parent messageView = loader.load();
+        Scene messageViewScene = new Scene(messageView);
+        messageController controller = loader.getController();
+        controller.setActiveUser(activeUser);
+        controller.setMessageRecipient(one.getSellerUsername());
+        Stage stage = new Stage();
+        stage.setScene(messageViewScene);
+        stage.show();
     }
 
     @FXML
-    void contactCar2Owner(ActionEvent event) {
-
+    void contactCar2Owner(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messageView.fxml"));
+        Parent messageView = loader.load();
+        Scene messageViewScene = new Scene(messageView);
+        messageController controller = loader.getController();
+        controller.setActiveUser(activeUser);
+        controller.setMessageRecipient(two.getSellerUsername());
+        Stage stage = new Stage();
+        stage.setScene(messageViewScene);
+        stage.show();
     }
 
     @FXML
-    void contactCar3Owner(ActionEvent event) {
-
+    void contactCar3Owner(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messageView.fxml"));
+        Parent messageView = loader.load();
+        Scene messageViewScene = new Scene(messageView);
+        messageController controller = loader.getController();
+        controller.setActiveUser(activeUser);
+        controller.setMessageRecipient(two.getSellerUsername());
+        Stage stage = new Stage();
+        stage.setScene(messageViewScene);
+        stage.show();
     }
 
     @FXML
-    void contactCar4Owner(ActionEvent event) {
-
+    void contactCar4Owner(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messageView.fxml"));
+        Parent messageView = loader.load();
+        Scene messageViewScene = new Scene(messageView);
+        messageController controller = loader.getController();
+        controller.setActiveUser(activeUser);
+        controller.setMessageRecipient(four.getSellerUsername());
+        Stage stage = new Stage();
+        stage.setScene(messageViewScene);
+        stage.show();
     }
     
     
