@@ -31,6 +31,15 @@ import javax.persistence.Table;
     @NamedQuery(name = "Car.findByMiles", query = "SELECT c FROM Car c WHERE c.miles = :miles")})
 public class Car implements Serializable {
 
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "miles")
+    private Integer miles;
+    @Column(name = "sellerUsername")
+    private String sellerUsername;
+    @Column(name = "price")
+    private Integer price;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -46,8 +55,6 @@ public class Car implements Serializable {
     private Short safteyRating;
     @Column(name = "year")
     private Short year;
-    @Column(name = "miles")
-    private int miles;
 
     public Car() {
     }
@@ -104,13 +111,6 @@ public class Car implements Serializable {
         this.year = year;
     }
 
-    public int getMiles() {
-        return miles;
-    }
-
-    public void setMiles(int miles) {
-        this.miles = miles;
-    }
 
     @Override
     public int hashCode() {
@@ -135,6 +135,31 @@ public class Car implements Serializable {
     @Override
     public String toString() {
         return "model.Car_1[ vin=" + vin + " ]";
+    }
+
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public int getMiles() {
+        return miles;
+    }
+
+    public void setMiles(int miles) {
+        this.miles = miles;
+    }
+
+    public String getSellerUsername() {
+        return sellerUsername;
+    }
+
+    public void setSellerUsername(String sellerUsername) {
+        this.sellerUsername = sellerUsername;
     }
     
 }
