@@ -394,14 +394,16 @@ public class searchController {
        and render the page with updated data */
     @FXML
     void renderLastCars(ActionEvent event) {
-        if (getPage() > 1) {
+        if (getPage() > 1 && firstCar >= 4) {
             firstCar -= 4;
             lastCar -= 4;
             int newPage = getPage() - 1;
             pageNumber.setText(Integer.toString(newPage));
-        } else {
+        }
+        else {
             firstCar = 0;
             lastCar = 3;
+            pageNumber.setText("1");
         }
 
         SetCars();
@@ -419,8 +421,9 @@ public class searchController {
             pageNumber.setText(Integer.toString(newPage));
             
         } else {
-            lastCar = getCarList().size();
-            firstCar = lastCar - 4;
+            lastCar = getCarList().size() - 1;
+            firstCar = lastCar - 3;
+            
             
         }
         
