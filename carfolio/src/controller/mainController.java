@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -22,6 +23,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import model.Car;
 import model.User;
 
@@ -122,7 +125,7 @@ public class mainController {
 
     private User activeUser;
     private Car sellCar;
-    
+    private EntityManager manager;
 
     @FXML
     void beginSearch(ActionEvent event) {
@@ -131,8 +134,31 @@ public class mainController {
 
     @FXML
     void initializePortfolio(ActionEvent event) {
-        
-    }
+//        this.sellCar = new Car();
+//        // TODO: add error checking
+//        sellCar.setMake(makeField.getText());
+//        sellCar.setModel(modelField.getText());
+//        createdCar.setStyle(styleField.getText());
+//        createdCar.setYear(Short.parseShort(yearField.getText()));
+//        sellCar.setVin(vinField.getText());
+//        sellCar.setMiles(Integer.parseInt(mileageField.getText()));
+//        
+//        manager.getTransaction().begin();
+//        manager.persist(sellCar);
+//        manager.getTransaction().commit();
+//        
+//        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//        alert.setTitle("Message");
+//        alert.setContentText("Your Car has been created!");
+//        alert.showAndWait();
+//        // Clear fields
+//        modelField.setText("");
+//        makeField.setText("");
+//        styleField.setText("");
+//        yearField.setText("");
+//        vinField.setText("");
+//        milageField.setText("");
+ }
 
     @FXML
     void openAccount(ActionEvent event) throws IOException {
@@ -287,7 +313,7 @@ public class mainController {
         assert searchStyle != null : "fx:id=\"searchStyle\" was not injected: check your FXML file 'mainView.fxml'.";
         assert searchYear != null : "fx:id=\"searchYear\" was not injected: check your FXML file 'mainView.fxml'.";
         
-        
+        manager = (EntityManager) Persistence.createEntityManagerFactory("CarfolioPU").createEntityManager();
         
     }
 
