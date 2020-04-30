@@ -6,6 +6,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -33,6 +34,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import model.Car;
+import model.Message;
 import model.User;
 
 
@@ -300,6 +302,7 @@ public class searchController {
     private int lastCar = 3;
     
     private User activeUser;
+    private Message createdMessage;
     
     
     //Needed to determine who is sending offer/message
@@ -345,6 +348,29 @@ public class searchController {
             try {
                 Double.parseDouble(result.get());
                 amount = result.get();
+                
+                //Auto-send message with the offer
+                this.createdMessage = new Message();
+                createdMessage.setRecipient(one.getSellerUsername());
+                createdMessage.setSender(activeUser.getUsername());
+                createdMessage.setMessageBody(activeUser.getUsername() + " has submitted an offer to buy your " + one.getMake() + ", VIN " + one.getVin() + ", for: " + "$" + amount);
+                Date dt = new Date(System.currentTimeMillis());
+                createdMessage.setTimeSent(dt);
+
+                List<Message> data  = manager.createNamedQuery("Message.findAll").getResultList();
+                int last_id = data.size();
+                createdMessage.setMessageID((last_id + 1) + "");
+
+                manager.getTransaction().begin();
+                manager.persist(createdMessage);
+                manager.getTransaction().commit();
+
+                //Success msg
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Offer submitted successfully!");
+                alert.showAndWait();
             }
             catch(NumberFormatException x){
                 Alert alert = new Alert(AlertType.ERROR);
@@ -353,10 +379,7 @@ public class searchController {
                 alert.setContentText("Please enter a valid numeric dollar amount.");
                 alert.showAndWait();
              }
-        }
-        //Auto-send message with the offer
-        
-        
+        }   
     }
 
     @FXML
