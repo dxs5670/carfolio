@@ -123,11 +123,12 @@ public class sellerController {
 
     @FXML
     void openAccount(ActionEvent event) {
-
+        
     }
 
     @FXML
     void openMessages(ActionEvent event) throws IOException {
+        
         //opens in same window
         FXMLLoader messageLoader = new FXMLLoader(getClass().getResource("/view/messageView.fxml"));
         Parent message = messageLoader.load();

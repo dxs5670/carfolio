@@ -140,10 +140,12 @@ public class mainController {
 
     @FXML
     void openAccount(ActionEvent event) throws IOException {
+        System.out.println(activeUser);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/accountView.fxml"));
         Parent accountView = loader.load();
         Scene accountViewScene = new Scene(accountView);
         accountController controller = loader.getController();
+        controller.setActiveUser(activeUser);
         Stage stage = new Stage();
         stage.setScene(accountViewScene);
         stage.show();
