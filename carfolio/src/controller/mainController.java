@@ -164,10 +164,12 @@ public class mainController {
 
     @FXML
     void openAccount(ActionEvent event) throws IOException {
+        System.out.println(activeUser);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/accountView.fxml"));
         Parent accountView = loader.load();
         Scene accountViewScene = new Scene(accountView);
         accountController controller = loader.getController();
+        controller.setActiveUser(activeUser);
         Stage stage = new Stage();
         stage.setScene(accountViewScene);
         stage.show();
@@ -201,14 +203,14 @@ public class mainController {
 
     @FXML
     void openPortfolios(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/userPortfolioView.fxml"));
-        Parent userPortfolioView = loader.load();
-        Scene userPortfolioViewScene = new Scene(userPortfolioView);
-        portfolioController controller = loader.getController();
-        
-        Stage stage = new Stage();
-        stage.setScene(userPortfolioViewScene);
-        stage.show();
+        FXMLLoader userPortfolioLoader = new FXMLLoader(getClass().getResource("/view/userPortfolioView.fxml"));
+        Parent userPortfolio = userPortfolioLoader.load();
+        Scene userPortfolioUI = new Scene(userPortfolio);
+        userPortfolioController upController = userPortfolioLoader.getController();
+        upController.setActiveUser(activeUser);
+        Stage userPortfolioWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        userPortfolioWindow.setScene(userPortfolioUI);
+        userPortfolioWindow.show();
     }
 
     @FXML

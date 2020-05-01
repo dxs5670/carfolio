@@ -15,15 +15,15 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import model.Message;
 import model.User;
 import org.controlsfx.control.textfield.TextFields;
@@ -35,6 +35,8 @@ public class messageController {
 
     @FXML // URL location of the FXML file that was given to the FXMLLoader
     private URL location;
+
+
 
     @FXML // fx:id="recipientUser"
     private TextField recipientUser; // Value injected by FXMLLoader
@@ -50,18 +52,31 @@ public class messageController {
 
     @FXML // fx:id="back"
     private Button back; // Value injected by FXMLLoader
+
+
+    @FXML // fx:id="clickedMessageBody"
+    private TextArea clickedMessageBody; // Value injected by FXMLLoader
+
+    @FXML // fx:id="replyButton"
+    private Button replyButton; // Value injected by FXMLLoader
     
-    @FXML
-    private SplitPane messagePane;
+    @FXML // fx:id="messageTable"
+    private TableView<?> messageTable; // Value injected by FXMLLoader
+
+    @FXML // fx:id="from"
+    private TableColumn<?, ?> from; // Value injected by FXMLLoader
+
+    @FXML // fx:id="recieved"
+    private TableColumn<?, ?> recieved; // Value injected by FXMLLoader
+
     
-    @FXML
-    private Tab messageTab;
+    
 
     private User activeUser;
     private Scene previousScene;
     private Message createdMessage;
     private EntityManager manager;
-    
+
     @FXML //Clear text box
     void discardMessage(ActionEvent event) {
         recipientUser.setText("");
@@ -97,33 +112,17 @@ public class messageController {
 
     }
 
-    @FXML // View messages addressed to current user
-    void loadMessages(ActionEvent event) {
-        // Not working
-//        List<Message> data = manager.createNamedQuery("Message.findAll").getResultList();
-//        ArrayList<Message> matching = new ArrayList<Message>();
-//        for (Message msg: data)
-//        {
-//            if (msg.getRecipient() == activeUser.getUsername())
-//            {
-//                matching.add(msg);
-//            }
-//        }
-//        
-//        for (Message msg: matching)
-//        {
-//            System.out.println(msg.getMessageBody());
-//        }
-        
-        
-    }
-    
     @FXML
-    void setRecipient(KeyEvent event) {
-        
+    void sendMessageToSelected(ActionEvent event) {
+
     }
 
-    @FXML // Return to previous view
+    @FXML
+    void setRecipient(KeyEvent event) {
+
+    }
+
+    @FXML
     void toPrevious(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         if (previousScene != null){
@@ -133,12 +132,12 @@ public class messageController {
 
     @FXML
     void updateBody(KeyEvent event) {
-        
+
     }
-    
-   public void setMessageRecipient(String username) {
+
+    public void setMessageRecipient(String username) {
        recipientUser.setText(username);
-   }
+    }
     
     // Should be called from anywhere messageView is entered
     public void setPreviousScene(Scene scene) {
@@ -151,7 +150,6 @@ public class messageController {
         this.activeUser = activeUser;
     }
 
-    
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert recipientUser != null : "fx:id=\"recipientUser\" was not injected: check your FXML file 'messageView.fxml'.";
@@ -159,8 +157,13 @@ public class messageController {
         assert delete != null : "fx:id=\"delete\" was not injected: check your FXML file 'messageView.fxml'.";
         assert sendButton != null : "fx:id=\"sendButton\" was not injected: check your FXML file 'messageView.fxml'.";
         assert back != null : "fx:id=\"back\" was not injected: check your FXML file 'messageView.fxml'.";
-        assert messagePane != null : "fx:id=\"messagePane\" was not injected: check your FXML file 'messageView.fxml'.";
-        assert messageTab != null : "fx:id=\"messageTab\" was not injected: check your FXML file 'messageView.fxml'.";
+        assert clickedMessageBody != null : "fx:id=\"clickedMessageBody\" was not injected: check your FXML file 'messageView.fxml'.";
+        assert replyButton != null : "fx:id=\"replyButton\" was not injected: check your FXML file 'messageView.fxml'.";
+        assert messageTable != null : "fx:id=\"messageTable\" was not injected: check your FXML file 'messageView.fxml'.";
+        assert from != null : "fx:id=\"from\" was not injected: check your FXML file 'messageView.fxml'.";
+        assert recieved != null : "fx:id=\"recieved\" was not injected: check your FXML file 'messageView.fxml'.";
+
+
 
         manager = (EntityManager) Persistence.createEntityManagerFactory("CarfolioPU").createEntityManager();
         

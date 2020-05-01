@@ -172,14 +172,27 @@ public class accountController {
 
     public void setActiveUser(User activeUser) {
         this.activeUser = activeUser;
+        updateActiveUser();
     }
     
     public void updateActiveUser() {
         username.setText(activeUser.getUsername());
         firstName.setText(activeUser.getFirstName());
         lastName.setText(activeUser.getLastName());
-        
+        switch(activeUser.getUserType()) {
+            case (0): 
+                accountType.setText("Admin Rating");
+                break;
+            case (1):
+                accountType.setText("Seller Rating");
+                break;
+            case (2):
+                accountType.setText("Buyer Rating");
+                break;
+        }
     }
+    
+    
     
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -200,6 +213,6 @@ public class accountController {
         assert accountType != null : "fx:id=\"accountType\" was not injected: check your FXML file 'accountView.fxml'.";
         assert noMatch != null : "fx:id=\"noMatch\" was not injected: check your FXML file 'accountView.fxml'.";
 
-        updateActiveUser();
+        
     }
 }

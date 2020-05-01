@@ -6,6 +6,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +28,7 @@ import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -67,10 +69,10 @@ public class searchController {
     private MenuItem mileageSortMenuItem; // Value injected by FXMLLoader
 
     @FXML // fx:id="distanceSortMenuItem"
-    private MenuItem distanceSortMenuItem; // Value injected by FXMLLoader
+    private MenuItem yearSortMenuItem; // Value injected by FXMLLoader
 
     @FXML // fx:id="bestValueSortMenuItem"
-    private MenuItem bestValueSortMenuItem; // Value injected by FXMLLoader
+    private MenuItem safetySortMenuItem; // Value injected by FXMLLoader
 
     @FXML // fx:id="searchField"
     private TextField searchField; // Value injected by FXMLLoader
@@ -96,38 +98,9 @@ public class searchController {
     @FXML // fx:id="manufacturerMenu"
     private MenuButton manufacturerMenu; // Value injected by FXMLLoader
 
-    @FXML // fx:id="make1"
-    private RadioMenuItem make1; // Value injected by FXMLLoader
-
-    @FXML // fx:id="make2"
-    private RadioMenuItem make2; // Value injected by FXMLLoader
-
-    @FXML // fx:id="make3"
-    private RadioMenuItem make3; // Value injected by FXMLLoader
-
-    @FXML // fx:id="make4"
-    private RadioMenuItem make4; // Value injected by FXMLLoader
-
-    @FXML // fx:id="make5"
-    private RadioMenuItem make5; // Value injected by FXMLLoader
 
     @FXML // fx:id="modelMenu"
     private MenuButton modelMenu; // Value injected by FXMLLoader
-
-    @FXML // fx:id="model1"
-    private RadioMenuItem model1; // Value injected by FXMLLoader
-
-    @FXML // fx:id="model2"
-    private RadioMenuItem model2; // Value injected by FXMLLoader
-
-    @FXML // fx:id="model3"
-    private RadioMenuItem model3; // Value injected by FXMLLoader
-
-    @FXML // fx:id="model4"
-    private RadioMenuItem model4; // Value injected by FXMLLoader
-
-    @FXML // fx:id="model5"
-    private RadioMenuItem model5; // Value injected by FXMLLoader
 
     @FXML // fx:id="filterPriceLabel"
     private Label filterPriceLabel; // Value injected by FXMLLoader
@@ -314,248 +287,44 @@ public class searchController {
     
     @FXML
     void contactCar1Owner(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messageView.fxml"));
-        Parent messageView = loader.load();
-        Scene messageViewScene = new Scene(messageView);
-        messageController controller = loader.getController();
-        controller.setActiveUser(activeUser);
-        controller.setMessageRecipient(one.getSellerUsername());
-        Stage stage = new Stage();
-        stage.setScene(messageViewScene);
-        stage.show();
+        contact(one);
     }
 
     @FXML
     void contactCar2Owner(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messageView.fxml"));
-        Parent messageView = loader.load();
-        Scene messageViewScene = new Scene(messageView);
-        messageController controller = loader.getController();
-        controller.setActiveUser(activeUser);
-        controller.setMessageRecipient(two.getSellerUsername());
-        Stage stage = new Stage();
-        stage.setScene(messageViewScene);
-        stage.show();
+        contact(two);
     }
 
     @FXML
     void contactCar3Owner(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messageView.fxml"));
-        Parent messageView = loader.load();
-        Scene messageViewScene = new Scene(messageView);
-        messageController controller = loader.getController();
-        controller.setActiveUser(activeUser);
-        controller.setMessageRecipient(two.getSellerUsername());
-        Stage stage = new Stage();
-        stage.setScene(messageViewScene);
-        stage.show();
+        contact(three);
     }
 
     @FXML
     void contactCar4Owner(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messageView.fxml"));
-        Parent messageView = loader.load();
-        Scene messageViewScene = new Scene(messageView);
-        messageController controller = loader.getController();
-        controller.setActiveUser(activeUser);
-        controller.setMessageRecipient(four.getSellerUsername());
-        Stage stage = new Stage();
-        stage.setScene(messageViewScene);
-        stage.show();
+        contact(four);
     }
     
     
     //For making an offer on a vehicle
     @FXML
     void makeOfferCar1(ActionEvent event) {
-        //Prompt user for offer amount
-        TextInputDialog dialog = new TextInputDialog("0.00");
-        dialog.setTitle("Make Offer");
-        dialog.setHeaderText("Make Offer");
-        dialog.setContentText("Please enter an amount:");
-        
-        Optional<String> result = dialog.showAndWait();
-        String amount = "";
-        if (result.isPresent()){
-            try {
-                Double.parseDouble(result.get());
-                amount = result.get();
-                
-                //Auto-send message with the offer
-                this.createdMessage = new Message();
-                createdMessage.setRecipient(one.getSellerUsername());
-                createdMessage.setSender(activeUser.getUsername());
-                createdMessage.setMessageBody(activeUser.getUsername() + " has submitted an offer to buy your " + one.getMake() + ", VIN " + one.getVin() + ", for: " + "$" + amount);
-                Date dt = new Date(System.currentTimeMillis());
-                createdMessage.setTimeSent(dt);
-
-                List<Message> data  = manager.createNamedQuery("Message.findAll").getResultList();
-                int last_id = data.size();
-                createdMessage.setMessageID((last_id + 1) + "");
-
-                manager.getTransaction().begin();
-                manager.persist(createdMessage);
-                manager.getTransaction().commit();
-
-                //Success msg
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
-                alert.setHeaderText(null);
-                alert.setContentText("Offer submitted successfully!");
-                alert.showAndWait();
-            }
-            catch(NumberFormatException x){
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error");
-                alert.setContentText("Please enter a valid numeric dollar amount.");
-                alert.showAndWait();
-             }
-        }   
+        message(one);
     }
 
     @FXML
     void makeOfferCar2(ActionEvent event) {
-        //Prompt user for offer amount
-        TextInputDialog dialog = new TextInputDialog("0.00");
-        dialog.setTitle("Make Offer");
-        dialog.setHeaderText("Make Offer");
-        dialog.setContentText("Please enter an amount:");
-        
-        Optional<String> result = dialog.showAndWait();
-        String amount = "";
-        if (result.isPresent()){
-            try {
-                Double.parseDouble(result.get());
-                amount = result.get();
-                
-                //Auto-send message with the offer
-                this.createdMessage = new Message();
-                createdMessage.setRecipient(two.getSellerUsername());
-                createdMessage.setSender(activeUser.getUsername());
-                createdMessage.setMessageBody(activeUser.getUsername() + " has submitted an offer to buy your " + two.getMake() + ", VIN " + two.getVin() + ", for: " + "$" + amount);
-                Date dt = new Date(System.currentTimeMillis());
-                createdMessage.setTimeSent(dt);
-
-                List<Message> data  = manager.createNamedQuery("Message.findAll").getResultList();
-                int last_id = data.size();
-                createdMessage.setMessageID((last_id + 1) + "");
-
-                manager.getTransaction().begin();
-                manager.persist(createdMessage);
-                manager.getTransaction().commit();
-
-                //Success msg
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
-                alert.setHeaderText(null);
-                alert.setContentText("Offer submitted successfully!");
-                alert.showAndWait();
-            }
-            catch(NumberFormatException x){
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error");
-                alert.setContentText("Please enter a valid numeric dollar amount.");
-                alert.showAndWait();
-             }
-        }   
+        message(two);
     }
 
     @FXML
     void makeOfferCar3(ActionEvent event) {
-        //Prompt user for offer amount
-        TextInputDialog dialog = new TextInputDialog("0.00");
-        dialog.setTitle("Make Offer");
-        dialog.setHeaderText("Make Offer");
-        dialog.setContentText("Please enter an amount:");
-        
-        Optional<String> result = dialog.showAndWait();
-        String amount = "";
-        if (result.isPresent()){
-            try {
-                Double.parseDouble(result.get());
-                amount = result.get();
-                
-                //Auto-send message with the offer
-                this.createdMessage = new Message();
-                createdMessage.setRecipient(three.getSellerUsername());
-                createdMessage.setSender(activeUser.getUsername());
-                createdMessage.setMessageBody(activeUser.getUsername() + " has submitted an offer to buy your " + three.getMake() + ", VIN " + three.getVin() + ", for: " + "$" + amount);
-                Date dt = new Date(System.currentTimeMillis());
-                createdMessage.setTimeSent(dt);
-
-                List<Message> data  = manager.createNamedQuery("Message.findAll").getResultList();
-                int last_id = data.size();
-                createdMessage.setMessageID((last_id + 1) + "");
-
-                manager.getTransaction().begin();
-                manager.persist(createdMessage);
-                manager.getTransaction().commit();
-
-                //Success msg
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
-                alert.setHeaderText(null);
-                alert.setContentText("Offer submitted successfully!");
-                alert.showAndWait();
-            }
-            catch(NumberFormatException x){
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error");
-                alert.setContentText("Please enter a valid numeric dollar amount.");
-                alert.showAndWait();
-             }
-        }   
+        message(three);
     }
 
     @FXML
     void makeOfferCar4(ActionEvent event) {
-        //Prompt user for offer amount
-        TextInputDialog dialog = new TextInputDialog("0.00");
-        dialog.setTitle("Make Offer");
-        dialog.setHeaderText("Make Offer");
-        dialog.setContentText("Please enter an amount:");
-        
-        Optional<String> result = dialog.showAndWait();
-        String amount = "";
-        if (result.isPresent()){
-            try {
-                Double.parseDouble(result.get());
-                amount = result.get();
-                
-                //Auto-send message with the offer
-                this.createdMessage = new Message();
-                createdMessage.setRecipient(four.getSellerUsername());
-                createdMessage.setSender(activeUser.getUsername());
-                createdMessage.setMessageBody(activeUser.getUsername() + " has submitted an offer to buy your " + four.getMake() + ", VIN " + four.getVin() + ", for: " + "$" + amount);
-                Date dt = new Date(System.currentTimeMillis());
-                createdMessage.setTimeSent(dt);
-
-                List<Message> data  = manager.createNamedQuery("Message.findAll").getResultList();
-                int last_id = data.size();
-                createdMessage.setMessageID((last_id + 1) + "");
-
-                manager.getTransaction().begin();
-                manager.persist(createdMessage);
-                manager.getTransaction().commit();
-
-                //Success msg
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
-                alert.setHeaderText(null);
-                alert.setContentText("Offer submitted successfully!");
-                alert.showAndWait();
-            }
-            catch(NumberFormatException x){
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error");
-                alert.setContentText("Please enter a valid numeric dollar amount.");
-                alert.showAndWait();
-             }
-        }   
+        message(four);
     }   
     
     
@@ -568,62 +337,22 @@ public class searchController {
 
     @FXML
     void openCar1Portfolio(ActionEvent event) throws IOException {
-        
-        //Need to pass car data or id
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/portfolioView.fxml"));
-        Parent portfolioView = loader.load();
-        Scene portfolioViewScene = new Scene(portfolioView);
-        portfolioController controller = loader.getController();
-        controller.setCar(one);
-        controller.setActiveUser(activeUser);
-        Stage stage = new Stage();
-        stage.setScene(portfolioViewScene);
-        stage.show();
+        portfolio(one);
     }
 
     @FXML
     void openCar2Portfolio(ActionEvent event) throws IOException {
-        
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/portfolioView.fxml"));
-        Parent portfolioView = loader.load();
-        Scene portfolioViewScene = new Scene(portfolioView);
-        portfolioController controller = loader.getController();
-        controller.setCar(two);
-        controller.setActiveUser(activeUser);
-        Stage stage = new Stage();
-        stage.setScene(portfolioViewScene);
-        stage.show();
+        portfolio(two);
     }
 
     @FXML
     void openCar3Portfolio(ActionEvent event) throws IOException {
-        
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/portfolioView.fxml"));
-        Parent portfolioView = loader.load();
-        Scene portfolioViewScene = new Scene(portfolioView);
-        portfolioController controller = loader.getController();
-        controller.setCar(three);
-        controller.setActiveUser(activeUser);
-        Stage stage = new Stage();
-        stage.setScene(portfolioViewScene);
-        stage.show();
+        portfolio(three);
     }
 
     @FXML
     void openCar4Portfolio(ActionEvent event) throws IOException {
-        
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/portfolioView.fxml"));
-        Parent portfolioView = loader.load();
-        Scene portfolioViewScene = new Scene(portfolioView);
-        portfolioController controller = loader.getController();
-        controller.setCar(four);
-        controller.setActiveUser(activeUser);
-        Stage stage = new Stage();
-        stage.setScene(portfolioViewScene);
-        stage.show();
+        portfolio(four);
     }
 
     
@@ -638,14 +367,16 @@ public class searchController {
        and render the page with updated data */
     @FXML
     void renderLastCars(ActionEvent event) {
-        if (getPage() > 1) {
+        if (getPage() > 1 && firstCar >= 4) {
             firstCar -= 4;
             lastCar -= 4;
             int newPage = getPage() - 1;
             pageNumber.setText(Integer.toString(newPage));
-        } else {
+        }
+        else {
             firstCar = 0;
             lastCar = 3;
+            pageNumber.setText("1");
         }
 
         SetCars();
@@ -663,8 +394,9 @@ public class searchController {
             pageNumber.setText(Integer.toString(newPage));
             
         } else {
-            lastCar = getCarList().size();
-            firstCar = lastCar - 4;
+            lastCar = getCarList().size() - 1;
+            firstCar = lastCar - 3;
+            
             
         }
         
@@ -708,103 +440,33 @@ public class searchController {
 
     /* Sort the cars in order of their reccomneded value index */ 
     @FXML
-    void toggleBVSort(ActionEvent event) {
-
+    void toggleSafetySort(ActionEvent event) {
+        sortByMenu.setText("Safety");
     }
 
     /* Sort the cars by their distacne from the buyer */
     @FXML
-    void toggleDistanceSort(ActionEvent event) {
-
+    void toggleYearSort(ActionEvent event) {
+        sortByMenu.setText("Year");
     }
-
-    /* toggle search by a particular make 
-    This is the first manufacturer in the dropdown list*/
-    @FXML
-    void toggleMake1(ActionEvent event) {
-
-    }
-    
-    /* toggle search by a particular make 
-    This is the second manufacturer in the dropdown list*/
-    @FXML
-    void toggleMake2(ActionEvent event) {
-
-    }
-    
-    /* toggle search by a particular make 
-    This is the third manufacturer in the dropdown list*/
-    @FXML
-    void toggleMake3(ActionEvent event) {
-
-    }
-
-    /* toggle search by a particular make 
-    This is the fourth manufacturer in the dropdown list*/
-    @FXML
-    void toggleMake4(ActionEvent event) {
-
-    }
-
-    /* toggle search by a particular make 
-    This is the fifth manufacturer in the dropdown list*/
-    @FXML
-    void toggleMake5(ActionEvent event) {
-
-    }
-
     
     // to be removed
     @FXML
-    void toggleMakeMenu(ActionEvent event) {
+    void toggleMakeMenu(MouseEvent event) {
 
     }
 
     /* toggle sort by mileage */
     @FXML
     void toggleMileageSort(ActionEvent event) {
-
+        sortByMenu.setText("Miles");
     }
 
-    /* toggle search by a particular model 
-    This is the first model in the dropdown list*/
-    @FXML
-    void toggleModel1(ActionEvent event) {
-
-    }
-
-    /* toggle search by a particular model 
-    This is the second model in the dropdown list*/
-    @FXML
-    void toggleModel2(ActionEvent event) {
-
-    }
-
-    /* toggle search by a particular model 
-    This is the third model in the dropdown list*/
-    @FXML
-    void toggleModel3(ActionEvent event) {
-
-    }
-    
-    /* toggle search by a particular model 
-    This is the fourth model in the dropdown list*/
-    @FXML
-    void toggleModel4(ActionEvent event) {
-
-    }
-
-    /* toggle search by a particular model 
-    This is the fifth model in the dropdown list*/
-    @FXML
-    void toggleModel5(ActionEvent event) {
-
-    }
 
     
     // to be removed
     @FXML
-    void toggleModelMenu(ActionEvent event) {
+    void toggleModelMenu(MouseEvent event) {
 
     }
 
@@ -812,7 +474,7 @@ public class searchController {
     /* toggle sorting by lowest price */
     @FXML
     void togglePriceSort(ActionEvent event) {
-
+        sortByMenu.setText("Price");
     }
     
     
@@ -821,11 +483,13 @@ public class searchController {
         
         SetCars();
         setPageCarData();
+        addModelToMenu();
+        addManufacturerToMenu();
         
     }
     
     
-    // Retrieve the list of cars from the database
+    // Retrieve the list of cars from the database in the order they appear on the database
     private List<Car> getCarList() {
         Query query = manager.createNamedQuery("Car.findAll");
         List<Car> data = query.getResultList();
@@ -907,6 +571,107 @@ public class searchController {
     }
     
     
+    public void message(Car car) {
+        TextInputDialog dialog = new TextInputDialog("0.00");
+        dialog.setTitle("Make Offer");
+        dialog.setHeaderText("Make Offer");
+        dialog.setContentText("Please enter an amount:");
+        
+        Optional<String> result = dialog.showAndWait();
+        String amount = "";
+        if (result.isPresent()){
+            try {
+                Double.parseDouble(result.get());
+                amount = result.get();
+                
+                //Auto-send message with the offer
+                this.createdMessage = new Message();
+                createdMessage.setRecipient(car.getSellerUsername());
+                createdMessage.setSender(activeUser.getUsername());
+                createdMessage.setMessageBody(activeUser.getUsername() + " has submitted an offer to buy your " + four.getMake() + ", VIN " + four.getVin() + ", for: " + "$" + amount);
+                Date dt = new Date(System.currentTimeMillis());
+                createdMessage.setTimeSent(dt);
+
+                List<Message> data  = manager.createNamedQuery("Message.findAll").getResultList();
+                int last_id = data.size();
+                createdMessage.setMessageID((last_id + 1) + "");
+
+                manager.getTransaction().begin();
+                manager.persist(createdMessage);
+                manager.getTransaction().commit();
+
+                //Success msg
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Offer submitted successfully!");
+                alert.showAndWait();
+            }
+            catch(NumberFormatException x){
+                System.out.println(x.getMessage());
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error");
+                alert.setContentText("Please enter a valid numeric dollar amount.");
+                alert.showAndWait();
+             }
+        }   
+    }
+    
+    
+    public void contact(Car car) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messageView.fxml"));
+        Parent messageView = loader.load();
+        Scene messageViewScene = new Scene(messageView);
+        messageController controller = loader.getController();
+        controller.setActiveUser(activeUser);
+        controller.setMessageRecipient(car.getSellerUsername());
+        Stage stage = new Stage();
+        stage.setScene(messageViewScene);
+        stage.show();
+    }
+    
+    public void portfolio(Car car) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/portfolioView.fxml"));
+        Parent portfolioView = loader.load();
+        Scene portfolioViewScene = new Scene(portfolioView);
+        portfolioController controller = loader.getController();
+        controller.setCar(car);
+        controller.setActiveUser(activeUser);
+        Stage stage = new Stage();
+        stage.setScene(portfolioViewScene);
+        stage.show();
+    }
+    
+    public void addManufacturerToMenu() {
+        ArrayList<String> toAdd = new ArrayList<>();
+        for ( Car car : getCarList() ) {
+            String manufacturer = car.getMake();
+            if(!toAdd.contains(manufacturer)) {
+                toAdd.add(manufacturer);
+            }
+        }
+        toAdd.forEach((item) -> {            
+            RadioMenuItem added = new RadioMenuItem();
+            added.setText(item);
+            manufacturerMenu.getItems().add(added);
+        });
+    }
+    
+    public void addModelToMenu() {
+        ArrayList<String> toAdd = new ArrayList<>();
+        for ( Car car : getCarList() ) {
+            String model = car.getModel();
+            if(!toAdd.contains(model)) {
+                toAdd.add(model);
+            }
+        }
+        toAdd.forEach((String item) -> {
+            RadioMenuItem added = new RadioMenuItem();
+            added.setText(item);
+            modelMenu.getItems().add(added);
+        });
+    }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
@@ -917,8 +682,8 @@ public class searchController {
         assert sortByMenu != null : "fx:id=\"sortByMenu\" was not injected: check your FXML file 'searchView.fxml'.";
         assert priceSortMenuItem != null : "fx:id=\"priceSortMenuItem\" was not injected: check your FXML file 'searchView.fxml'.";
         assert mileageSortMenuItem != null : "fx:id=\"mileageSortMenuItem\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert distanceSortMenuItem != null : "fx:id=\"distanceSortMenuItem\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert bestValueSortMenuItem != null : "fx:id=\"bestValueSortMenuItem\" was not injected: check your FXML file 'searchView.fxml'.";
+        assert safetySortMenuItem != null : "fx:id=\"distanceSortMenuItem\" was not injected: check your FXML file 'searchView.fxml'.";
+        assert yearSortMenuItem != null : "fx:id=\"bestValueSortMenuItem\" was not injected: check your FXML file 'searchView.fxml'.";
         assert searchField != null : "fx:id=\"searchField\" was not injected: check your FXML file 'searchView.fxml'.";
         assert searchTermLabel != null : "fx:id=\"searchTermLabel\" was not injected: check your FXML file 'searchView.fxml'.";
         assert filterTitleLabel != null : "fx:id=\"filterTitleLabel\" was not injected: check your FXML file 'searchView.fxml'.";
@@ -927,17 +692,7 @@ public class searchController {
         assert minMilesField != null : "fx:id=\"minMilesField\" was not injected: check your FXML file 'searchView.fxml'.";
         assert maxMilesField != null : "fx:id=\"maxMilesField\" was not injected: check your FXML file 'searchView.fxml'.";
         assert manufacturerMenu != null : "fx:id=\"manufacturerMenu\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert make1 != null : "fx:id=\"make1\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert make2 != null : "fx:id=\"make2\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert make3 != null : "fx:id=\"make3\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert make4 != null : "fx:id=\"make4\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert make5 != null : "fx:id=\"make5\" was not injected: check your FXML file 'searchView.fxml'.";
         assert modelMenu != null : "fx:id=\"modelMenu\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert model1 != null : "fx:id=\"model1\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert model2 != null : "fx:id=\"model2\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert model3 != null : "fx:id=\"model3\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert model4 != null : "fx:id=\"model4\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert model5 != null : "fx:id=\"model5\" was not injected: check your FXML file 'searchView.fxml'.";
         assert filterPriceLabel != null : "fx:id=\"filterPriceLabel\" was not injected: check your FXML file 'searchView.fxml'.";
         assert filterMilesLabel != null : "fx:id=\"filterMilesLabel\" was not injected: check your FXML file 'searchView.fxml'.";
         assert greaterThanPrice != null : "fx:id=\"greaterThanPrice\" was not injected: check your FXML file 'searchView.fxml'.";
