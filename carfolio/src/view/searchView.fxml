@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,8 +17,8 @@
               <items>
                 <MenuItem fx:id="priceSortMenuItem" mnemonicParsing="false" onAction="#togglePriceSort" text="Price" />
                   <MenuItem fx:id="mileageSortMenuItem" mnemonicParsing="false" onAction="#toggleMileageSort" text="Mileage" />
-                  <MenuItem fx:id="distanceSortMenuItem" mnemonicParsing="false" onAction="#toggleDistanceSort" text="Distance" />
-                <MenuItem fx:id="bestValueSortMenuItem" mnemonicParsing="false" onAction="#toggleBVSort" text="Best Value" />
+                  <MenuItem fx:id="yearSortMenuItem" mnemonicParsing="false" onAction="#toggleYearSort" text="Year" />
+                <MenuItem fx:id="safetySortMenuItem" mnemonicParsing="false" onAction="#toggleSafetySort" text="Safety Rating" />
               </items>
             </MenuButton>
             <TextField fx:id="searchField" layoutX="7.0" layoutY="33.0" onAction="#setSearchField" prefHeight="26.0" prefWidth="130.0" />
@@ -29,24 +28,8 @@
             <TextField fx:id="minPriceField" layoutX="20.0" layoutY="162.0" onAction="#setMinPrice" prefHeight="26.0" prefWidth="43.0" />
             <TextField fx:id="minMilesField" layoutX="19.0" layoutY="218.0" onAction="#setMinMiles" prefHeight="26.0" prefWidth="43.0" />
             <TextField fx:id="maxMilesField" layoutX="80.0" layoutY="218.0" onAction="#setMaxMiles" prefHeight="26.0" prefWidth="43.0" />
-            <MenuButton fx:id="manufacturerMenu" layoutX="18.0" layoutY="266.0" mnemonicParsing="false" onAction="#toggleMakeMenu" prefHeight="26.0" prefWidth="111.0" text="Manufacturer">
-               <items>
-                  <RadioMenuItem fx:id="make1" mnemonicParsing="false" onAction="#toggleMake1" text="Unspecified Action" />
-                  <RadioMenuItem fx:id="make2" mnemonicParsing="false" onAction="#toggleMake2" text="Unspecified Action" />
-                  <RadioMenuItem fx:id="make3" mnemonicParsing="false" onAction="#toggleMake3" text="Unspecified Action" />
-                  <RadioMenuItem fx:id="make4" mnemonicParsing="false" onAction="#toggleMake4" text="Unspecified Action" />
-                  <RadioMenuItem fx:id="make5" mnemonicParsing="false" onAction="#toggleMake5" text="Unspecified Action" />
-               </items>
-            </MenuButton>
-            <MenuButton fx:id="modelMenu" layoutX="19.0" layoutY="307.0" mnemonicParsing="false" onAction="#toggleModelMenu" prefHeight="26.0" prefWidth="111.0" text="Model">
-               <items>
-                  <RadioMenuItem fx:id="model1" mnemonicParsing="false" onAction="#toggleModel1" text="Unspecified Action" />
-                  <RadioMenuItem fx:id="model2" mnemonicParsing="false" onAction="#toggleModel2" text="Unspecified Action" />
-                  <RadioMenuItem fx:id="model3" mnemonicParsing="false" onAction="#toggleModel3" text="Unspecified Action" />
-                  <RadioMenuItem fx:id="model4" mnemonicParsing="false" onAction="#toggleModel4" text="Unspecified Action" />
-                  <RadioMenuItem fx:id="model5" mnemonicParsing="false" onAction="#toggleModel5" text="Unspecified Action" />
-               </items>
-            </MenuButton>
+            <MenuButton fx:id="manufacturerMenu" layoutX="18.0" layoutY="266.0" mnemonicParsing="false" onMouseClicked="#toggleMakeMenu" prefHeight="26.0" prefWidth="111.0" text="Manufacturer" />
+            <MenuButton fx:id="modelMenu" layoutX="19.0" layoutY="307.0" mnemonicParsing="false" onMouseClicked="#toggleModelMenu" prefHeight="26.0" prefWidth="111.0" text="Model" />
             <Label fx:id="filterPriceLabel" layoutX="21.0" layoutY="144.0" text="Price Between" />
             <Label fx:id="filterMilesLabel" layoutX="17.0" layoutY="199.0" text="Miles Between" />
             <Label fx:id="greaterThanPrice" layoutX="9.0" layoutY="167.0" text="&gt;" />
