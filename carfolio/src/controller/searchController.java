@@ -441,13 +441,13 @@ public class searchController {
     /* Sort the cars in order of their reccomneded value index */ 
     @FXML
     void toggleSafetySort(ActionEvent event) {
-
+        sortByMenu.setText("Safety");
     }
 
     /* Sort the cars by their distacne from the buyer */
     @FXML
     void toggleYearSort(ActionEvent event) {
-
+        sortByMenu.setText("Year");
     }
     
     // to be removed
@@ -459,7 +459,7 @@ public class searchController {
     /* toggle sort by mileage */
     @FXML
     void toggleMileageSort(ActionEvent event) {
-
+        sortByMenu.setText("Miles");
     }
 
 
@@ -474,7 +474,7 @@ public class searchController {
     /* toggle sorting by lowest price */
     @FXML
     void togglePriceSort(ActionEvent event) {
-
+        sortByMenu.setText("Price");
     }
     
     
@@ -644,30 +644,32 @@ public class searchController {
     }
     
     public void addManufacturerToMenu() {
-        ArrayList<MenuItem> toAdd = new ArrayList<>();
+        ArrayList<String> toAdd = new ArrayList<>();
         for ( Car car : getCarList() ) {
-            RadioMenuItem manufacturer = new RadioMenuItem();
-            manufacturer.setText(car.getMake());
+            String manufacturer = car.getMake();
             if(!toAdd.contains(manufacturer)) {
                 toAdd.add(manufacturer);
             }
         }
-        toAdd.forEach((item) -> {
-            manufacturerMenu.getItems().add(item);
+        toAdd.forEach((item) -> {            
+            RadioMenuItem added = new RadioMenuItem();
+            added.setText(item);
+            manufacturerMenu.getItems().add(added);
         });
     }
     
     public void addModelToMenu() {
-        ArrayList<MenuItem> toAdd = new ArrayList<>();
+        ArrayList<String> toAdd = new ArrayList<>();
         for ( Car car : getCarList() ) {
-            RadioMenuItem model = new RadioMenuItem();
-            model.setText(car.getModel());
+            String model = car.getModel();
             if(!toAdd.contains(model)) {
                 toAdd.add(model);
             }
         }
-        toAdd.forEach((item) -> {
-            modelMenu.getItems().add(item);
+        toAdd.forEach((String item) -> {
+            RadioMenuItem added = new RadioMenuItem();
+            added.setText(item);
+            modelMenu.getItems().add(added);
         });
     }
 
