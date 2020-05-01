@@ -155,6 +155,11 @@ public class sellerController {
         mController.setPreviousScene(((Node) event.getSource()).getScene());
         messageWindow.show();
     }
+    
+    @FXML
+    void setMake(KeyEvent event) {
+
+    }
 
     @FXML
     void setMileage(KeyEvent event) {
