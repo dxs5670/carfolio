@@ -10,42 +10,42 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.messageController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="703.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.messageController">
   <tabs>
     <Tab text="Compose Message">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="recipientUser" layoutX="226.0" layoutY="22.0" onKeyTyped="#setRecipient" promptText="Recipient Username" />
-                  <TextArea fx:id="messageBody" layoutX="52.0" layoutY="64.0" onKeyTyped="#updateBody" prefHeight="226.0" prefWidth="496.0" promptText="Type message here..." wrapText="true" />
-                  <Button fx:id="delete" layoutX="443.0" layoutY="313.0" mnemonicParsing="false" onAction="#discardMessage" style="-fx-background-color: red;" text="Delete Message">
+                  <TextField fx:id="recipientUser" layoutX="278.0" layoutY="20.0" onKeyTyped="#setRecipient" promptText="Recipient Username" />
+                  <TextArea fx:id="messageBody" layoutX="104.0" layoutY="62.0" onKeyTyped="#updateBody" prefHeight="226.0" prefWidth="496.0" promptText="Type message here..." wrapText="true" />
+                  <Button fx:id="delete" layoutX="495.0" layoutY="311.0" mnemonicParsing="false" onAction="#discardMessage" style="-fx-background-color: red;" text="Delete Message">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="sendButton" layoutX="52.0" layoutY="313.0" mnemonicParsing="false" onAction="#sendMessage" style="-fx-background-color: green;" text="Send Message">
+                  <Button fx:id="sendButton" layoutX="104.0" layoutY="311.0" mnemonicParsing="false" onAction="#sendMessage" style="-fx-background-color: green;" text="Send Message">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="back" layoutX="528.0" layoutY="22.0" mnemonicParsing="false" onAction="#toPrevious" text="Back" />
+                  <Button fx:id="back" layoutX="559.0" layoutY="20.0" mnemonicParsing="false" onAction="#toPrevious" text="Back" />
                </children></AnchorPane>
       </content>
     </Tab>
     <Tab fx:id="history" onSelectionChanged="#readMessages" text="Message History">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="634.0">
                <children>
-                  <TextArea fx:id="clickedMessageBody" editable="false" layoutX="25.0" layoutY="14.0" prefHeight="305.0" prefWidth="375.0" />
+                  <TextArea fx:id="clickedMessageBody" editable="false" layoutX="25.0" layoutY="14.0" prefHeight="305.0" prefWidth="375.0" wrapText="true" />
                   <Button fx:id="replyButton" layoutX="184.0" layoutY="330.0" mnemonicParsing="false" onAction="#sendMessageToSelected" style="-fx-background-color: green;" text="Reply">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <TableView fx:id="messageTable" layoutX="415.0" layoutY="14.0" onMouseClicked="#findRow" prefHeight="343.0" prefWidth="172.0">
+                  <TableView fx:id="messageTable" layoutX="415.0" layoutY="14.0" onMouseClicked="#findRow" prefHeight="343.0" prefWidth="272.0">
                     <columns>
                       <TableColumn fx:id="from" editable="false" prefWidth="87.0" resizable="false" text="From" />
-                      <TableColumn fx:id="recieved" editable="false" prefWidth="84.0" resizable="false" text="Date" />
+                      <TableColumn fx:id="recieved" editable="false" prefWidth="183.0" resizable="false" text="Date" />
                     </columns>
                   </TableView>
                </children></AnchorPane>
