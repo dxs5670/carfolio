@@ -187,8 +187,15 @@ public class sellerController {
     }
 
     @FXML
-    void viewUserPortfolios(ActionEvent event) {
-
+    void viewUserPortfolios(ActionEvent event) throws IOException {
+        FXMLLoader userPortfolioLoader = new FXMLLoader(getClass().getResource("/view/userPortfolioView.fxml"));
+        Parent userPortfolio = userPortfolioLoader.load();
+        Scene userPortfolioUI = new Scene(userPortfolio);
+        userPortfolioController upController = userPortfolioLoader.getController();
+        upController.setActiveUser(activeUser);
+        Stage userPortfolioWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        userPortfolioWindow.setScene(userPortfolioUI);
+        userPortfolioWindow.show();
     }
     
     public void setActiveUser(User fromLogin) {

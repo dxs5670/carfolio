@@ -50,9 +50,6 @@ public class buyerController {
     @FXML // fx:id="accountButton"
     private Button accountButton; // Value injected by FXMLLoader
 
-    @FXML // fx:id="portfolioButton"
-    private Button portfolioButton; // Value injected by FXMLLoader
-
     @FXML // fx:id="messagesButton"
     private Button messagesButton; // Value injected by FXMLLoader
 
@@ -105,6 +102,7 @@ public class buyerController {
         Parent account = accountLoader.load();
         Scene accountUI = new Scene(account);
         accountController aController = accountLoader.getController();
+        aController.setActiveUser(activeUser);
         Stage stage = new Stage();
         stage.setScene(accountUI);
         stage.show();
@@ -166,11 +164,6 @@ public class buyerController {
     void setYearSearch(ActionEvent event) {
 
     }
-
-    @FXML
-    void viewUserPortfolios(ActionEvent event) {
-
-    }
     
     public void setActiveUser(User fromLogin) {
         String queryUsername = fromLogin.getUsername();
@@ -190,7 +183,6 @@ public class buyerController {
         assert advancedSearchButton != null : "fx:id=\"advancedSearchButton\" was not injected: check your FXML file 'buyerView.fxml'.";
         assert searchButton != null : "fx:id=\"searchButton\" was not injected: check your FXML file 'buyerView.fxml'.";
         assert accountButton != null : "fx:id=\"accountButton\" was not injected: check your FXML file 'buyerView.fxml'.";
-        assert portfolioButton != null : "fx:id=\"portfolioButton\" was not injected: check your FXML file 'buyerView.fxml'.";
         assert messagesButton != null : "fx:id=\"messagesButton\" was not injected: check your FXML file 'buyerView.fxml'.";
         assert sellCarLabel != null : "fx:id=\"sellCarLabel\" was not injected: check your FXML file 'buyerView.fxml'.";
         assert searchByMenu != null : "fx:id=\"searchByMenu\" was not injected: check your FXML file 'buyerView.fxml'.";

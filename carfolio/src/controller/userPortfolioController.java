@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
+import model.User;
 
 public class userPortfolioController {
 
@@ -37,9 +38,11 @@ public class userPortfolioController {
     @FXML // fx:id="carBestOffer"
     private TableColumn<?, ?> carBestOffer; // Value injected by FXMLLoader
 
+    User activeUser;
     
-    
-    
+    public void setActiveUser(User user) {
+        activeUser = user;
+    }
     
     
     
