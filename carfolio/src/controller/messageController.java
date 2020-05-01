@@ -20,11 +20,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -146,6 +149,12 @@ public class messageController {
     @FXML
     void readMessages(Event event) {
         retrieveMessages();
+        
+    }
+    
+    @FXML
+    void findRow(MouseEvent event) {
+        
     }
 
     public void setMessageRecipient(String username) {
@@ -176,11 +185,26 @@ public class messageController {
         from.setCellValueFactory(new PropertyValueFactory<>("Sender"));
         recieved.setCellValueFactory(new PropertyValueFactory<>("TimeSent"));
         messageTable.setItems(odata);
-            
+        messageFromRow();
         
         
     }
     
+    public void messageFromRow() {
+        messageTable.setRowFactory( tv -> {
+            TableRow<Message> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY 
+                    && event.getClickCount() == 2) {
+
+                    Message clickedRow = row.getItem();
+                    clickedMessageBody.setText(clickedRow.getMessageBody());
+                    
+                }
+            });
+            return row;
+        });
+    }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
