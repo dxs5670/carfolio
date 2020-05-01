@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -20,10 +23,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+import model.Car;
 import model.Message;
 import model.User;
 import org.controlsfx.control.textfield.TextFields;
@@ -53,6 +59,8 @@ public class messageController {
     @FXML // fx:id="back"
     private Button back; // Value injected by FXMLLoader
 
+    @FXML
+    private Tab history;
 
     @FXML // fx:id="clickedMessageBody"
     private TextArea clickedMessageBody; // Value injected by FXMLLoader
@@ -61,13 +69,13 @@ public class messageController {
     private Button replyButton; // Value injected by FXMLLoader
     
     @FXML // fx:id="messageTable"
-    private TableView<?> messageTable; // Value injected by FXMLLoader
+    private TableView<Message> messageTable; // Value injected by FXMLLoader
 
     @FXML // fx:id="from"
-    private TableColumn<?, ?> from; // Value injected by FXMLLoader
+    private TableColumn<Message, String> from; // Value injected by FXMLLoader
 
     @FXML // fx:id="recieved"
-    private TableColumn<?, ?> recieved; // Value injected by FXMLLoader
+    private TableColumn<Message, Date> recieved; // Value injected by FXMLLoader
 
     
     
@@ -134,6 +142,11 @@ public class messageController {
     void updateBody(KeyEvent event) {
 
     }
+    
+    @FXML
+    void readMessages(Event event) {
+        retrieveMessages();
+    }
 
     public void setMessageRecipient(String username) {
        recipientUser.setText(username);
@@ -146,9 +159,28 @@ public class messageController {
     } 
     
     // Called from sellerController, buyerController, mainController
-    public void setActiveUser(User activeUser) {
-        this.activeUser = activeUser;
+    public void setActiveUser(User user) {
+        activeUser = user;
     }
+    
+    public void retrieveMessages() {
+        
+        Query query = manager.createNamedQuery("Message.findByRecipient");
+        query.setParameter("recipient", activeUser.getUsername());
+        List<Message> data = query.getResultList();
+        ObservableList<Message> odata = FXCollections.observableArrayList();
+        data.forEach((d) -> {
+            odata.add(d);
+        });
+      
+        from.setCellValueFactory(new PropertyValueFactory<>("Sender"));
+        recieved.setCellValueFactory(new PropertyValueFactory<>("TimeSent"));
+        messageTable.setItems(odata);
+            
+        
+        
+    }
+    
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
@@ -162,6 +194,7 @@ public class messageController {
         assert messageTable != null : "fx:id=\"messageTable\" was not injected: check your FXML file 'messageView.fxml'.";
         assert from != null : "fx:id=\"from\" was not injected: check your FXML file 'messageView.fxml'.";
         assert recieved != null : "fx:id=\"recieved\" was not injected: check your FXML file 'messageView.fxml'.";
+        assert history != null : "fx:id=\"history\" was not injected: check your FXML file 'messageView.fxml'.";
 
 
 
@@ -174,5 +207,7 @@ public class messageController {
             suggestions.add(model.getUsername());
         }
         TextFields.bindAutoCompletion(recipientUser, suggestions);
+       
+        
     }
 }
