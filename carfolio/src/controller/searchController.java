@@ -6,6 +6,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +28,7 @@ import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -67,10 +69,10 @@ public class searchController {
     private MenuItem mileageSortMenuItem; // Value injected by FXMLLoader
 
     @FXML // fx:id="distanceSortMenuItem"
-    private MenuItem distanceSortMenuItem; // Value injected by FXMLLoader
+    private MenuItem yearSortMenuItem; // Value injected by FXMLLoader
 
     @FXML // fx:id="bestValueSortMenuItem"
-    private MenuItem bestValueSortMenuItem; // Value injected by FXMLLoader
+    private MenuItem safetySortMenuItem; // Value injected by FXMLLoader
 
     @FXML // fx:id="searchField"
     private TextField searchField; // Value injected by FXMLLoader
@@ -96,38 +98,9 @@ public class searchController {
     @FXML // fx:id="manufacturerMenu"
     private MenuButton manufacturerMenu; // Value injected by FXMLLoader
 
-    @FXML // fx:id="make1"
-    private RadioMenuItem make1; // Value injected by FXMLLoader
-
-    @FXML // fx:id="make2"
-    private RadioMenuItem make2; // Value injected by FXMLLoader
-
-    @FXML // fx:id="make3"
-    private RadioMenuItem make3; // Value injected by FXMLLoader
-
-    @FXML // fx:id="make4"
-    private RadioMenuItem make4; // Value injected by FXMLLoader
-
-    @FXML // fx:id="make5"
-    private RadioMenuItem make5; // Value injected by FXMLLoader
 
     @FXML // fx:id="modelMenu"
     private MenuButton modelMenu; // Value injected by FXMLLoader
-
-    @FXML // fx:id="model1"
-    private RadioMenuItem model1; // Value injected by FXMLLoader
-
-    @FXML // fx:id="model2"
-    private RadioMenuItem model2; // Value injected by FXMLLoader
-
-    @FXML // fx:id="model3"
-    private RadioMenuItem model3; // Value injected by FXMLLoader
-
-    @FXML // fx:id="model4"
-    private RadioMenuItem model4; // Value injected by FXMLLoader
-
-    @FXML // fx:id="model5"
-    private RadioMenuItem model5; // Value injected by FXMLLoader
 
     @FXML // fx:id="filterPriceLabel"
     private Label filterPriceLabel; // Value injected by FXMLLoader
@@ -467,55 +440,19 @@ public class searchController {
 
     /* Sort the cars in order of their reccomneded value index */ 
     @FXML
-    void toggleBVSort(ActionEvent event) {
+    void toggleSafetySort(ActionEvent event) {
 
     }
 
     /* Sort the cars by their distacne from the buyer */
     @FXML
-    void toggleDistanceSort(ActionEvent event) {
+    void toggleYearSort(ActionEvent event) {
 
     }
-
-    /* toggle search by a particular make 
-    This is the first manufacturer in the dropdown list*/
-    @FXML
-    void toggleMake1(ActionEvent event) {
-
-    }
-    
-    /* toggle search by a particular make 
-    This is the second manufacturer in the dropdown list*/
-    @FXML
-    void toggleMake2(ActionEvent event) {
-
-    }
-    
-    /* toggle search by a particular make 
-    This is the third manufacturer in the dropdown list*/
-    @FXML
-    void toggleMake3(ActionEvent event) {
-
-    }
-
-    /* toggle search by a particular make 
-    This is the fourth manufacturer in the dropdown list*/
-    @FXML
-    void toggleMake4(ActionEvent event) {
-
-    }
-
-    /* toggle search by a particular make 
-    This is the fifth manufacturer in the dropdown list*/
-    @FXML
-    void toggleMake5(ActionEvent event) {
-
-    }
-
     
     // to be removed
     @FXML
-    void toggleMakeMenu(ActionEvent event) {
+    void toggleMakeMenu(MouseEvent event) {
 
     }
 
@@ -525,45 +462,11 @@ public class searchController {
 
     }
 
-    /* toggle search by a particular model 
-    This is the first model in the dropdown list*/
-    @FXML
-    void toggleModel1(ActionEvent event) {
-
-    }
-
-    /* toggle search by a particular model 
-    This is the second model in the dropdown list*/
-    @FXML
-    void toggleModel2(ActionEvent event) {
-
-    }
-
-    /* toggle search by a particular model 
-    This is the third model in the dropdown list*/
-    @FXML
-    void toggleModel3(ActionEvent event) {
-
-    }
-    
-    /* toggle search by a particular model 
-    This is the fourth model in the dropdown list*/
-    @FXML
-    void toggleModel4(ActionEvent event) {
-
-    }
-
-    /* toggle search by a particular model 
-    This is the fifth model in the dropdown list*/
-    @FXML
-    void toggleModel5(ActionEvent event) {
-
-    }
 
     
     // to be removed
     @FXML
-    void toggleModelMenu(ActionEvent event) {
+    void toggleModelMenu(MouseEvent event) {
 
     }
 
@@ -580,11 +483,13 @@ public class searchController {
         
         SetCars();
         setPageCarData();
+        addModelToMenu();
+        addManufacturerToMenu();
         
     }
     
     
-    // Retrieve the list of cars from the database
+    // Retrieve the list of cars from the database in the order they appear on the database
     private List<Car> getCarList() {
         Query query = manager.createNamedQuery("Car.findAll");
         List<Car> data = query.getResultList();
@@ -738,7 +643,33 @@ public class searchController {
         stage.show();
     }
     
+    public void addManufacturerToMenu() {
+        ArrayList<MenuItem> toAdd = new ArrayList<>();
+        for ( Car car : getCarList() ) {
+            RadioMenuItem manufacturer = new RadioMenuItem();
+            manufacturer.setText(car.getMake());
+            if(!toAdd.contains(manufacturer)) {
+                toAdd.add(manufacturer);
+            }
+        }
+        toAdd.forEach((item) -> {
+            manufacturerMenu.getItems().add(item);
+        });
+    }
     
+    public void addModelToMenu() {
+        ArrayList<MenuItem> toAdd = new ArrayList<>();
+        for ( Car car : getCarList() ) {
+            RadioMenuItem model = new RadioMenuItem();
+            model.setText(car.getModel());
+            if(!toAdd.contains(model)) {
+                toAdd.add(model);
+            }
+        }
+        toAdd.forEach((item) -> {
+            modelMenu.getItems().add(item);
+        });
+    }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
@@ -749,8 +680,8 @@ public class searchController {
         assert sortByMenu != null : "fx:id=\"sortByMenu\" was not injected: check your FXML file 'searchView.fxml'.";
         assert priceSortMenuItem != null : "fx:id=\"priceSortMenuItem\" was not injected: check your FXML file 'searchView.fxml'.";
         assert mileageSortMenuItem != null : "fx:id=\"mileageSortMenuItem\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert distanceSortMenuItem != null : "fx:id=\"distanceSortMenuItem\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert bestValueSortMenuItem != null : "fx:id=\"bestValueSortMenuItem\" was not injected: check your FXML file 'searchView.fxml'.";
+        assert safetySortMenuItem != null : "fx:id=\"distanceSortMenuItem\" was not injected: check your FXML file 'searchView.fxml'.";
+        assert yearSortMenuItem != null : "fx:id=\"bestValueSortMenuItem\" was not injected: check your FXML file 'searchView.fxml'.";
         assert searchField != null : "fx:id=\"searchField\" was not injected: check your FXML file 'searchView.fxml'.";
         assert searchTermLabel != null : "fx:id=\"searchTermLabel\" was not injected: check your FXML file 'searchView.fxml'.";
         assert filterTitleLabel != null : "fx:id=\"filterTitleLabel\" was not injected: check your FXML file 'searchView.fxml'.";
@@ -759,17 +690,7 @@ public class searchController {
         assert minMilesField != null : "fx:id=\"minMilesField\" was not injected: check your FXML file 'searchView.fxml'.";
         assert maxMilesField != null : "fx:id=\"maxMilesField\" was not injected: check your FXML file 'searchView.fxml'.";
         assert manufacturerMenu != null : "fx:id=\"manufacturerMenu\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert make1 != null : "fx:id=\"make1\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert make2 != null : "fx:id=\"make2\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert make3 != null : "fx:id=\"make3\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert make4 != null : "fx:id=\"make4\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert make5 != null : "fx:id=\"make5\" was not injected: check your FXML file 'searchView.fxml'.";
         assert modelMenu != null : "fx:id=\"modelMenu\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert model1 != null : "fx:id=\"model1\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert model2 != null : "fx:id=\"model2\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert model3 != null : "fx:id=\"model3\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert model4 != null : "fx:id=\"model4\" was not injected: check your FXML file 'searchView.fxml'.";
-        assert model5 != null : "fx:id=\"model5\" was not injected: check your FXML file 'searchView.fxml'.";
         assert filterPriceLabel != null : "fx:id=\"filterPriceLabel\" was not injected: check your FXML file 'searchView.fxml'.";
         assert filterMilesLabel != null : "fx:id=\"filterMilesLabel\" was not injected: check your FXML file 'searchView.fxml'.";
         assert greaterThanPrice != null : "fx:id=\"greaterThanPrice\" was not injected: check your FXML file 'searchView.fxml'.";
