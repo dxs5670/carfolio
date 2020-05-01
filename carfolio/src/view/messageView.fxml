@@ -36,13 +36,13 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextArea fx:id="clickedMessageBody" layoutX="25.0" layoutY="14.0" prefHeight="305.0" prefWidth="375.0" />
+                  <TextArea fx:id="clickedMessageBody" editable="false" layoutX="25.0" layoutY="14.0" prefHeight="305.0" prefWidth="375.0" />
                   <Button fx:id="replyButton" layoutX="184.0" layoutY="330.0" mnemonicParsing="false" onAction="#sendMessageToSelected" style="-fx-background-color: green;" text="Reply">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <TableView fx:id="messageTable" layoutX="415.0" layoutY="14.0" prefHeight="343.0" prefWidth="172.0">
+                  <TableView fx:id="messageTable" layoutX="415.0" layoutY="14.0" onMouseClicked="#findRow" prefHeight="343.0" prefWidth="172.0">
                     <columns>
                       <TableColumn fx:id="from" editable="false" prefWidth="87.0" resizable="false" text="From" />
                       <TableColumn fx:id="recieved" editable="false" prefWidth="84.0" resizable="false" text="Date" />
