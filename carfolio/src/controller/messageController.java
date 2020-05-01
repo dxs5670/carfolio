@@ -17,6 +17,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -30,37 +32,62 @@ import org.controlsfx.control.textfield.TextFields;
 
 public class messageController {
 
-    @FXML // ResourceBundle that was given to the FXMLLoader
+    @FXML
     private ResourceBundle resources;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
+    @FXML
     private URL location;
-
-    @FXML // fx:id="recipientUser"
-    private TextField recipientUser; // Value injected by FXMLLoader
-
-    @FXML // fx:id="messageBody"
-    private TextArea messageBody; // Value injected by FXMLLoader
-
-    @FXML // fx:id="delete"
-    private Button delete; // Value injected by FXMLLoader
-
-    @FXML // fx:id="sendButton"
-    private Button sendButton; // Value injected by FXMLLoader
-
-    @FXML // fx:id="back"
-    private Button back; // Value injected by FXMLLoader
     
     @FXML
-    private SplitPane messagePane;
-    
+    private Tab composeTab;
+
+    @FXML
+    private TextField recipientUser;
+
+    @FXML
+    private TextArea messageBody;
+
+    @FXML
+    private Button delete;
+
+    @FXML
+    private Button sendButton;
+
+    @FXML
+    private Button back;
+
     @FXML
     private Tab messageTab;
 
+    @FXML
+    private TableView<?> messageTable;
+
+    @FXML
+    private TableColumn<?, ?> fromColumn;
+
+    @FXML
+    private TableColumn<?, ?> recievedColumn;
+
+    @FXML
+    private TextArea clickedMessageBody;
+
+    @FXML
+    private Button replyButton;
+
+    
+    
     private User activeUser;
     private Scene previousScene;
     private Message createdMessage;
     private EntityManager manager;
+    
+    @FXML
+    void composeMessage(ActionEvent event) {
+
+    }
+    
+    
+    
     
     @FXML //Clear text box
     void discardMessage(ActionEvent event) {
@@ -119,6 +146,12 @@ public class messageController {
     }
     
     @FXML
+    void sendMessageToSelected(ActionEvent event) {
+
+    }
+    
+    
+    @FXML
     void setRecipient(KeyEvent event) {
         
     }
@@ -154,13 +187,20 @@ public class messageController {
     
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
+        assert composeTab != null : "fx:id=\"composeTab\" was not injected: check your FXML file 'messageView.fxml'.";
         assert recipientUser != null : "fx:id=\"recipientUser\" was not injected: check your FXML file 'messageView.fxml'.";
         assert messageBody != null : "fx:id=\"messageBody\" was not injected: check your FXML file 'messageView.fxml'.";
         assert delete != null : "fx:id=\"delete\" was not injected: check your FXML file 'messageView.fxml'.";
         assert sendButton != null : "fx:id=\"sendButton\" was not injected: check your FXML file 'messageView.fxml'.";
         assert back != null : "fx:id=\"back\" was not injected: check your FXML file 'messageView.fxml'.";
-        assert messagePane != null : "fx:id=\"messagePane\" was not injected: check your FXML file 'messageView.fxml'.";
         assert messageTab != null : "fx:id=\"messageTab\" was not injected: check your FXML file 'messageView.fxml'.";
+        assert messageTable != null : "fx:id=\"messageTable\" was not injected: check your FXML file 'messageView.fxml'.";
+        assert fromColumn != null : "fx:id=\"fromColumn\" was not injected: check your FXML file 'messageView.fxml'.";
+        assert recievedColumn != null : "fx:id=\"recievedColumn\" was not injected: check your FXML file 'messageView.fxml'.";
+        assert clickedMessageBody != null : "fx:id=\"clickedMessageBody\" was not injected: check your FXML file 'messageView.fxml'.";
+        assert replyButton != null : "fx:id=\"replyButton\" was not injected: check your FXML file 'messageView.fxml'.";
+
+        
 
         manager = (EntityManager) Persistence.createEntityManagerFactory("CarfolioPU").createEntityManager();
         
