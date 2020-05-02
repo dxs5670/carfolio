@@ -133,6 +133,7 @@ public class messageController {
 
     }
 
+    // Go back to the last screen
     @FXML
     void toPrevious(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

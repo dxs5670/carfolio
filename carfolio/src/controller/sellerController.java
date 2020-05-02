@@ -198,6 +198,7 @@ public class sellerController {
         Scene userPortfolioUI = new Scene(userPortfolio);
         userPortfolioController upController = userPortfolioLoader.getController();
         upController.setActiveUser(activeUser);
+        upController.setPreviousScene(((Node) event.getSource()).getScene());
         Stage userPortfolioWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
         userPortfolioWindow.setScene(userPortfolioUI);
         userPortfolioWindow.show();
