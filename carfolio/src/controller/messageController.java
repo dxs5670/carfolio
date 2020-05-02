@@ -172,6 +172,7 @@ public class messageController {
         activeUser = user;
     }
     
+    // Show active user's messages
     public void retrieveMessages() {
         
         Query query = manager.createNamedQuery("Message.findByRecipient");
@@ -181,15 +182,17 @@ public class messageController {
         data.forEach((d) -> {
             odata.add(d);
         });
-      
+    
         from.setCellValueFactory(new PropertyValueFactory<>("Sender"));
         recieved.setCellValueFactory(new PropertyValueFactory<>("TimeSent"));
         messageTable.setItems(odata);
         messageFromRow();
         
         
+        
     }
     
+    // Display message body on double click
     public void messageFromRow() {
         messageTable.setRowFactory( tv -> {
             TableRow<Message> row = new TableRow<>();

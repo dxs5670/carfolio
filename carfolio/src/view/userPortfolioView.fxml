@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="652.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.userPortfolioController">
    <children>
-      <TableView layoutX="14.0" layoutY="32.0" prefHeight="356.0" prefWidth="621.0">
+      <TableView fx:id="carTable" layoutX="14.0" layoutY="32.0" prefHeight="356.0" prefWidth="621.0">
         <columns>
           <TableColumn fx:id="carYear" prefWidth="54.4000244140625" text="Year" />
           <TableColumn fx:id="carMake" prefWidth="92.7999496459961" text="Make" />
@@ -16,10 +16,9 @@
             <TableColumn fx:id="carSafety" prefWidth="50.4000244140625" text="Saftey Rating" />
             <TableColumn fx:id="carMiles" prefWidth="82.39996337890625" text="Miles" />
             <TableColumn fx:id="carListPrice" prefWidth="96.00009155273438" text="List Price" />
-            <TableColumn fx:id="carBestOffer" prefWidth="98.39996337890625" text="Best Offer" />
         </columns>
       </TableView>
-      <Button layoutX="24.0" layoutY="3.0" mnemonicParsing="false" text="Back" />
+      <Button fx:id="backButton" layoutX="24.0" layoutY="3.0" mnemonicParsing="false" onAction="#toPrevious" text="Back" />
       <Button layoutX="534.0" layoutY="3.0" mnemonicParsing="false" text="Save Changes" />
    </children>
 </AnchorPane>

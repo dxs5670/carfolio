@@ -28,7 +28,8 @@ import javax.persistence.Table;
     @NamedQuery(name = "Car.findByStyle", query = "SELECT c FROM Car c WHERE c.style = :style"),
     @NamedQuery(name = "Car.findBySafteyRating", query = "SELECT c FROM Car c WHERE c.safteyRating = :safteyRating"),
     @NamedQuery(name = "Car.findByYear", query = "SELECT c FROM Car c WHERE c.year = :year"),
-    @NamedQuery(name = "Car.findByMiles", query = "SELECT c FROM Car c WHERE c.miles = :miles")})
+    @NamedQuery(name = "Car.findByMiles", query = "SELECT c FROM Car c WHERE c.miles = :miles"),
+    @NamedQuery(name = "Car.findBySellerUsername", query = "SELECT c FROM Car c WHERE c.sellerUsername = :sellerUsername")})
 public class Car implements Serializable {
 
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation

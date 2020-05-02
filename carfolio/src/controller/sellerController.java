@@ -201,6 +201,7 @@ public class sellerController {
         Stage userPortfolioWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
         userPortfolioWindow.setScene(userPortfolioUI);
         userPortfolioWindow.show();
+        upController.completeTable();
     }
     
     public void setActiveUser(User fromLogin) {
