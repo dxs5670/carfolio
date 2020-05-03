@@ -12,8 +12,8 @@
   <items>
     <AnchorPane fx:id="searchPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <Button fx:id="searchButton" layoutX="5.0" layoutY="67.0" mnemonicParsing="false" onAction="#initializeSearch" text="Search" />
-            <MenuButton fx:id="sortByMenu" layoutX="61.0" layoutY="67.0" mnemonicParsing="false" onAction="#openSortMenu" prefHeight="17.0" prefWidth="78.0" text="Sort By:">
+            <Button fx:id="searchButton" layoutX="5.0" layoutY="82.0" mnemonicParsing="false" onAction="#initializeSearch" text="Search" />
+            <MenuButton fx:id="sortByMenu" layoutX="61.0" layoutY="82.0" mnemonicParsing="false" onAction="#openSortMenu" prefHeight="17.0" prefWidth="78.0" text="Sort By:">
               <items>
                 <MenuItem fx:id="priceSortMenuItem" mnemonicParsing="false" onAction="#togglePriceSort" text="Price" />
                   <MenuItem fx:id="mileageSortMenuItem" mnemonicParsing="false" onAction="#toggleMileageSort" text="Mileage" />
@@ -21,9 +21,9 @@
                 <MenuItem fx:id="safetySortMenuItem" mnemonicParsing="false" onAction="#toggleSafetySort" text="Safety Rating" />
               </items>
             </MenuButton>
-            <TextField fx:id="searchField" layoutX="7.0" layoutY="33.0" onAction="#setSearchField" prefHeight="26.0" prefWidth="130.0" />
-            <Label fx:id="searchTermLabel" layoutX="8.0" layoutY="13.0" text="Search Term" />
-            <Label fx:id="filterTitleLabel" layoutX="7.0" layoutY="109.0" text="Filter Results by:" />
+            <TextField fx:id="searchField" layoutX="7.0" layoutY="48.0" onAction="#setSearchField" prefHeight="26.0" prefWidth="130.0" />
+            <Label fx:id="searchTermLabel" layoutX="8.0" layoutY="28.0" text="Search Term" />
+            <Label fx:id="filterTitleLabel" layoutX="7.0" layoutY="119.0" text="Filter Results by:" />
             <TextField fx:id="maxPriceField" layoutX="81.0" layoutY="162.0" onAction="#setMaxPrice" prefHeight="26.0" prefWidth="43.0" />
             <TextField fx:id="minPriceField" layoutX="20.0" layoutY="162.0" onAction="#setMinPrice" prefHeight="26.0" prefWidth="43.0" />
             <TextField fx:id="minMilesField" layoutX="19.0" layoutY="218.0" onAction="#setMinMiles" prefHeight="26.0" prefWidth="43.0" />
@@ -43,6 +43,7 @@
             <Label fx:id="lastButtonLabel" layoutX="11.0" layoutY="379.0" text="Last Page" />
             <Label fx:id="nextButtonLabel" layoutX="82.0" layoutY="380.0" text="Next Page" />
             <Label fx:id="pageNumber" layoutX="67.0" layoutY="357.0" text="1" />
+            <Button fx:id="backButton" layoutX="10.0" layoutY="2.0" mnemonicParsing="false" onAction="#toPrevious" text="Back" />
          </children></AnchorPane>
       <SplitPane fx:id="carListPane" dividerPositions="0.25, 0.5, 0.75" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
         <items>

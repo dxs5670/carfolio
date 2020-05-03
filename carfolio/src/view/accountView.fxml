@@ -39,6 +39,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
+                  <Button fx:id="backButton" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#toPrevious" text="Back" />
                </children></AnchorPane>
       </content>
     </Tab>
