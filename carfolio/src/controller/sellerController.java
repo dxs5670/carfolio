@@ -1,6 +1,11 @@
-/**
- * Sample Skeleton for 'sellerView.fxml' Controller Class
- */
+/*
+    This is the sellerView controller, responsible for directign to the 
+    various se;;er-eneabled pages. This includes: Account, Messages and
+    portfolios.
+
+    It serves as a communication layer between other views and controllers.
+
+*/
 
 package controller;
 
@@ -35,102 +40,76 @@ public class sellerController {
     private URL location;
 
     @FXML // fx:id="carPicture"
-    private ImageView carPicture; // Value injected by FXMLLoader
+    private ImageView carPicture; 
 
     @FXML // fx:id="carfolioTitle"
-    private Label carfolioTitle; // Value injected by FXMLLoader
+    private Label carfolioTitle; 
 
     @FXML // fx:id="sellCarLabel"
-    private Label sellCarLabel; // Value injected by FXMLLoader
+    private Label sellCarLabel; 
 
     @FXML // fx:id="initializePortfolioButton"
-    private Button initializePortfolioButton; // Value injected by FXMLLoader
+    private Button initializePortfolioButton; 
 
     @FXML // fx:id="makeField"
-    private TextField makeField; // Value injected by FXMLLoader
+    private TextField makeField; 
 
     @FXML // fx:id="modelField"
-    private TextField modelField; // Value injected by FXMLLoader
+    private TextField modelField; 
 
     @FXML // fx:id="vinField"
-    private TextField vinField; // Value injected by FXMLLoader
+    private TextField vinField; 
 
     @FXML // fx:id="milageField"
-    private TextField milageField; // Value injected by FXMLLoader
+    private TextField milageField; 
 
     @FXML // fx:id="makeLabel"
-    private Label makeLabel; // Value injected by FXMLLoader
+    private Label makeLabel; 
 
     @FXML // fx:id="modelLabel"
-    private Label modelLabel; // Value injected by FXMLLoader
+    private Label modelLabel; 
 
     @FXML // fx:id="vinLabel"
-    private Label vinLabel; // Value injected by FXMLLoader
+    private Label vinLabel; 
 
     @FXML // fx:id="mileageLabel"
-    private Label mileageLabel; // Value injected by FXMLLoader
+    private Label mileageLabel; 
 
     @FXML // fx:id="accountButton"
-    private Button accountButton; // Value injected by FXMLLoader
+    private Button accountButton; 
 
     @FXML // fx:id="portfolioButton"
-    private Button portfolioButton; // Value injected by FXMLLoader
+    private Button portfolioButton; 
 
     @FXML // fx:id="messagesButton"
-    private Button messagesButton; // Value injected by FXMLLoader
+    private Button messagesButton; 
 
     @FXML // fx:id="greetingName"
-    private Label greetingName; // Value injected by FXMLLoader
+    private Label greetingName; 
 
     @FXML // fx:id="styleField"
-    private TextField styleField; // Value injected by FXMLLoader
+    private TextField styleField; 
 
     @FXML // fx:id="yearField"
-    private TextField yearField; // Value injected by FXMLLoader
+    private TextField yearField; 
     
     @FXML
     private TextField priceField;
     
+    
+    // Used for finding the current user from username given by loginController    
+    private EntityManager manager;
+    // The logged-in user
     private User activeUser;
-    private Car createdCar;
+    // Car made form attributes
+    private Car createdCar = new Car();
     
-    EntityManager manager;
-
-    
-    @FXML // Add a new Car entity to the DB
-    void initializePortfolio(ActionEvent event) {
-        this.createdCar = new Car();
-        // TODO: add error checking
-        createdCar.setMake(makeField.getText());
-        createdCar.setModel(modelField.getText());
-        createdCar.setStyle(styleField.getText());
-        createdCar.setYear(Short.parseShort(yearField.getText()));
-        createdCar.setVin(vinField.getText());
-        createdCar.setMiles(Integer.parseInt(milageField.getText()));
-        createdCar.setPrice(Integer.parseInt(priceField.getText()));
-        createdCar.setSellerUsername(activeUser.getUsername());
-        
-        manager.getTransaction().begin();
-        manager.persist(createdCar);
-        manager.getTransaction().commit();
-        
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Message");
-        alert.setContentText("Your Car has been created!");
-        alert.showAndWait();
-        // Clear fields
-        modelField.setText("");
-        makeField.setText("");
-        styleField.setText("");
-        yearField.setText("");
-        vinField.setText("");
-        milageField.setText("");
-        priceField.setText("");
-    }
-
+    /* Opens the accountView in the current window when accountButton is 
+    clicked. Also passes the activeUser to the accountController and sets the 
+    previous scene as the curent one (sellerView)*/      
     @FXML
     void openAccount(ActionEvent event) throws IOException {
-        //opens in new window
+
         FXMLLoader accountLoader = new FXMLLoader(getClass().getResource("/view/accountView.fxml"));
         Parent account = accountLoader.load();
         Scene accountUI = new Scene(account);
@@ -142,10 +121,12 @@ public class sellerController {
         window.show();
     }
 
+    /* Opens the messageView in the current window when messagesButton is 
+    clicked. Also passes the activeUser to the messageController and sets 
+    the previous scene as the curent one (sellerView)*/     
     @FXML
     void openMessages(ActionEvent event) throws IOException {
         
-        //opens in same window
         FXMLLoader messageLoader = new FXMLLoader(getClass().getResource("/view/messageView.fxml"));
         Parent message = messageLoader.load();
         Scene messageUI = new Scene(message);
@@ -157,43 +138,12 @@ public class sellerController {
         messageWindow.show();
     }
     
-    @FXML
-    void setMake(KeyEvent event) {
-
-    }
-
-    @FXML
-    void setMileage(KeyEvent event) {
-
-    }
-
-    @FXML
-    void setModel(KeyEvent event) {
-
-    }
-
-    @FXML
-    void setStyle(KeyEvent event) {
-
-    }
-
-    @FXML
-    void setVin(KeyEvent event) {
-
-    }
-
-    @FXML
-    void setYear(KeyEvent event) {
-
-    }
-    
-    @FXML
-    void setPrice(KeyEvent event) {
-
-    }
-
+    /* Opens the userPortfolioView in the current window when portfolioButton 
+    is clicked. Also passes the activeUser to the userPortfolioController and
+    sets the previous scene as the curent one (sellerView)*/    
     @FXML
     void viewUserPortfolios(ActionEvent event) throws IOException {
+        
         FXMLLoader userPortfolioLoader = new FXMLLoader(getClass().getResource("/view/userPortfolioView.fxml"));
         Parent userPortfolio = userPortfolioLoader.load();
         Scene userPortfolioUI = new Scene(userPortfolio);
@@ -205,18 +155,94 @@ public class sellerController {
         userPortfolioWindow.setScene(userPortfolioUI);
         userPortfolioWindow.show();
         
+    }    
+    
+    // Sets the make of createdCar to the text in makeField when a key is pressed            
+    @FXML
+    void setMake(KeyEvent event) {
+        createdCar.setMake(makeField.getText());
+    }
+
+    // Sets the model of createdCar to the text in modelField when a key is pressed    
+    @FXML
+    void setModel(KeyEvent event) {
+        createdCar.setMake(makeField.getText());
     }
     
+    // Sets the year of createdCar to the text in yearField when a key is pressed        
+    @FXML
+    void setYear(KeyEvent event) {
+        createdCar.setYear(Short.parseShort(yearField.getText()));
+    }
+
+    // Sets the style of createdCar to the text in styleField when a key is pressed    
+    @FXML
+    void setStyle(KeyEvent event) {
+        createdCar.setStyle(styleField.getText());
+    }
+    
+    // Sets the vin of createdCar to the text in vinField when a key is pressed    
+    @FXML
+    void setVin(KeyEvent event) {
+        createdCar.setVin(vinField.getText());
+    }
+    
+    // Sets the miles of createdCar to the text in mileageField when a key is pressed    
+    @FXML
+    void setMileage(KeyEvent event) {
+        createdCar.setMiles(Integer.parseInt(milageField.getText()));
+    }
+    
+    // Sets the price of createdCar to the text in priceField when a key is pressed    
+    @FXML
+    void setPrice(KeyEvent event) {
+        createdCar.setPrice(Integer.parseInt(priceField.getText()));
+    }
+    
+    // Use EntityManager manager to send the car to the database 
+    @FXML 
+    void initializePortfolio(ActionEvent event) {
+        
+        manager.getTransaction().begin();
+        manager.persist(createdCar);
+        manager.getTransaction().commit();
+        
+        // Create an alert to notify users that the car was created
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Message");
+        alert.setContentText("Your Car has been created!");
+        alert.showAndWait();
+        
+        // Clear fields
+        clearTextFields();
+    }
+
+    // Function used for clearing all fields when a car is created successfully
+    public void clearTextFields() {
+        modelField.setText("");
+        makeField.setText("");
+        styleField.setText("");
+        yearField.setText("");
+        vinField.setText("");
+        milageField.setText("");
+        priceField.setText("");
+    }
+
+    
+    
+    // Function used for setting the User activeUser when directed to this page    
     public void setActiveUser(User fromLogin) {
         String queryUsername = fromLogin.getUsername();
         activeUser = manager.find(User.class, queryUsername);
     }
     
-    //Username appears in top right
+    // Function used for setting the label Greeting as text specified in login
     public void setGreeting() {
         this.greetingName.setText("Hello, " + activeUser.getUsername());
     }
 
+    
+    
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert carPicture != null : "fx:id=\"carPicture\" was not injected: check your FXML file 'sellerView.fxml'.";

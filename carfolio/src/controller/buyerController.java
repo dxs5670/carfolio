@@ -1,5 +1,5 @@
 /*
-    This is the buyerView controller, responsible for directign to the 
+    This is the buyerView controller, responsible for directing to the 
     various buyer-eneabled pages. This includes: Account, Messages and Search.
 
     It serves as a communication layer between other views and controllers.

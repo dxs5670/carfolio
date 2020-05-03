@@ -92,6 +92,15 @@ public class mainController {
 
     @FXML // fx:id="milageField"
     private TextField mileageField;
+    
+    @FXML // fx:id="styleField"
+    private TextField styleField; 
+
+    @FXML // fx:id="yearField"
+    private TextField yearField; 
+    
+    @FXML
+    private TextField priceField;    
 
     @FXML // fx:id="makeLabel"
     private Label makeLabel;
@@ -275,6 +284,18 @@ public class mainController {
         sellCar.setMake(makeField.getText());
     }
 
+    // Sets the year of sellCar to the text in yearField when a key is pressed        
+    @FXML
+    void setYear(KeyEvent event) {
+        sellCar.setYear(Short.parseShort(yearField.getText()));
+    }
+
+    // Sets the style of sellCar to the text in styleField when a key is pressed    
+    @FXML
+    void setStyle(KeyEvent event) {
+        sellCar.setStyle(styleField.getText());
+    }
+    
     // Sets the vin of sellCar to the text in vinField when a key is pressed
     @FXML
     void setVin(KeyEvent event) {
@@ -286,6 +307,12 @@ public class mainController {
     void setMileage(KeyEvent event) {
         sellCar.setMiles(Integer.valueOf(mileageField.getText()));
     }
+    
+    // Sets the price of sellCar to the text in priceField when a key is pressed    
+    @FXML
+    void setPrice(KeyEvent event) {
+        sellCar.setPrice(Integer.parseInt(priceField.getText()));
+    }    
 
 
 
@@ -322,6 +349,9 @@ public class mainController {
         assert modelField != null : "fx:id=\"modelField\" was not injected: check your FXML file 'mainView.fxml'.";
         assert vinField != null : "fx:id=\"vinField\" was not injected: check your FXML file 'mainView.fxml'.";
         assert mileageField != null : "fx:id=\"milageField\" was not injected: check your FXML file 'mainView.fxml'.";
+        assert styleField != null : "fx:id=\"styleField\" was not injected: check your FXML file 'sellerView.fxml'.";
+        assert yearField != null : "fx:id=\"yearField\" was not injected: check your FXML file 'sellerView.fxml'.";
+        assert priceField != null : "fx:id=\"priceField\" was not injected: check your FXML file 'sellerView.fxml'.";        
         assert makeLabel != null : "fx:id=\"makeLabel\" was not injected: check your FXML file 'mainView.fxml'.";
         assert modelLabel != null : "fx:id=\"modelLabel\" was not injected: check your FXML file 'mainView.fxml'.";
         assert vinLabel != null : "fx:id=\"vinLabel\" was not injected: check your FXML file 'mainView.fxml'.";
