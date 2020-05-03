@@ -22,11 +22,11 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <TextField fx:id="searchTermField" layoutX="163.0" layoutY="255.0" onAction="#setSearch" prefHeight="26.0" prefWidth="175.0" promptText="Enter Search Term" />
+      <TextField fx:id="searchTermField" layoutX="163.0" layoutY="255.0" onKeyTyped="#setSearch" prefHeight="26.0" prefWidth="175.0" promptText="Enter Search Term" />
       <Button fx:id="advancedSearchButton" layoutX="354.0" layoutY="300.0" mnemonicParsing="false" onAction="#openAdvancedSearch" text="Advanced Search" textFill="#053361" />
       <Button fx:id="searchButton" layoutX="222.0" layoutY="300.0" mnemonicParsing="false" onAction="#beginSearchBy" text="Search" textFill="#053361" />
-      <Button fx:id="accountButton" layoutX="499.0" layoutY="39.0" mnemonicParsing="false" onAction="#openAccount" prefHeight="26.0" prefWidth="67.0" text="Account" textFill="#053361" />
-      <Button fx:id="messagesButton" layoutX="499.0" layoutY="68.0" mnemonicParsing="false" onAction="#openMessages" text="Messages" textFill="#053361" />
+      <Button fx:id="accountButton" layoutX="499.0" layoutY="44.0" mnemonicParsing="false" onAction="#openAccount" prefHeight="26.0" prefWidth="67.0" text="Account" textFill="#053361" />
+      <Button fx:id="messagesButton" layoutX="499.0" layoutY="73.0" mnemonicParsing="false" onAction="#openMessages" text="Messages" textFill="#053361" />
       <Label fx:id="greetingName" layoutX="459.0" layoutY="17.0" text="Hello, ">
          <font>
             <Font size="14.0" />
