@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -10,7 +9,6 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -71,12 +69,13 @@ public class userPortfolioController {
     
     @FXML
     private Button offerButton;
-
+    
+    
     private User activeUser;
     private EntityManager manager;
     private Scene previousScene;
     
-    // When Respond to Offers is clicked
+    // Open messaging when "Respond to Offers" is clicked
     @FXML
     void openMessages(ActionEvent event) {
         try {
@@ -89,7 +88,6 @@ public class userPortfolioController {
             Stage stage = new Stage();
             stage.setScene(messageUI);
             stage.show();
-            mController.retrieveMessages();
             } catch (IOException ex) {
                 Logger.getLogger(userPortfolioController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -104,11 +102,13 @@ public class userPortfolioController {
         }
     }
     
+    // Called from sellerController
     public void setPreviousScene(Scene scene) {
         previousScene = scene;
         backButton.setDisable(false);
     } 
     
+    // Called from sellerController
     public void setActiveUser(User user) {
         String queryUsername = user.getUsername();
         activeUser = manager.find(User.class, queryUsername);
@@ -117,7 +117,6 @@ public class userPortfolioController {
     // Show all the cars belonging to the current seller, as well as any offers on them
     public void completeTable() {
         Query query = manager.createNamedQuery("Car.findBySellerUsername");
-        System.out.println(activeUser.getUsername());
         query.setParameter("sellerUsername", activeUser.getUsername());
         
         // Fill Car table
@@ -127,13 +126,16 @@ public class userPortfolioController {
             odata.add(c);
         }
 
+        // In order to edit these values in place, we would probably have to use something
+        // other than an FX table
         carYear.setCellValueFactory(new PropertyValueFactory<>("year"));
         carMake.setCellValueFactory(new PropertyValueFactory<>("make"));
         carModel.setCellValueFactory(new PropertyValueFactory<>("model"));
         carStyle.setCellValueFactory(new PropertyValueFactory<>("style"));
-        carSafety.setCellValueFactory(new PropertyValueFactory<>("safetyRating"));
+        carSafety.setCellValueFactory(new PropertyValueFactory<>("safteyRating"));
         carMiles.setCellValueFactory(new PropertyValueFactory<>("miles"));
         carListPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        
         carTable.setItems(odata);
         
         // Add offers in separate table
@@ -154,8 +156,10 @@ public class userPortfolioController {
             for (Message m: odata2){
                 if (m.getMessageBody().contains(c.getVin())) {
                     match = true;
-                    odata3.add(m);  // Could cut this down with string.split()
-                    break; // Only using 1st offer in message table currently
+                    String[] temp = m.getMessageBody().split("for: "); // Cut out everything except offer $amount
+                    m.setMessageBody(temp[1]);
+                    odata3.add(m);
+                    break; // Only using 1st offer in message DB table
                 } 
             }
             if (match == false) {
@@ -165,9 +169,9 @@ public class userPortfolioController {
         
         carOffer.setCellValueFactory(new PropertyValueFactory<>("messageBody"));
         offerTable.setItems(odata3);
-           
     }
     
+   
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert carYear != null : "fx:id=\"carYear\" was not injected: check your FXML file 'userPortfolioView.fxml'.";

@@ -5,24 +5,23 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.userPortfolioController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.userPortfolioController">
    <children>
-      <TableView fx:id="carTable" layoutX="14.0" layoutY="32.0" prefHeight="356.0" prefWidth="534.0">
+      <TableView fx:id="carTable" editable="true" layoutX="14.0" layoutY="32.0" prefHeight="356.0" prefWidth="534.0">
         <columns>
           <TableColumn fx:id="carYear" prefWidth="54.4000244140625" sortable="false" text="Year" />
           <TableColumn fx:id="carMake" prefWidth="92.7999496459961" sortable="false" text="Make" />
             <TableColumn fx:id="carModel" prefWidth="79.20001220703125" sortable="false" text="Model" />
             <TableColumn fx:id="carStyle" prefWidth="75.0" sortable="false" text="Style" />
-            <TableColumn fx:id="carSafety" prefWidth="60.0" sortable="false" text="Saftey Rating" />
-            <TableColumn fx:id="carMiles" prefWidth="74.0" sortable="false" text="Miles" />
+            <TableColumn fx:id="carSafety" prefWidth="81.0" sortable="false" text="Saftey Rating" />
+            <TableColumn fx:id="carMiles" prefWidth="53.0" sortable="false" text="Miles" />
             <TableColumn fx:id="carListPrice" prefWidth="96.00009155273438" sortable="false" text="List Price" />
         </columns>
       </TableView>
-      <Button fx:id="backButton" layoutX="24.0" layoutY="3.0" mnemonicParsing="false" onAction="#toPrevious" text="Back" />
-      <Button layoutX="458.0" layoutY="3.0" mnemonicParsing="false" text="Save Changes" />
-      <TableView fx:id="offerTable" layoutX="551.0" layoutY="32.0" prefHeight="356.0" prefWidth="485.0">
+      <Button fx:id="backButton" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" onAction="#toPrevious" text="Back" />
+      <TableView fx:id="offerTable" layoutX="551.0" layoutY="32.0" prefHeight="356.0" prefWidth="113.0">
         <columns>
-          <TableColumn fx:id="carOffer" prefWidth="484.0" sortable="false" text="Offer" />
+          <TableColumn fx:id="carOffer" prefWidth="113.0" sortable="false" text="Offers" />
         </columns>
       </TableView>
       <Button fx:id="offerButton" layoutX="551.0" layoutY="3.0" mnemonicParsing="false" onAction="#openMessages" text="Respond to Offers" />
