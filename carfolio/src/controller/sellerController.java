@@ -202,6 +202,8 @@ public class sellerController {
     // Use EntityManager manager to send the car to the database 
     @FXML 
     void initializePortfolio(ActionEvent event) {
+        // Set the sellerUsername attribute to the activeUser username 
+        createdCar.setSellerUsername(activeUser.getUsername());
         
         manager.getTransaction().begin();
         manager.persist(createdCar);

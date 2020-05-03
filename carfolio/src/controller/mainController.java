@@ -20,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -265,12 +266,6 @@ public class mainController {
     void beginSearch(ActionEvent event) {
 
     }
-
-    // TODO: Create portfolio function
-    @FXML
-    void initializePortfolio(ActionEvent event) {
-        
-    }
     
     // Sets the make of sellCar to the text in makeField when a key is pressed            
     @FXML
@@ -313,6 +308,37 @@ public class mainController {
     void setPrice(KeyEvent event) {
         sellCar.setPrice(Integer.parseInt(priceField.getText()));
     }    
+    
+    // TODO: Create portfolio function
+    @FXML
+    void initializePortfolio(ActionEvent event) {
+        // Set the sellerUsername attribute to the activeUser username 
+        sellCar.setSellerUsername(activeUser.getUsername());
+        
+        em.getTransaction().begin();
+        em.persist(sellCar);
+        em.getTransaction().commit();
+        
+        // Create an alert to notify users that the car was created
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Message");
+        alert.setContentText("Your Car has been created!");
+        alert.showAndWait();
+        
+        // Clear fields
+        clearTextFields();
+    }
+    
+    // Function used for clearing all fields when a car is created successfully
+    public void clearTextFields() {
+        modelField.setText("");
+        makeField.setText("");
+        styleField.setText("");
+        yearField.setText("");
+        vinField.setText("");
+        mileageField.setText("");
+        priceField.setText("");
+    }
 
 
 
