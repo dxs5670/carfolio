@@ -1,5 +1,9 @@
-/**
- * Sample Skeleton for 'messageView.fxml' Controller Class
+/*
+    This class supports messageView, which is accessable by all types of accounts. 
+    It's a tabbed interface that allows for composing messages to other users of 
+    the application, as well as viewing those addressed to the current one.
+    The recipient box will auto-fill with names of users in the database. 
+    
  */
 
 package controller;
@@ -32,7 +36,6 @@ import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import model.Car;
 import model.Message;
 import model.User;
 import org.controlsfx.control.textfield.TextFields;
@@ -44,8 +47,6 @@ public class messageController {
 
     @FXML // URL location of the FXML file that was given to the FXMLLoader
     private URL location;
-
-
 
     @FXML // fx:id="recipientUser"
     private TextField recipientUser; // Value injected by FXMLLoader

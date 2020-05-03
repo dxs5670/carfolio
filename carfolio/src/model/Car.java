@@ -73,8 +73,6 @@ public class Car implements Serializable {
     }
 
     
-    
-    
     // Get and set the VIN number attribute of a car 
     public String getVin() {
         return vin;
@@ -188,8 +186,5 @@ public class Car implements Serializable {
     public String toString() {
         return "model.Car_1[ vin=" + vin + " ]";
     }
-
-
-
-    
+  
 }

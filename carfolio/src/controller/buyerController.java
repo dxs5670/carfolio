@@ -192,13 +192,13 @@ public class buyerController {
     }
 
     
-    
+    // 
     public void setActiveUser(User fromLogin) {
         String queryUsername = fromLogin.getUsername();
         activeUser = em.find(User.class, queryUsername);
     }
     
-    //Username appears in top right
+    // Username appears in top right
     public void setGreeting() {
         this.greetingName.setText("Hello, " + activeUser.getUsername());
     }
