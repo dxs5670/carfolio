@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="380.0" prefWidth="656.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="464.0" prefWidth="656.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainController">
    <children>
       <ImageView fx:id="carPicture" fitHeight="114.0" fitWidth="218.0" layoutX="224.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -22,7 +22,7 @@
       <Button fx:id="portfolioButton" layoutX="549.0" layoutY="115.0" mnemonicParsing="false" onAction="#openPortfolios" prefHeight="26.0" prefWidth="68.0" text="Portfolios" textFill="#053361" />
       <Button fx:id="messagesButton" layoutX="549.0" layoutY="87.0" mnemonicParsing="false" onAction="#openMessages" text="Messages" textFill="#053361" />
       <Separator fx:id="horizontalSeparator" layoutX="3.0" layoutY="182.0" prefHeight="0.0" prefWidth="650.0" />
-      <Label fx:id="searchCarLabel" layoutX="45.0" layoutY="212.0" text="Search for Cars" textFill="#053361">
+      <Label fx:id="searchCarLabel" layoutX="96.0" layoutY="200.0" text="Search for Cars" textFill="#053361">
          <font>
             <Font size="17.0" />
          </font>
@@ -32,20 +32,20 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Separator fx:id="vSeparator" layoutX="316.0" layoutY="182.0" orientation="VERTICAL" prefHeight="198.0" prefWidth="22.0" />
-      <TextField fx:id="searchTermField" layoutX="14.0" layoutY="255.0" onKeyTyped="#setSearch" prefHeight="26.0" prefWidth="175.0" promptText="Enter Search Term" />
+      <Separator fx:id="vSeparator" layoutX="316.0" layoutY="182.0" orientation="VERTICAL" prefHeight="282.0" prefWidth="22.0" />
+      <TextField fx:id="searchTermField" layoutX="67.0" layoutY="254.0" onKeyTyped="#setSearch" prefHeight="26.0" prefWidth="175.0" promptText="Enter Search Term" />
       <Button fx:id="initializePortfolioButton" layoutX="376.0" layoutY="200.0" mnemonicParsing="false" onAction="#initializePortfolio" text="Build Portfolio" textFill="#053361" />
-      <Button fx:id="advancedSearchButton" layoutX="205.0" layoutY="300.0" mnemonicParsing="false" onAction="#openAdvancedSearch" text="Advanced Search" textFill="#053361" />
+      <Button fx:id="advancedSearchButton" layoutX="96.0" layoutY="348.0" mnemonicParsing="false" onAction="#openAdvancedSearch" text="Advanced Search" textFill="#053361" />
       <Button fx:id="launchScraperButton" layoutX="58.0" layoutY="87.0" mnemonicParsing="false" onAction="#openScraper" text="Launch Scraper" textFill="#053361" />
-      <Button fx:id="searchButton" layoutX="73.0" layoutY="300.0" mnemonicParsing="false" onAction="#beginSearch" text="Search" textFill="#053361" />
+      <Button fx:id="searchButton" layoutX="73.0" layoutY="303.0" mnemonicParsing="false" onAction="#beginSearch" text="Search" textFill="#053361" />
       <TextField fx:id="makeField" layoutX="468.0" layoutY="245.0" onKeyTyped="#setMake" promptText="Enter Make" />
-      <TextField fx:id="modelField" layoutX="468.0" layoutY="278.0" onKeyTyped="#setModel" promptText="Enter Model" />
-      <TextField fx:id="vinField" layoutX="468.0" layoutY="310.0" onKeyTyped="#setVin" promptText="Enter VIN" />
-      <TextField fx:id="mileageField" layoutX="468.0" layoutY="342.0" onKeyTyped="#setMileage" promptText="Enter Mileage" />
+      <TextField fx:id="modelField" layoutX="469.0" layoutY="277.0" onKeyTyped="#setModel" promptText="Enter Model" />
+      <TextField fx:id="vinField" layoutX="470.0" layoutY="371.0" onKeyTyped="#setVin" promptText="Enter VIN" />
+      <TextField fx:id="mileageField" layoutX="470.0" layoutY="401.0" onKeyTyped="#setMileage" promptText="Enter Mileage" />
       <Label fx:id="makeLabel" layoutX="401.0" layoutY="249.0" text="Make" textFill="#053361" />
       <Label fx:id="modelLabel" layoutX="398.0" layoutY="282.0" text="Model" textFill="#053361" />
-      <Label fx:id="vinLabel" layoutX="365.0" layoutY="314.0" text="VIN Number" textFill="#053361" />
-      <Label fx:id="mileageLabel" layoutX="348.0" layoutY="346.0" text="Current Mileage" textFill="#053361" />
+      <Label fx:id="vinLabel" layoutX="381.0" layoutY="375.0" text="VIN Number" textFill="#053361" />
+      <Label fx:id="mileageLabel" layoutX="372.0" layoutY="405.0" text="Current Mileage" textFill="#053361" />
       <Label fx:id="carfolioTitle" layoutX="264.0" layoutY="31.0" text="Carfolio" textFill="#053361">
          <font>
             <Font size="36.0" />
@@ -56,7 +56,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <MenuButton fx:id="searchByMenu" layoutX="209.0" layoutY="254.0" mnemonicParsing="false" text="Search by..." textFill="#053361">
+      <MenuButton fx:id="searchByMenu" layoutX="141.0" layoutY="303.0" mnemonicParsing="false" text="Search by..." textFill="#053361">
         <items>
           <MenuItem fx:id="searchMake" mnemonicParsing="false" onAction="#setMakeSearch" text="Make" />
           <MenuItem fx:id="searchModel" mnemonicParsing="false" onAction="#setModelSearch" text="Model" />
@@ -65,5 +65,11 @@
             <MenuItem fx:id="searchYear" mnemonicParsing="false" onAction="#setYearSearch" text="Year" />
         </items>
       </MenuButton>
+      <TextField fx:id="yearField" layoutX="469.0" layoutY="309.0" onKeyTyped="#setYear" promptText="Enter Year" />
+      <TextField fx:id="styleField" layoutX="470.0" layoutY="341.0" onKeyTyped="#setStyle" promptText="Enter Style" />
+      <Label layoutX="403.0" layoutY="314.0" text="Year" textFill="#053361" />
+      <Label layoutX="403.0" layoutY="345.0" text="Style" textFill="#053361" />
+      <TextField fx:id="priceField" layoutX="470.0" layoutY="431.0" onKeyTyped="#setPrice" promptText="Enter Desired Price" />
+      <Label layoutX="401.0" layoutY="435.0" text="Price" textFill="#053361" />
    </children>
 </AnchorPane>
