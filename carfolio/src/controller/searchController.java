@@ -1,6 +1,7 @@
-/**
- * Sample Skeleton for 'searchView.fxml' Controller Class
- */
+/*
+
+
+*/
 
 package controller;
 
@@ -29,9 +30,9 @@ import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -39,9 +40,6 @@ import javax.persistence.Query;
 import model.Car;
 import model.Message;
 import model.User;
-
-
-
 
 public class searchController {
 
@@ -52,324 +50,370 @@ public class searchController {
     private URL location;
 
     @FXML // fx:id="advancedSearchPane"
-    private SplitPane advancedSearchPane; // Value injected by FXMLLoader
+    private SplitPane advancedSearchPane; 
 
     @FXML // fx:id="searchPane"
-    private AnchorPane searchPane; // Value injected by FXMLLoader
+    private AnchorPane searchPane; 
 
     @FXML // fx:id="searchButton"
-    private Button searchButton; // Value injected by FXMLLoader
+    private Button searchButton; 
 
     @FXML // fx:id="sortByMenu"
-    private MenuButton sortByMenu; // Value injected by FXMLLoader
+    private MenuButton sortByMenu; 
 
     @FXML // fx:id="priceSortMenuItem"
-    private MenuItem priceSortMenuItem; // Value injected by FXMLLoader
+    private MenuItem priceSortMenuItem; 
 
     @FXML // fx:id="mileageSortMenuItem"
-    private MenuItem mileageSortMenuItem; // Value injected by FXMLLoader
+    private MenuItem mileageSortMenuItem; 
 
     @FXML // fx:id="distanceSortMenuItem"
-    private MenuItem yearSortMenuItem; // Value injected by FXMLLoader
+    private MenuItem yearSortMenuItem; 
 
     @FXML // fx:id="bestValueSortMenuItem"
-    private MenuItem safetySortMenuItem; // Value injected by FXMLLoader
+    private MenuItem safetySortMenuItem; 
 
     @FXML // fx:id="searchField"
-    private TextField searchField; // Value injected by FXMLLoader
+    private TextField searchField; 
 
     @FXML // fx:id="searchTermLabel"
-    private Label searchTermLabel; // Value injected by FXMLLoader
+    private Label searchTermLabel; 
 
     @FXML // fx:id="filterTitleLabel"
-    private Label filterTitleLabel; // Value injected by FXMLLoader
+    private Label filterTitleLabel; 
 
     @FXML // fx:id="maxPriceField"
-    private TextField maxPriceField; // Value injected by FXMLLoader
+    private TextField maxPriceField; 
 
     @FXML // fx:id="minPriceField"
-    private TextField minPriceField; // Value injected by FXMLLoader
+    private TextField minPriceField; 
 
     @FXML // fx:id="minMilesField"
-    private TextField minMilesField; // Value injected by FXMLLoader
+    private TextField minMilesField; 
 
     @FXML // fx:id="maxMilesField"
-    private TextField maxMilesField; // Value injected by FXMLLoader
+    private TextField maxMilesField; 
 
     @FXML // fx:id="manufacturerMenu"
-    private MenuButton manufacturerMenu; // Value injected by FXMLLoader
-
+    private MenuButton manufacturerMenu; 
 
     @FXML // fx:id="modelMenu"
-    private MenuButton modelMenu; // Value injected by FXMLLoader
+    private MenuButton modelMenu; 
 
     @FXML // fx:id="filterPriceLabel"
-    private Label filterPriceLabel; // Value injected by FXMLLoader
+    private Label filterPriceLabel; 
 
     @FXML // fx:id="filterMilesLabel"
-    private Label filterMilesLabel; // Value injected by FXMLLoader
+    private Label filterMilesLabel; 
 
     @FXML // fx:id="greaterThanPrice"
-    private Label greaterThanPrice; // Value injected by FXMLLoader
+    private Label greaterThanPrice; 
 
     @FXML // fx:id="greaterThanMiles"
-    private Label greaterThanMiles; // Value injected by FXMLLoader
+    private Label greaterThanMiles; 
 
     @FXML // fx:id="lessThanPrice"
-    private Label lessThanPrice; // Value injected by FXMLLoader
+    private Label lessThanPrice; 
 
     @FXML // fx:id="lessThanMiles"
-    private Label lessThanMiles; // Value injected by FXMLLoader
+    private Label lessThanMiles; 
 
     @FXML // fx:id="andPrice"
-    private Label andPrice; // Value injected by FXMLLoader
+    private Label andPrice; 
 
     @FXML // fx:id="andMiles"
-    private Label andMiles; // Value injected by FXMLLoader
+    private Label andMiles; 
 
     @FXML // fx:id="nextPageButton"
-    private Button nextPageButton; // Value injected by FXMLLoader
+    private Button nextPageButton; 
 
     @FXML // fx:id="lastButton"
-    private Button lastButton; // Value injected by FXMLLoader
+    private Button lastButton; 
 
     @FXML // fx:id="lastButtonLabel"
-    private Label lastButtonLabel; // Value injected by FXMLLoader
+    private Label lastButtonLabel; 
 
     @FXML // fx:id="nextButtonLabel"
-    private Label nextButtonLabel; // Value injected by FXMLLoader
+    private Label nextButtonLabel; 
 
     @FXML // fx:id="pageNumber"
-    private Label pageNumber; // Value injected by FXMLLoader
+    private Label pageNumber; 
 
-    @FXML
+    @FXML // fx:id="backButton"
     private Button backButton;
     
     @FXML // fx:id="carListPane"
-    private SplitPane carListPane; // Value injected by FXMLLoader
+    private SplitPane carListPane; 
 
     @FXML // fx:id="car1Pane"
-    private AnchorPane car1Pane; // Value injected by FXMLLoader
+    private AnchorPane car1Pane; 
 
     @FXML // fx:id="moreDetailsButton1"
-    private Button moreDetailsButton1; // Value injected by FXMLLoader
+    private Button moreDetailsButton1; 
 
     @FXML // fx:id="moreDetailsLabel1"
-    private Label moreDetailsLabel1; // Value injected by FXMLLoader
+    private Label moreDetailsLabel1; 
 
     @FXML // fx:id="priceCar1"
-    private Label priceCar1; // Value injected by FXMLLoader
+    private Label priceCar1; 
 
     @FXML // fx:id="contactButton1"
-    private Button contactButton1; // Value injected by FXMLLoader
+    private Button contactButton1; 
 
     @FXML // fx:id="makeOfferButton1"
-    private Button makeOfferButton1; // Value injected by FXMLLoader
+    private Button makeOfferButton1; 
 
     @FXML // fx:id="makeCar1"
-    private Label makeCar1; // Value injected by FXMLLoader
+    private Label makeCar1; 
 
     @FXML // fx:id="modelCar1"
-    private Label modelCar1; // Value injected by FXMLLoader
+    private Label modelCar1; 
 
     @FXML // fx:id="yearCar1"
-    private Label yearCar1; // Value injected by FXMLLoader
+    private Label yearCar1; 
 
     @FXML // fx:id="milesCar1"
-    private Label milesCar1; // Value injected by FXMLLoader
+    private Label milesCar1; 
 
     @FXML // fx:id="car2Pane"
-    private AnchorPane car2Pane; // Value injected by FXMLLoader
+    private AnchorPane car2Pane; 
 
     @FXML // fx:id="moreDetailsButton2"
-    private Button moreDetailsButton2; // Value injected by FXMLLoader
+    private Button moreDetailsButton2; 
 
     @FXML // fx:id="moreDetailsLabe2"
-    private Label moreDetailsLabe2; // Value injected by FXMLLoader
+    private Label moreDetailsLabe2; 
 
     @FXML // fx:id="priceCar2"
-    private Label priceCar2; // Value injected by FXMLLoader
+    private Label priceCar2; 
 
     @FXML // fx:id="contactButtonCar2"
-    private Button contactButtonCar2; // Value injected by FXMLLoader
+    private Button contactButtonCar2; 
 
     @FXML // fx:id="makeOfferButton2"
-    private Button makeOfferButton2; // Value injected by FXMLLoader
+    private Button makeOfferButton2; 
 
     @FXML // fx:id="makeCar2"
-    private Label makeCar2; // Value injected by FXMLLoader
+    private Label makeCar2; 
 
     @FXML // fx:id="modelCar2"
-    private Label modelCar2; // Value injected by FXMLLoader
+    private Label modelCar2; 
 
     @FXML // fx:id="yearCar2"
-    private Label yearCar2; // Value injected by FXMLLoader
+    private Label yearCar2; 
 
     @FXML // fx:id="milesCar2"
-    private Label milesCar2; // Value injected by FXMLLoader
+    private Label milesCar2; 
 
     @FXML // fx:id="car3Pane"
-    private AnchorPane car3Pane; // Value injected by FXMLLoader
+    private AnchorPane car3Pane; 
 
     @FXML // fx:id="moreDetailsButton3"
-    private Button moreDetailsButton3; // Value injected by FXMLLoader
+    private Button moreDetailsButton3; 
 
     @FXML // fx:id="moreDetailsLabel3"
-    private Label moreDetailsLabel3; // Value injected by FXMLLoader
+    private Label moreDetailsLabel3; 
 
     @FXML // fx:id="priceCar3"
-    private Label priceCar3; // Value injected by FXMLLoader
+    private Label priceCar3; 
 
     @FXML // fx:id="contactButtonCar3"
-    private Button contactButtonCar3; // Value injected by FXMLLoader
+    private Button contactButtonCar3; 
 
     @FXML // fx:id="makeOfferButton3"
-    private Button makeOfferButton3; // Value injected by FXMLLoader
+    private Button makeOfferButton3; 
 
     @FXML // fx:id="makeCar3"
-    private Label makeCar3; // Value injected by FXMLLoader
+    private Label makeCar3; 
 
     @FXML // fx:id="modelCar3"
-    private Label modelCar3; // Value injected by FXMLLoader
+    private Label modelCar3; 
 
     @FXML // fx:id="yearCar3"
-    private Label yearCar3; // Value injected by FXMLLoader
+    private Label yearCar3; 
 
     @FXML // fx:id="milesCar3"
-    private Label milesCar3; // Value injected by FXMLLoader
+    private Label milesCar3; 
 
     @FXML // fx:id="car4Pane"
-    private AnchorPane car4Pane; // Value injected by FXMLLoader
+    private AnchorPane car4Pane; 
 
     @FXML // fx:id="moreDetailsButton4"
-    private Button moreDetailsButton4; // Value injected by FXMLLoader
+    private Button moreDetailsButton4; 
 
     @FXML // fx:id="moreDetailsLabel4"
-    private Label moreDetailsLabel4; // Value injected by FXMLLoader
+    private Label moreDetailsLabel4; 
 
     @FXML // fx:id="makeCar4"
-    private Label makeCar4; // Value injected by FXMLLoader
+    private Label makeCar4; 
 
     @FXML // fx:id="modelCar4"
-    private Label modelCar4; // Value injected by FXMLLoader
+    private Label modelCar4; 
 
     @FXML // fx:id="yearCar4"
-    private Label yearCar4; // Value injected by FXMLLoader
+    private Label yearCar4; 
 
     @FXML // fx:id="priceCar4"
-    private Label priceCar4; // Value injected by FXMLLoader
+    private Label priceCar4; 
 
     @FXML // fx:id="contactButtonCar4"
-    private Button contactButtonCar4; // Value injected by FXMLLoader
+    private Button contactButtonCar4; 
 
     @FXML // fx:id="makeOfferButton4"
-    private Button makeOfferButton4; // Value injected by FXMLLoader
+    private Button makeOfferButton4; 
 
     @FXML // fx:id="milesCar4"
-    private Label milesCar4; // Value injected by FXMLLoader
+    private Label milesCar4; 
     
+    
+    // Used for finding users, cars, and adding messages from and to the DB
     private EntityManager manager;
-    
+    // The car loaded into the first spot on the page
     private Car one = new Car(); 
+    // The car loaded into the second spot on the page
     private Car two = new Car();
+    // The car loaded into the third spot on the page
     private Car three = new Car();
+    // The car loaded into the fourth spot on the page    
     private Car four = new Car();
-    
+    // The default position of the firstCar in a list
     private int firstCar = 0;
+    // The default position of the last car in a list
     private int lastCar = 3;
-    
+    // The logged-in user
     private User activeUser;
+    // Declaration of the scene accessed previously
     private Scene previousScene;
+    // Declaration of a message created when an offer is made
     private Message createdMessage;
     
     
-    //Needed to determine who is sending offer/message
-    public void setActiveUser(User activeUser) {
-        this.activeUser = activeUser;
+    /*
+    When the Button backButton is clicked, toPrevious will set the previous
+    scene to the Scene previousScene
+    */    
+    @FXML
+    void toPrevious(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        if (previousScene != null){
+            stage.setScene(previousScene);
+        }
     }
     
-    //For messaging car owners 
+    /*
+    setPreviousScene ensures Button backButton is enabled and sets
+    the previousScene variable to the Scene parameter scene
+    */     
+    public void setPreviousScene(Scene scene) {
+        previousScene = scene;
+        backButton.setDisable(false);
+    } 
     
+    // Set the text of the search query to Field searchField
     @FXML
-    void contactCar1Owner(ActionEvent event) throws IOException {
-        contact(one);
-    }
+    void setSearchField(KeyEvent event) {
 
-    @FXML
-    void contactCar2Owner(ActionEvent event) throws IOException {
-        contact(two);
-    }
-
-    @FXML
-    void contactCar3Owner(ActionEvent event) throws IOException {
-        contact(three);
-    }
-
-    @FXML
-    void contactCar4Owner(ActionEvent event) throws IOException {
-        contact(four);
     }
     
-    
-    //For making an offer on a vehicle
-    @FXML
-    void makeOfferCar1(ActionEvent event) {
-        message(one);
-    }
-
-    @FXML
-    void makeOfferCar2(ActionEvent event) {
-        message(two);
-    }
-
-    @FXML
-    void makeOfferCar3(ActionEvent event) {
-        message(three);
-    }
-
-    @FXML
-    void makeOfferCar4(ActionEvent event) {
-        message(four);
-    }   
-    
-    
+    // When searchButton is clicked, begin a search using the specified query
     @FXML
     void initializeSearch(ActionEvent event) {
 
     }
     
-    //For launching the portfolio matching each car
-
+    // Sort by the car price, low to high
     @FXML
-    void openCar1Portfolio(ActionEvent event) throws IOException {
-        portfolio(one);
+    void togglePriceSort(ActionEvent event) {
+        sortByMenu.setText("Price");
     }
-
-    @FXML
-    void openCar2Portfolio(ActionEvent event) throws IOException {
-        portfolio(two);
-    }
-
-    @FXML
-    void openCar3Portfolio(ActionEvent event) throws IOException {
-        portfolio(three);
-    }
-
-    @FXML
-    void openCar4Portfolio(ActionEvent event) throws IOException {
-        portfolio(four);
-    }
-
     
-
+    /// Sort by the car mileage, low to high 
     @FXML
-    void openSortMenu(ActionEvent event) {
+    void toggleMileageSort(ActionEvent event) {
+        sortByMenu.setText("Miles");
+    }
+    
+    // Sort by the car manufacturing year, low to high
+    @FXML
+    void toggleYearSort(ActionEvent event) {
+        sortByMenu.setText("Year");
+    }
+    
+    // Sort by the car safety rating, high to low 
+    @FXML
+    void toggleSafetySort(ActionEvent event) {
+        sortByMenu.setText("Safety");
+    }
+    
+    // Set the minimum number of miles on the displayed cars
+    @FXML
+    void setMinMiles(KeyEvent event) {
 
     }
 
+    // Set the maximum number of miles on the displayed cars
+    @FXML
+    void setMaxMiles(KeyEvent event) {
+
+    }
     
-    /* On back button click, set Car objects corresponding with the data entry 
-       and render the page with updated data */
+    // Set the minimum price on the displayed cars
+    @FXML
+    void setMinPrice(KeyEvent event) {
+
+    }
+    
+    // Set the maximum price on the displayed cars \
+    @FXML
+    void setMaxPrice(KeyEvent event) {
+
+    }
+
+    /*
+    This function finds all of the different manufacturers in the database of
+    cars. Then, it populates the manufacturer dropdown button with only the 
+    manufacturers found.
+    */
+    public void addManufacturerToMenu() {
+        ArrayList<String> toAdd = new ArrayList<>();
+        for ( Car car : getCarList() ) {
+            String manufacturer = car.getMake();
+            if(!toAdd.contains(manufacturer)) {
+                toAdd.add(manufacturer);
+            }
+        }
+        toAdd.forEach((item) -> {            
+            RadioMenuItem added = new RadioMenuItem();
+            added.setText(item);
+            manufacturerMenu.getItems().add(added);
+        });
+    }
+    
+    /*
+    This function finds all of the different models in the database of
+    cars. Then, it populates the manufacturer dropdown button with only the 
+    models found.
+    */
+    public void addModelToMenu() {
+        ArrayList<String> toAdd = new ArrayList<>();
+        for ( Car car : getCarList() ) {
+            String model = car.getModel();
+            if(!toAdd.contains(model)) {
+                toAdd.add(model);
+            }
+        }
+        toAdd.forEach((String item) -> {
+            RadioMenuItem added = new RadioMenuItem();
+            added.setText(item);
+            modelMenu.getItems().add(added);
+        });
+    }
+    
+    /* 
+    On back button click, set Car objects corresponding with the first and last
+    cars in the database. Then, the function makes a call to functions SetCars
+    and setPageCarData to set the data on the page to the last four car entries
+    */
     @FXML
     void renderLastCars(ActionEvent event) {
         if (getPage() > 1 && firstCar >= 4) {
@@ -383,13 +427,22 @@ public class searchController {
             lastCar = 3;
             pageNumber.setText("1");
         }
-
         SetCars();
         setPageCarData();
     }
 
-    /* On back button click, set Car objects corresponding with the data entry 
-    and render the page with updated data */
+    // this will fetch the current page
+    public int getPage() {
+        int nowSelected = Integer.parseInt(pageNumber.getText());
+        System.out.println(nowSelected);
+        return nowSelected;
+    }
+
+    /* 
+    On next button click, set Car objects corresponding with the first and last
+    cars in the database. Then, the function makes a call to functions SetCars
+    and setPageCarData to set the data on the page to the next four car entries
+    */
     @FXML
     void renderNextCars(ActionEvent event) {
         if (getPage() < totalPages()) {
@@ -397,116 +450,16 @@ public class searchController {
             lastCar += 4;
             int newPage = getPage() + 1;
             pageNumber.setText(Integer.toString(newPage));
-            
         } else {
             lastCar = getCarList().size() - 1;
             firstCar = lastCar - 3;
-            
-            
         }
-        
-
-
         SetCars();
         setPageCarData();
-    }
-    
-    // The following methods are used to search and sort the car data
-    
-    /* Set the maximum number of miles on the displayed cars */
-    @FXML
-    void setMaxMiles(ActionEvent event) {
+    }    
 
-    }
-    
-    /* Set the maximum price on the displayed cars */
-    @FXML
-    void setMaxPrice(ActionEvent event) {
-
-    }
-
-    /* Set the minimum number of miles on the displayed cars */
-    @FXML
-    void setMinMiles(ActionEvent event) {
-
-    }
-    
-    /* Set the minimum price on the displayed cars */
-    @FXML
-    void setMinPrice(ActionEvent event) {
-
-    }
-
-    /* Set the term to search by */
-    @FXML
-    void setSearchField(ActionEvent event) {
-
-    }
-
-    @FXML
-    void toPrevious(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        if (previousScene != null){
-            stage.setScene(previousScene);
-        }
-    }
-    
-    /* Sort the cars in order of their reccomneded value index */ 
-    @FXML
-    void toggleSafetySort(ActionEvent event) {
-        sortByMenu.setText("Safety");
-    }
-
-    /* Sort the cars by their distacne from the buyer */
-    @FXML
-    void toggleYearSort(ActionEvent event) {
-        sortByMenu.setText("Year");
-    }
-    
-    // to be removed
-    @FXML
-    void toggleMakeMenu(MouseEvent event) {
-
-    }
-
-    /* toggle sort by mileage */
-    @FXML
-    void toggleMileageSort(ActionEvent event) {
-        sortByMenu.setText("Miles");
-    }
-
-
-    
-    // to be removed
-    @FXML
-    void toggleModelMenu(MouseEvent event) {
-
-    }
-
-    
-    /* toggle sorting by lowest price */
-    @FXML
-    void togglePriceSort(ActionEvent event) {
-        sortByMenu.setText("Price");
-    }
-    
-    public void setPreviousScene(Scene scene) {
-        previousScene = scene;
-        backButton.setDisable(false);
-    } 
-    
-    // Method used to initialize the page with essential data
-    private void loadPage() {
-        
-        SetCars();
-        setPageCarData();
-        addModelToMenu();
-        addManufacturerToMenu();
-        
-    }
-    
-    
-    // Retrieve the list of cars from the database in the order they appear on the database
+    // Retrieve the list of cars from the database in the order they appear in 
+    // the database
     private List<Car> getCarList() {
         Query query = manager.createNamedQuery("Car.findAll");
         List<Car> data = query.getResultList();
@@ -516,24 +469,16 @@ public class searchController {
         });
         return odata;
     } 
-    
-    //set the cars to be rendered; these are initiallized as Car objects
+
+    // set the cars to be rendered; these are initiallized as Car objects
     private void SetCars() {
         one = getCarList().get(firstCar);
         two = getCarList().get(firstCar + 1);
         three = getCarList().get(lastCar - 1);
         four = getCarList().get(lastCar);
     }
-    
-    
-    // this will fetch the current page
-    public int getPage() {
-        int nowSelected = Integer.parseInt(pageNumber.getText());
-        System.out.println(nowSelected);
-        return nowSelected;
-    }
-    
-    // set the data for the first car on the page
+
+    // set the data for the first car on the page (this is only page data)
     public void setCarDataOne() {
         makeCar1.setText(one.getMake());
         modelCar1.setText(one.getModel());
@@ -543,7 +488,7 @@ public class searchController {
             
     }
     
-    // set the data for the second car on the page
+    // set the data for the second car on the page (this is only page data)
     public void setCarDataTwo() {
         makeCar2.setText(two.getMake());
         modelCar2.setText(two.getModel());
@@ -553,7 +498,7 @@ public class searchController {
             
     }    
     
-    // set the data for the third car on the page
+    // set the data for the third car on the page (this is only page data)
     public void setCarDataThree() {
         makeCar3.setText(three.getMake());
         modelCar3.setText(three.getModel());
@@ -562,7 +507,7 @@ public class searchController {
         priceCar3.setText(Integer.toString(three.getPrice()));
     }    
     
-    // set the data for the fourth car on the page
+    // set the data for the fourth car on the page (this is only page data)
     public void setCarDataFour() {
         makeCar4.setText(four.getMake());
         modelCar4.setText(four.getModel());
@@ -571,8 +516,11 @@ public class searchController {
         priceCar4.setText(Integer.toString(four.getPrice()));
             
     }    
-    
-    // set the data for the all cars on the page
+
+    /*
+    Update the page with data corresponding to the declared Car objects using 
+    the four functions above
+    */
     public void setPageCarData() {
         setCarDataOne();
         setCarDataTwo();
@@ -580,14 +528,63 @@ public class searchController {
         setCarDataFour();
     }
     
-    // the total number of pages 
+    // Return the total number of pages
     public int totalPages() {
-        
+        // divide the size of carList by four since there are four cars/page
         int pages = (getCarList().size()) / 4;
         return pages;
     }
     
+    /*
+    Each of the functions below set the makeOfferButtons to open an offer 
+    dialogue when the buttons are clicked. They each reference the message() 
+    function which takes in a car to send a message to the seller.
+    */
+    @FXML
+    void makeOfferCar1(ActionEvent event) { message(one); }
+    @FXML
+    void makeOfferCar2(ActionEvent event) { message(two); }
+    @FXML
+    void makeOfferCar3(ActionEvent event) { message(three); }
+    @FXML
+    void makeOfferCar4(ActionEvent event) { message(four); } 
+
+    /*
+    Each of the functions below set the contactButtons to open a messageView 
+    window when the buttons are clicked. They each reference the contact() 
+    function which takes in a car to send a message to the seller using the 
+    car's sellerUsername attribute.
+    */
+    @FXML
+    void contactCar1Owner(ActionEvent event) throws IOException { contact(one); }
+    @FXML
+    void contactCar2Owner(ActionEvent event) throws IOException { contact(two); }
+    @FXML
+    void contactCar3Owner(ActionEvent event) throws IOException { contact(three); }
+    @FXML
+    void contactCar4Owner(ActionEvent event) throws IOException { contact(four); }
     
+ 
+    /*
+    Each of the functions below set the moreDetailsButtons to open a page with 
+    the car's data when the buttons are clicked. They each reference the 
+    portfolio() function which takes in a car to render a page with the car's 
+    data.
+    */
+    @FXML
+    void openCar1Portfolio(ActionEvent event) throws IOException { portfolio(one); }
+    @FXML
+    void openCar2Portfolio(ActionEvent event) throws IOException { portfolio(two); }
+    @FXML
+    void openCar3Portfolio(ActionEvent event) throws IOException { portfolio(three); }
+    @FXML
+    void openCar4Portfolio(ActionEvent event) throws IOException { portfolio(four); }
+    
+    /*
+    The message funciton takes in a single car to make an offer using the 
+    message model to a particular vehicle seller. This version of a message is 
+    sent to the seller's userPortfolio as well as their messaging inbox
+    */
     public void message(Car car) {
         TextInputDialog dialog = new TextInputDialog("0.00");
         dialog.setTitle("Make Offer");
@@ -635,6 +632,12 @@ public class searchController {
         }   
     }
     
+    /*
+    The contact fucntion passes a Car to set a message recipient while opening 
+    an instance of messageView in a new window. The back button is set to 
+    invisible when the message is launched to prevent any glitches in page
+    duplication.
+    */
     public void contact(Car car) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messageView.fxml"));
         Parent messageView = loader.load();
@@ -648,6 +651,14 @@ public class searchController {
         stage.show();
     }
     
+    /*
+    The portfolio funciton passes a car to open a new window of portfolioView 
+    that will render that car's data. The user can also access the make an offer 
+    and send message buttons from this interface. 
+    
+    Opening in a small-sized new window gives the user a way to compare 
+    different cars without switching back and forth between different views.
+    */
     public void portfolio(Car car) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/portfolioView.fxml"));
         Parent portfolioView = loader.load();
@@ -660,36 +671,23 @@ public class searchController {
         stage.show();
     }
     
-    public void addManufacturerToMenu() {
-        ArrayList<String> toAdd = new ArrayList<>();
-        for ( Car car : getCarList() ) {
-            String manufacturer = car.getMake();
-            if(!toAdd.contains(manufacturer)) {
-                toAdd.add(manufacturer);
-            }
-        }
-        toAdd.forEach((item) -> {            
-            RadioMenuItem added = new RadioMenuItem();
-            added.setText(item);
-            manufacturerMenu.getItems().add(added);
-        });
-    }
     
-    public void addModelToMenu() {
-        ArrayList<String> toAdd = new ArrayList<>();
-        for ( Car car : getCarList() ) {
-            String model = car.getModel();
-            if(!toAdd.contains(model)) {
-                toAdd.add(model);
-            }
-        }
-        toAdd.forEach((String item) -> {
-            RadioMenuItem added = new RadioMenuItem();
-            added.setText(item);
-            modelMenu.getItems().add(added);
-        });
+    
+    // Method used to initialize the page with essential data
+    private void loadPage() {
+        SetCars();
+        setPageCarData();
+        addModelToMenu();
+        addManufacturerToMenu();   
     }
 
+    // Needed to determine who is sending offer/message
+    public void setActiveUser(User activeUser) {
+        this.activeUser = activeUser;
+    }
+    
+    
+    
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
 
