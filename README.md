@@ -15,3 +15,14 @@ Carfolio wants to focus on turning all cars to the same model that collectors fo
 
 ## Building
 Clone the repository locally. Open Netbeans and ensure your Java platform is set to JDK 14. Open project, navigate to where you've cloned the repo, and open the carfolio folder. Netbeans should recognize the project from here. Build and Run the application. Note that it should run on Windows and Mac, but was tested on Windows.
+
+## Testing Credentials 
+Buyer Account 
+uname: dbuyer password: pw
+
+Seller Account
+uname: dseller pasword: pw
+
+
+##Uses
+###Create a listing
