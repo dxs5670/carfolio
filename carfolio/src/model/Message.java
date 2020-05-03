@@ -1,7 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    The Message entity class models a basic message. These messages will go 
+    from user-to-user (sender to recipient). While not indicated in this class, 
+    messages are also used to make an offer on a vehicle. When a potential buyer
+    makes an offer, the seller will recieve a message and, when tehy check their
+    portfolio, they are able to see what the most recent offer for their vehicle
+    was. This is all done using the message as a model.
  */
 package model;
 
@@ -17,10 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author Caden
- */
+
 @Entity
 @Table(name = "message")
 @NamedQueries({
@@ -30,30 +30,41 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Message.findBySender", query = "SELECT m FROM Message m WHERE m.sender = :sender"),
     @NamedQuery(name = "Message.findByTimeSent", query = "SELECT m FROM Message m WHERE m.timeSent = :timeSent"),
     @NamedQuery(name = "Message.findByMessageID", query = "SELECT m FROM Message m WHERE m.messageID = :messageID")})
-public class Message implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Column(name = "messageBody")
-    private String messageBody;
-    @Column(name = "recipient")
-    private String recipient;
-    @Column(name = "sender")
-    private String sender;
-    @Column(name = "timeSent")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date timeSent;
+public class Message implements Serializable {
+    
+    private static final long serialVersionUID = 1L;    
     @Id
     @Basic(optional = false)
     @Column(name = "messageID")
     private String messageID;
 
+    @Column(name = "messageBody")
+    private String messageBody;
+    
+    @Column(name = "recipient")
+    private String recipient;
+    
+    @Column(name = "sender")
+    private String sender;
+    
+    @Column(name = "timeSent")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date timeSent;
+    
+
+
+    // Empty Message constructor 
     public Message() {
     }
 
+    // 
     public Message(String messageID) {
         this.messageID = messageID;
     }
 
+    // Get and set the messageBody attribute of a message 
+    // This is the contents of a message, which is preset for an offer
     public String getMessageBody() {
         return messageBody;
     }
@@ -62,6 +73,8 @@ public class Message implements Serializable {
         this.messageBody = messageBody;
     }
 
+    // Get and set the recipient attribute of a message 
+    // This will be the user that recieves a message
     public String getRecipient() {
         return recipient;
     }
@@ -70,6 +83,8 @@ public class Message implements Serializable {
         this.recipient = recipient;
     }
 
+    // Get and set the sender attribute of a message 
+    // The sender is whoever is logged in while sending a message
     public String getSender() {
         return sender;
     }
@@ -78,6 +93,8 @@ public class Message implements Serializable {
         this.sender = sender;
     }
 
+    // Get and set the timeSent attribute of a message 
+    // This will be a dynamically created date object when the message is sent
     public Date getTimeSent() {
         return timeSent;
     }
@@ -86,6 +103,9 @@ public class Message implements Serializable {
         this.timeSent = timeSent;
     }
 
+    // Get and set the messageID attribute of a message
+    // The message ID is the unique identifying attribute of a message
+    // It will be incramentted based on the last message sent
     public String getMessageID() {
         return messageID;
     }
@@ -94,6 +114,8 @@ public class Message implements Serializable {
         this.messageID = messageID;
     }
 
+    // Injected
+    
     @Override
     public int hashCode() {
         int hash = 0;
