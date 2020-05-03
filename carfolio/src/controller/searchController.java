@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -141,6 +142,9 @@ public class searchController {
     @FXML // fx:id="pageNumber"
     private Label pageNumber; // Value injected by FXMLLoader
 
+    @FXML
+    private Button backButton;
+    
     @FXML // fx:id="carListPane"
     private SplitPane carListPane; // Value injected by FXMLLoader
 
@@ -275,6 +279,7 @@ public class searchController {
     private int lastCar = 3;
     
     private User activeUser;
+    private Scene previousScene;
     private Message createdMessage;
     
     
@@ -438,6 +443,14 @@ public class searchController {
 
     }
 
+    @FXML
+    void toPrevious(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        if (previousScene != null){
+            stage.setScene(previousScene);
+        }
+    }
+    
     /* Sort the cars in order of their reccomneded value index */ 
     @FXML
     void toggleSafetySort(ActionEvent event) {
@@ -477,6 +490,10 @@ public class searchController {
         sortByMenu.setText("Price");
     }
     
+    public void setPreviousScene(Scene scene) {
+        previousScene = scene;
+        backButton.setDisable(false);
+    } 
     
     // Method used to initialize the page with essential data
     private void loadPage() {
@@ -618,7 +635,6 @@ public class searchController {
         }   
     }
     
-    
     public void contact(Car car) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messageView.fxml"));
         Parent messageView = loader.load();
@@ -626,6 +642,7 @@ public class searchController {
         messageController controller = loader.getController();
         controller.setActiveUser(activeUser);
         controller.setMessageRecipient(car.getSellerUsername());
+        controller.setBackButtnInvisible();
         Stage stage = new Stage();
         stage.setScene(messageViewScene);
         stage.show();
@@ -706,6 +723,7 @@ public class searchController {
         assert lastButtonLabel != null : "fx:id=\"lastButtonLabel\" was not injected: check your FXML file 'searchView.fxml'.";
         assert nextButtonLabel != null : "fx:id=\"nextButtonLabel\" was not injected: check your FXML file 'searchView.fxml'.";
         assert pageNumber != null : "fx:id=\"pageNumber\" was not injected: check your FXML file 'searchView.fxml'.";
+        assert backButton != null : "fx:id=\"backButton\" was not injected: check your FXML file 'searchView.fxml'.";
         assert carListPane != null : "fx:id=\"carListPane\" was not injected: check your FXML file 'searchView.fxml'.";
         assert car1Pane != null : "fx:id=\"car1Pane\" was not injected: check your FXML file 'searchView.fxml'.";
         assert moreDetailsButton1 != null : "fx:id=\"moreDetailsButton1\" was not injected: check your FXML file 'searchView.fxml'.";
@@ -753,7 +771,6 @@ public class searchController {
         manager = (EntityManager) Persistence.createEntityManagerFactory("CarfolioPU").createEntityManager();
         // Render the first page of cars
         loadPage();
-        
         
         
 

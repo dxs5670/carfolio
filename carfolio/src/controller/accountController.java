@@ -78,9 +78,12 @@ public class accountController {
     @FXML
     private Label noMatch;
 
-    private EntityManager em;
+    @FXML
+    private Button backButton;
     
-    private User activeUser = new User();
+    private EntityManager em;
+    private Scene previousScene;
+    private User activeUser;
         
     private String fn;
     private String ln;
@@ -142,6 +145,23 @@ public class accountController {
         window.show();
     }
 
+    public void setPreviousScene(Scene scene) {
+        previousScene = scene;
+        backButton.setDisable(false);
+    } 
+    
+    
+    @FXML
+    void toPrevious(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        if (previousScene != null){
+            stage.setScene(previousScene);
+        }
+    }
+    
+    
+    
+    
     @FXML
     void updateUser(ActionEvent event) throws IOException {
          try {
@@ -212,6 +232,8 @@ public class accountController {
         assert star5 != null : "fx:id=\"star5\" was not injected: check your FXML file 'accountView.fxml'.";
         assert accountType != null : "fx:id=\"accountType\" was not injected: check your FXML file 'accountView.fxml'.";
         assert noMatch != null : "fx:id=\"noMatch\" was not injected: check your FXML file 'accountView.fxml'.";
+        assert backButton != null : "fx:id=\"backButton\" was not injected: check your FXML file 'accountView.fxml'.";
+
 
         
     }

@@ -136,9 +136,10 @@ public class sellerController {
         Scene accountUI = new Scene(account);
         accountController aController = accountLoader.getController();
         aController.setActiveUser(activeUser);
-        Stage stage = new Stage();
-        stage.setScene(accountUI);
-        stage.show();
+        aController.setPreviousScene(((Node) event.getSource()).getScene());
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(accountUI);
+        window.show();
     }
 
     @FXML
@@ -149,10 +150,10 @@ public class sellerController {
         Parent message = messageLoader.load();
         Scene messageUI = new Scene(message);
         messageController mController = messageLoader.getController();
-        Stage messageWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        messageWindow.setScene(messageUI);
         mController.setActiveUser(activeUser);
         mController.setPreviousScene(((Node) event.getSource()).getScene());
+        Stage messageWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        messageWindow.setScene(messageUI);
         messageWindow.show();
     }
     
@@ -198,11 +199,12 @@ public class sellerController {
         Scene userPortfolioUI = new Scene(userPortfolio);
         userPortfolioController upController = userPortfolioLoader.getController();
         upController.setActiveUser(activeUser);
+        upController.completeTable();
         upController.setPreviousScene(((Node) event.getSource()).getScene());
         Stage userPortfolioWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
         userPortfolioWindow.setScene(userPortfolioUI);
         userPortfolioWindow.show();
-        upController.completeTable();
+        
     }
     
     public void setActiveUser(User fromLogin) {

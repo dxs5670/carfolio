@@ -13,7 +13,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -127,7 +126,7 @@ public class mainController {
     
     private User activeUser;
     private Car sellCar;
-    private EntityManager manager;
+    
 
     @FXML
     void beginSearch(ActionEvent event) {
@@ -136,43 +135,20 @@ public class mainController {
 
     @FXML
     void initializePortfolio(ActionEvent event) {
-//        this.sellCar = new Car();
-//        // TODO: add error checking
-//        sellCar.setMake(makeField.getText());
-//        sellCar.setModel(modelField.getText());
-//        createdCar.setStyle(styleField.getText());
-//        createdCar.setYear(Short.parseShort(yearField.getText()));
-//        sellCar.setVin(vinField.getText());
-//        sellCar.setMiles(Integer.parseInt(mileageField.getText()));
-//        
-//        manager.getTransaction().begin();
-//        manager.persist(sellCar);
-//        manager.getTransaction().commit();
-//        
-//        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//        alert.setTitle("Message");
-//        alert.setContentText("Your Car has been created!");
-//        alert.showAndWait();
-//        // Clear fields
-//        modelField.setText("");
-//        makeField.setText("");
-//        styleField.setText("");
-//        yearField.setText("");
-//        vinField.setText("");
-//        milageField.setText("");
- }
+        
+    }
 
     @FXML
     void openAccount(ActionEvent event) throws IOException {
-        System.out.println(activeUser);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/accountView.fxml"));
         Parent accountView = loader.load();
         Scene accountViewScene = new Scene(accountView);
         accountController controller = loader.getController();
         controller.setActiveUser(activeUser);
-        Stage stage = new Stage();
-        stage.setScene(accountViewScene);
-        stage.show();
+        controller.setPreviousScene(((Node) event.getSource()).getScene());
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(accountViewScene);
+        window.show();
     }
 
     @FXML
@@ -182,9 +158,10 @@ public class mainController {
         Scene searchViewScene = new Scene(searchView);
         searchController controller = loader.getController();
         controller.setActiveUser(activeUser);
-        Stage stage = new Stage();
-        stage.setScene(searchViewScene);
-        stage.show();
+        controller.setPreviousScene(((Node) event.getSource()).getScene());
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(searchViewScene);
+        window.show();
 
     }
 
@@ -196,9 +173,9 @@ public class mainController {
         messageController controller = loader.getController();
         controller.setActiveUser(activeUser);
         controller.setPreviousScene(((Node) event.getSource()).getScene());
-        Stage stage = new Stage();
-        stage.setScene(messageViewScene);
-        stage.show();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(messageViewScene);
+        window.show();
     }
 
     @FXML
@@ -208,6 +185,7 @@ public class mainController {
         Scene userPortfolioUI = new Scene(userPortfolio);
         userPortfolioController upController = userPortfolioLoader.getController();
         upController.setActiveUser(activeUser);
+        upController.setPreviousScene(((Node) event.getSource()).getScene());
         Stage userPortfolioWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
         userPortfolioWindow.setScene(userPortfolioUI);
         userPortfolioWindow.show();
@@ -320,7 +298,6 @@ public class mainController {
         assert searchYear != null : "fx:id=\"searchYear\" was not injected: check your FXML file 'mainView.fxml'.";
         
         em = (EntityManager) Persistence.createEntityManagerFactory("CarfolioPU").createEntityManager();
-
         
     }
 

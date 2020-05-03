@@ -89,6 +89,7 @@ public class buyerController {
         Scene searchUI = new Scene(search);
         searchController sController = searchLoader.getController();
         sController.setActiveUser(activeUser);
+        sController.setPreviousScene(((Node) event.getSource()).getScene());
         Stage searchWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
         searchWindow.setScene(searchUI);
         searchWindow.show();
@@ -103,9 +104,10 @@ public class buyerController {
         Scene accountUI = new Scene(account);
         accountController aController = accountLoader.getController();
         aController.setActiveUser(activeUser);
-        Stage stage = new Stage();
-        stage.setScene(accountUI);
-        stage.show();
+        aController.setPreviousScene(((Node) event.getSource()).getScene());
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(accountUI);
+        window.show();
     }
 
     @FXML 
@@ -116,9 +118,10 @@ public class buyerController {
         Scene searchUI = new Scene(search);
         searchController sController = searchLoader.getController();
         sController.setActiveUser(activeUser);
-        Stage stage = new Stage();
-        stage.setScene(searchUI);
-        stage.show();
+        sController.setPreviousScene(((Node) event.getSource()).getScene());
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(searchUI);
+        window.show();
     }
 
     @FXML

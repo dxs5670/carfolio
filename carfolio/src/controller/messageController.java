@@ -209,6 +209,12 @@ public class messageController {
             return row;
         });
     }
+    
+    // set back button invisible when opened from search
+    public void setBackButtnInvisible() {
+        back.setVisible(false);
+    }
+    
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
