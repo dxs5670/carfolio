@@ -14,4 +14,4 @@ Carfolio wants to focus on turning all cars to the same model that collectors fo
 * IDE: [NetBeans 11.3](https://netbeans.apache.org/download/nb113/nb113.html)
 
 ## Building
-Clone the repository locally. Open Netbeans and ensure your Java platform is set to JDK 14. Open project, navigate to where you've cloned the repo, and open the carfolio folder. Netbeans should recognize the project from here. Build and Run the application.
+Clone the repository locally. Open Netbeans and ensure your Java platform is set to JDK 14. Open project, navigate to where you've cloned the repo, and open the carfolio folder. Netbeans should recognize the project from here. Build and Run the application. Note that it should run on Windows and Mac, but was tested on Windows.
