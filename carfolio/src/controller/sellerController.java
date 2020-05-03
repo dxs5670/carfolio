@@ -1,6 +1,6 @@
 /*
-    This is the sellerView controller, responsible for directign to the 
-    various se;;er-eneabled pages. This includes: Account, Messages and
+    This is the sellerView controller, responsible for directing to the 
+    various seller-enabled pages. This includes: Account, Messages and
     portfolios.
 
     It serves as a communication layer between other views and controllers.

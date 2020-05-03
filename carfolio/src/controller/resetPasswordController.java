@@ -1,5 +1,5 @@
-/**
- * Sample Skeleton for 'resetPasswordView.fxml' Controller Class
+/*
+ 
  */
 
 package controller;

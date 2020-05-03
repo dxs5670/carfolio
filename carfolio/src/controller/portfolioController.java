@@ -1,5 +1,7 @@
-/**
- * Sample Skeleton for 'portfolioView.fxml' Controller Class
+/*
+    Supports portfolioView, a detailed view entered from searchView to look
+    at the varius attributes of a car. Provides the same offer and messaging
+    buttons as in searchView.
  */
 
 package controller;
@@ -71,12 +73,12 @@ public class portfolioController {
     @FXML
     private Label safetyRating;
 
-
     private Car selectedCar = new Car();
     private User activeUser;
     private Message createdMessage;
     private EntityManager manager;
 
+    // Open messaging
     @FXML
     public void contactOwner(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messageView.fxml"));
@@ -136,6 +138,7 @@ public class portfolioController {
         }   
     }
     
+    // Get the car's attributes
     public void setMake(Car car) {
         make.setText(selectedCar.getMake());
     }
@@ -171,6 +174,7 @@ public class portfolioController {
         
     }
     
+    // Called in searchController
     public void setActiveUser(User usr) {
         this.activeUser = usr;
     }

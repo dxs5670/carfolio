@@ -1,9 +1,10 @@
 /*
-    This class supports messageView, which is accessable by all types of accounts. 
-    It's a tabbed interface that allows for composing messages to other users of 
-    the application, as well as viewing those addressed to the current one.
-    The recipient box will auto-fill with names of users in the database. 
-    
+    This class supports messageView, which is accessable by all types of accounts 
+    from their respective controllers. It's a tabbed interface that allows for 
+    composing messages to other users of the application, as well as viewing 
+    those addressed to the current one. 
+
+    The reply function is unfinished, but users can always compose another message.
  */
 
 package controller;
@@ -63,7 +64,7 @@ public class messageController {
     @FXML // fx:id="back"
     private Button back; // Value injected by FXMLLoader
 
-    @FXML
+    @FXML // Message history tab
     private Tab history;
 
     @FXML // fx:id="clickedMessageBody"
@@ -81,15 +82,12 @@ public class messageController {
     @FXML // fx:id="recieved"
     private TableColumn<Message, Date> recieved; // Value injected by FXMLLoader
 
-    
-    
-
     private User activeUser;
     private Scene previousScene;
     private Message createdMessage;
     private EntityManager manager;
 
-    @FXML //Clear text box
+    @FXML // Clear message body & recipient
     void discardMessage(ActionEvent event) {
         recipientUser.setText("");
         messageBody.setText("");
@@ -124,14 +122,16 @@ public class messageController {
 
     }
 
+    // For replying
     @FXML
     void sendMessageToSelected(ActionEvent event) {
-
+        
     }
 
+    // Unused
     @FXML
     void setRecipient(KeyEvent event) {
-
+        
     }
 
     // Go back to the last screen
@@ -143,22 +143,26 @@ public class messageController {
         }
     }
 
+    // Unused
     @FXML
     void updateBody(KeyEvent event) {
-
+        
     }
     
+    // Called upon clicking the Message History tab
     @FXML
     void readMessages(Event event) {
         retrieveMessages();
         
     }
     
+    // Unused
     @FXML
     void findRow(MouseEvent event) {
         
     }
 
+    
     public void setMessageRecipient(String username) {
        recipientUser.setText(username);
     }

@@ -1,3 +1,10 @@
+/*
+    Supports userPortfolioView, a window that allows sellers and admins to view
+    cars they have added to the database. This is also where they can quickly
+    see if they have an offer on any particular car. messageView is opened 
+    upon clicking the "respond to offers" button.
+*/
+
 package controller;
 
 import java.io.IOException;
@@ -34,6 +41,7 @@ public class userPortfolioController {
     @FXML // URL location of the FXML file that was given to the FXMLLoader
     private URL location;
     
+    // Table of cars
     @FXML
     private TableView<Car> carTable;
 
@@ -58,6 +66,7 @@ public class userPortfolioController {
     @FXML // fx:id="carListPrice"
     private TableColumn<Car, Integer> carListPrice; // Value injected by FXMLLoader
 
+    // Table of offers
     @FXML
     private TableView<Message> offerTable;
     
@@ -69,7 +78,6 @@ public class userPortfolioController {
     
     @FXML
     private Button offerButton;
-    
     
     private User activeUser;
     private EntityManager manager;
