@@ -14,17 +14,21 @@ Carfolio wants to focus on turning all cars to the same model that collectors fo
 * IDE: [NetBeans 11.3](https://netbeans.apache.org/download/nb113/nb113.html)
 
 ## Building
-Clone the repository locally. Open Netbeans and ensure your Java platform is set to JDK 14. Open project, navigate to where you've cloned the repo, and open the carfolio folder. Netbeans should recognize the project from here. Build and Run the application. Note that it should run on Windows and Mac, but was tested on Windows.
+Clone the repository locally. Open Netbeans and ensure your Java platform is set to JDK 14. Open project, navigate to where you've cloned the repo, and open the carfolio folder. Netbeans should recognize the project from here. Build and Run the application. Note that it should run on Windows and Mac, but was tested on Windows. Linux platforms currently encounter a JavaFX-related error.
 
 ## Testing Credentials 
 Buyer Account - 
 uname: dbuyer, password: pw
 
 Seller Account -
-uname: dseller, pasword: pw
+uname: dseller, password: pw
 
 Admin Account - 
 uname: dstetts, password: pw
 
 ## Uses
-### Create a listing
+### Creating a Listing
+Log in as the seller. On the landing page under Sell a Car, enter the make, model, year, style, VIN, mileage, and deisred price for the vehicle. Click "build portfolio" to create the car and add it to the database.
+
+### Viewing Listings
+Log in as the buyer or Admin. On the landing page, click "advanced search". Use the left and right arrow buttons on the bottom left to page through the listings. Click on "more details" to open the advanced view of each car.
