@@ -18,17 +18,24 @@ Clone the repository locally. Open Netbeans and ensure your Java platform is set
 
 ## Testing Credentials 
 Buyer Account - 
-uname: dbuyer, password: pw
+uname: dbuyer  password: pw
 
 Seller Account -
-uname: dseller, password: pw
+uname: dseller  password: pw
 
 Admin Account - 
-uname: dstetts, password: pw
+uname: dstetts  password: pw
 
 ## Uses
-### Creating a Listing
+### Creating a Listing (Portfolio)
 Log in as the seller. On the landing page under Sell a Car, enter the make, model, year, style, VIN, mileage, and deisred price for the vehicle. Click "build portfolio" to create the car and add it to the database.
 
 ### Viewing Listings
 Log in as the buyer or Admin. On the landing page, click "advanced search". Use the left and right arrow buttons on the bottom left to page through the listings. Click on "more details" to open the advanced view of each car.
+
+### Posting an Offer
+Continuing from the previous use, click "make offer" and enter a dollar amount. If you see the confirmation pop-up, your offer has been made. To open the message
+
+### Viewing/Responding to an Offer
+Log in as the seller. On the landing page, click "portfolios". A table will be populated with each car belonging to the current user, along with the first corresponding offer, if there is one. Click "respond to offers" to open the messaging window, and switch to the message history tab. Here you can double click on a message timestamp to view its contents.
+Note that there are multiple sellers, and not all offers will be sent to dseller.
